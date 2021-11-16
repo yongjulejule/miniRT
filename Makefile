@@ -6,18 +6,18 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/15 16:08:32 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/16 16:10:51 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				= gcc
 
 ifdef DEBUG
-	CFLAGS = -g3 -fsanitize=address
+	CFLAGS = -g3 -fsanitize=address -D BUFFER_SIZE=64
 else ifdef LEAKS
-	CFLAGS = -g
+	CFLAGS = -g -D BUFFER_SIZE=64
 else 
-	CFLAGS = -Wall -Wextra -Werror
+	CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=64
 endif
 
 NAME			= miniRT
@@ -36,6 +36,9 @@ INC_DIR_MAN		= ./include/
 
 SRCS_PARSE		= $(addprefix $(SRCS_PARSE_DIR), \
 				parse_main.c\
+				conf_lst.c\
+				get_next_line.c\
+				get_next_line_utils.c\
 				)
 
 SRCS_MAN		= $(addprefix $(SRCS_DIR), \
@@ -52,6 +55,7 @@ OBJS_BONUS		= ${SRCS_BONUS:%.c=%.o}
 OBJ_FILES		= $(OBJS_MAN)
 
 INC_DIR			= $(INC_DIR_MAN)
+INC_DIR_LIBFT	= ./lib/libft/
 
 ######################### Color #########################
 GREEN="\033[32m"
@@ -79,12 +83,12 @@ RESTORE = "\033[u"
 all				:	$(LIBFT_FILE) $(OBJ_FILES) $(NAME)
 
 $(NAME)			: 	$(LIBFT_FILE) $(OBJ_FILES)
-					@$(CC) $(CFLAGS) $(OBJ_FILES) $(RDLN_LFLAGS) $(RDLN_INC) $(LIBFT_FLAGS) -I$(INC_DIR) -D BUFFSIZE=64 -o $@ 
+					@$(CC) $(CFLAGS) $(OBJ_FILES) $(RDLN_LFLAGS) $(RDLN_INC) $(LIBFT_FLAGS) -I$(INC_DIR) -o $@ 
 					@printf $(CUT)$(DOWN)$(CUT)
 					@echo $(CUT)$(UP)$(BOLD)$(L_PUPLE) 🌏 miniRT Compiled 🥳$(RESET)
 
 %.o				: 	%.c
-					@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+					@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(INC_DIR_LIBFT) -c $< -o $@
 					@echo $(CUT)$(BOLD)$(L_GREEN) Compiling with $(CFLAGS)...$(RESET)
 					@echo $(CUT)$(GREEN) [$(notdir $^)] to [$(notdir $@)] $(RESET)
 					@printf $(UP)$(UP)

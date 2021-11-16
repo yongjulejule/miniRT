@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 14:18:23 by yongjule          #+#    #+#             */
-/*   Updated: 2021/08/06 15:09:50 by jun              ###   ########.fr       */
+/*   Updated: 2021/11/16 11:31:55 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_calloc(size_t count, size_t size)
 	str = (unsigned char *)malloc(sizeof(unsigned char) * size * count);
 	if (str == 0)
 	{
-		ft_putendl_fd("Error while allocation", 2);
+		ft_putendl_fd("Error\nFailed to allocate", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	while (idx < count * size)

@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsetdup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 14:48:45 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 16:09:59 by ghan             ###   ########.fr       */
+/*   Created: 2021/11/16 13:42:25 by ghan              #+#    #+#             */
+/*   Updated: 2021/11/16 15:27:08 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+char	**ft_strsetdup(char **src)
 {
-	t_spec	spec;
+	char	**ret;
+	int		i;
 
-	check_config(argc, argv, &spec);
-	return (EXIT_SUCCESS);
+	if (!src)
+		return (NULL);
+	ret = (char **)ft_calloc(ft_strsetlen(src) + 1, sizeof(char *));
+	i = -1;
+	while (src[++i])
+		ret[i] = ft_strdup(src[i]);
+	return (ret);
 }

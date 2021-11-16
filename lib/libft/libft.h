@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 11:11:45 by yongjule          #+#    #+#             */
-/*   Updated: 2021/11/15 15:50:19 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/16 13:45:55 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			ft_putnbr_fd(int n, int fd);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 char			**ft_split_charset(char const *s, char *charset);
 int				ft_strsetlen(char **strs);
+char			**ft_strsetdup(char **src);
 char			*ft_strrnstr(const char *haystack, const char *needle,
 					size_t len);
 char			*ft_strchrset(const char *s, char *charset);

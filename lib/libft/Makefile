@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/11 16:52:24 by yongjule          #+#    #+#              #
-#    Updated: 2021/10/02 10:06:08 by yongjule         ###   ########.fr        #
+#    Updated: 2021/11/16 13:46:06 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRCS = ft_memset.c\
 	   ft_strsetlen.c\
 	   ft_strrnstr.c\
 	   ft_strchrset.c\
+	   ft_strsetdup.c\
 	   ft_strrchrset.c\
 	   bubble_sort_strset.c\
 	   swap_char.c\

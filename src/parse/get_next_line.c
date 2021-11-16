@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 09:46:01 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/15 16:07:48 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/16 11:37:29 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	split_by_newline(t_gnl_lst *cur_fd, char **line,
 static int	init_fd_lst(t_gnl_lst **fd_lst, t_gnl_lst **cur_fd, int fd)
 {
 	if (*fd_lst == NULL)
-		*fd_lst = ft_gnl_lstnew(0, -2);
+		*fd_lst = gnl_lstnew(0, -2);
 	if (*fd_lst == NULL)
 		return (-1);
 	(*cur_fd) = *fd_lst;
@@ -56,14 +56,14 @@ static int	init_fd_lst(t_gnl_lst **fd_lst, t_gnl_lst **cur_fd, int fd)
 	}
 	if (*cur_fd)
 		return (1);
-	*cur_fd = ft_gnl_lstnew(ft_strndup("", 1), fd);
+	*cur_fd = gnl_lstnew(ft_strndup("", 1), fd);
 	if (*cur_fd == NULL)
 	{
 		if ((*fd_lst)->next == NULL)
 			free(fd_lst);
 		return (-1);
 	}
-	ft_gnl_lstadd_back(fd_lst, *cur_fd);
+	gnl_lstadd_back(fd_lst, *cur_fd);
 	return (1);
 }
 

@@ -6,13 +6,27 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/15 16:34:21 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/16 16:13:23 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	check_config_details(int fd, t_conf *cur)
+void	free_double_ptr(void **ptr)
+{
+	int	i;
+
+	i = -1;
+	while (ptr[++i])
+	{
+		free(ptr[i]);
+		ptr[i] = NULL;
+	}
+	free(ptr);
+	ptr = NULL;
+}
+
+static void	read_config(int fd, t_conf **hd)
 {
 	char	**elem_info;
 	char	*line;
@@ -22,16 +36,19 @@ static void	check_config_details(int fd, t_conf *cur)
 		if (*line != '\0')
 		{
 			elem_info = ft_split(line, ' ');
-			cur->elem = elem_info[0];
+			conf_lst_addback(hd, conf_lst_new(ft_strdup(elem_info[0]),
+					ft_strsetdup(elem_info + 1)));
+			free_double_ptr((void **)elem_info);
 		}
 		free(line);
+		line = NULL;
 	}
 }
 
-void	check_config(int argc, char **argv)
+void	check_config(int argc, char **argv, t_spec *spec)
 {
 	int		fd;
-	t_conf	head;
+	t_conf	*head;
 
 	if (argc != 2)
 		is_error("miniRT must display only one scene!", NULL, EXIT_FAILURE);
@@ -41,7 +58,8 @@ void	check_config(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		is_error("Open failed: ", strerror(errno), EXIT_FAILURE);
-	head.next = NULL;
-	check_config_details(fd, head.next);
+	head = conf_lst_new(NULL, NULL);
+	read_config(fd, &head);
 	close(fd);
+	config_to_spec(head, spec);
 }
