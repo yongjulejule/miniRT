@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/11 16:52:24 by yongjule          #+#    #+#              #
-#    Updated: 2021/11/16 18:03:29 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/16 20:54:11 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,8 @@ SRCS = ft_memset.c\
 	   swap_char.c\
 	   strchrset_skip_bs.c\
 	   free_double_ptr.c\
-	   ft_atod.c
+	   ft_atod.c\
+	   ft_isint.c
 
 
 OBJS = ${SRCS:.c=.o}

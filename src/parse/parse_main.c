@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 17:21:51 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/16 20:55:23 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 	while (cur)
 	{
 		if (!ft_strcmp(cur->elem, "A") && !cap_flag[0])
-			fill_a_light(spec, cur->info, cap_flag);
+			fill_a_light(spec, cur->info, cap_flag, 0);
 		else if (!ft_strcmp(cur->elem, "C") && !cap_flag[1])
-			fill_cam(spec, cur->info, cap_flag);
+			fill_cam(spec, cur->info, cap_flag, 0);
 		else if (!ft_strcmp(cur->elem, "L") && !cap_flag[2])
-			fill_light(spec, cur->info, cap_flag);
+			fill_light(spec, cur->info, cap_flag, 0);
 		else if (!ft_strcmp(cur->elem, "sp"))
 			fill_sphere(spec, cur->info);
 		else if (!ft_strcmp(cur->elem, "pl"))

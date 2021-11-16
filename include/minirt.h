@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 17:29:22 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/16 20:31:50 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_conf
 
 typedef struct s_a_light
 {
-	float	ratio;
+	double	ratio;
 	int		color[3];
 }	t_a_light;
 

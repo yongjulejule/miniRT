@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 11:11:45 by yongjule          #+#    #+#             */
-/*   Updated: 2021/11/16 18:01:27 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/16 20:54:04 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void			swap_char(char *a, char *b);
 char			*strchrset_skip_bs(const char *s, char *charset);
 void			free_double_ptr(void **ptr);
 double			ft_atod(char *str, int *flag);
+int				ft_isint(char *str);
 
 /*
 ** To handle List
