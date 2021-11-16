@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 11:11:45 by yongjule          #+#    #+#             */
-/*   Updated: 2021/11/16 13:45:55 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/16 18:01:27 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char			*ft_strrchrset(const char *s, char *charset);
 void			bubble_sort_strset(char **strset, int len);
 void			swap_char(char *a, char *b);
 char			*strchrset_skip_bs(const char *s, char *charset);
+void			free_double_ptr(void **ptr);
+double			ft_atod(char *str, int *flag);
 
 /*
 ** To handle List

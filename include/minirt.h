@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 15:59:48 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/16 17:29:22 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_conf
 
 typedef struct s_a_light
 {
-	double	ratio;
+	float	ratio;
 	int		color[3];
 }	t_a_light;
 
@@ -101,7 +101,7 @@ typedef struct s_spec
 
 /* Parse */
 int			get_next_line(int fd, char **line);
-void		check_config(int argc, char **argv);
+void		check_config(int argc, char **argv, t_spec *spec);
 t_conf		*conf_lst_new(char *elem, char **info);
 t_conf		*conf_lst_last(t_conf *elem);
 void		conf_lst_addback(t_conf **hd, t_conf *new);
