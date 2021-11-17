@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_conf_lst.c                                   :+:      :+:    :+:   */
+/*   conf_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 12:16:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 16:10:29 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 20:22:48 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,21 @@ void	conf_lst_addback(t_conf **hd, t_conf *new)
 		return ;
 	last = conf_lst_last(*hd);
 	last->next = new;
+}
+
+void	free_config(t_conf *hd)
+{
+	t_conf	*cur;
+	t_conf	*to_fr;
+
+	cur = hd->next;
+	while (cur)
+	{
+		to_fr = cur;
+		free(to_fr->elem);
+		free_double_ptr((void **)to_fr->info);
+		cur = cur->next;
+		free(to_fr);
+	}
+	free(hd);
 }

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 16:59:09 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 20:33:42 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 static void	read_config(int fd, t_conf **hd)
 {
 	char	**elem_info;
+	char	**info_dup;
 	char	*line;
 
 	while (get_next_line(fd, &line) > 0)
@@ -59,6 +60,7 @@ static void	read_config(int fd, t_conf **hd)
 		free(line);
 		line = NULL;
 	}
+	free(line);
 }
 
 void	check_config(int argc, char **argv, t_spec *spec)
@@ -78,4 +80,5 @@ void	check_config(int argc, char **argv, t_spec *spec)
 	read_config(fd, &head);
 	close(fd);
 	config_to_spec(head->next, spec);
+	free_config(head);
 }

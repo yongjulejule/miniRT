@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:51:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 16:01:13 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 19:51:10 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_obj_lst	*obj_lst_new(void *object, int which)
 		new->obj.pl = (t_pl *)object;
 	else if (which == CYLINDER)
 		new->obj.cy = (t_cy *)object;
+	new->type = which;
 	new->next = NULL;
 	return (new);
 }
