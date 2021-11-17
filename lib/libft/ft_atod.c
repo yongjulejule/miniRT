@@ -6,11 +6,11 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:27:29 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 20:22:50 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 15:45:12 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
 static void	check_validity(char *str, int *flag)
 {
@@ -25,7 +25,7 @@ static void	check_validity(char *str, int *flag)
 	while (!(*flag) && str[++i])
 	{
 		if (!is_charset(str[i], "0123456789."))
-			return (0);
+			(*flag)++;
 		else if (str[i] == '.')
 		{
 			if (dot_flag)
@@ -61,6 +61,7 @@ double	ft_atod(char *str, int *flag)
 	double	ret;
 	int		dot_pos;
 
+	ret = 0;
 	check_validity(str, flag);
 	if (*flag)
 		return (ret);

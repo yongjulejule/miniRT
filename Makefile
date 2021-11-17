@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/16 16:10:51 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/17 15:33:49 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,10 @@ INC_DIR_MAN		= ./include/
 SRCS_PARSE		= $(addprefix $(SRCS_PARSE_DIR), \
 				parse_main.c\
 				conf_lst.c\
+				obj_lst.c\
+				fill_setting.c\
+				fill_sph_pl.c\
+				fill_cy.c\
 				get_next_line.c\
 				get_next_line_utils.c\
 				)

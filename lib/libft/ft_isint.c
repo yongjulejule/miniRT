@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 20:53:41 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 20:53:50 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 15:46:12 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_isint(char *str)
 	if (is_charset(str[0], "+-"))
 		k++;
 	while (str[++k])
-		if (!is_digit(str[k], "0123456789"))
+		if (!ft_isdigit(str[k]))
 			return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 20:55:23 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 15:46:58 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 	int	cap_flag[3];
 
 	ft_bzero(cap_flag, 96);
+	spec->obj_lst = obj_lst_new(NULL, 0);
 	while (cur)
 	{
 		if (!ft_strcmp(cur->elem, "A") && !cap_flag[0])
@@ -26,11 +27,11 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 		else if (!ft_strcmp(cur->elem, "L") && !cap_flag[2])
 			fill_light(spec, cur->info, cap_flag, 0);
 		else if (!ft_strcmp(cur->elem, "sp"))
-			fill_sphere(spec, cur->info);
+			fill_sphere(&(spec->obj_lst), cur->info, 0);
 		else if (!ft_strcmp(cur->elem, "pl"))
-			fill_plane(spec, cur->info);
+			fill_plane(&(spec->obj_lst), cur->info, 0);
 		else if (!ft_strcmp(cur->elem, "cy"))
-			fill_cylinder(spec, cur->info);
+			fill_cylinder(&(spec->obj_lst), cur->info, 0);
 		else
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
 		cur = cur->next;

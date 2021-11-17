@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/16 20:31:50 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 15:40:36 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # include "libft.h"
 
 /* User Defines */
+
+# define SPHERE 0
+# define PLANE 1
+# define CYLINDER 2
 
 typedef struct s_conf
 {
@@ -78,14 +82,14 @@ typedef struct s_cy
 
 typedef union u_obj
 {
-	t_sph	sph;
-	t_pl	pl;
-	t_cy	cy;
+	t_sph	*sph;
+	t_pl	*pl;
+	t_cy	*cy;
 }	t_obj;
 
 typedef struct s_obj_lst
 {
-	t_obj				obj;
+	t_obj				*obj;
 	struct s_obj_lst	*next;
 }	t_obj_lst;
 
@@ -105,5 +109,16 @@ void		check_config(int argc, char **argv, t_spec *spec);
 t_conf		*conf_lst_new(char *elem, char **info);
 t_conf		*conf_lst_last(t_conf *elem);
 void		conf_lst_addback(t_conf **hd, t_conf *new);
+t_obj_lst	*obj_lst_new(void *object, int which);
+t_obj_lst	*obj_lst_last(t_obj_lst *obj);
+void		obj_lst_addback(t_obj_lst **hd, t_obj_lst *new);
+
+/* Fill Elements */
+void		fill_a_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_cam(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
+void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
+void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 
 #endif
