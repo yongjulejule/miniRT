@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/17 15:33:49 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/17 20:59:09 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,13 @@ SRCS_PARSE_DIR	= ./src/parse/
 
 # TODO - Select a version of minilibx and declare LFAGS & INC
 
-LIB_DIR			= ./lib/
-LIBFT_DIR		= $(LIB_DIR)libft/
+LIBFT_DIR		= ./lib/libft/
 LIBFT_FLAGS		= -L./$(LIBFT_DIR) -lft
 LIBFT_FILE		= $(LIBFT_DIR)libft.a
+
+MLX_DIR			= ./lib/mlx/
+MLX_FLAGS		= -L./$(MLX_DIR) -lmlx
+MLX_FILE		= $(MLX_DIR)libmlx.a
 
 INC_DIR_MAN		= ./include/
 
@@ -86,8 +89,8 @@ RESTORE = "\033[u"
 .PHONY			:	all
 all				:	$(LIBFT_FILE) $(OBJ_FILES) $(NAME)
 
-$(NAME)			: 	$(LIBFT_FILE) $(OBJ_FILES)
-					@$(CC) $(CFLAGS) $(OBJ_FILES) $(RDLN_LFLAGS) $(RDLN_INC) $(LIBFT_FLAGS) -I$(INC_DIR) -o $@ 
+$(NAME)			: 	$(LIBFT_FILE) $(MLX_FILE) $(OBJ_FILES)
+					@$(CC) $(CFLAGS) $(OBJ_FILES) $(RDLN_LFLAGS) $(RDLN_INC) $(LIBFT_FLAGS) $(MLX_FLAGS) -I$(INC_DIR) -o $@ 
 					@printf $(CUT)$(DOWN)$(CUT)
 					@echo $(CUT)$(UP)$(BOLD)$(L_PUPLE) 🌏 miniRT Compiled 🥳$(RESET)
 
@@ -98,13 +101,18 @@ $(NAME)			: 	$(LIBFT_FILE) $(OBJ_FILES)
 					@printf $(UP)$(UP)
 
 $(LIBFT_FILE)	:
-					@echo $(CUT)$(YELLOW) Get Library 🏃 $(RESET)
+					@echo $(CUT)$(YELLOW) Get LIBFT 🏃 $(RESET)
 					@make -C $(LIBFT_DIR) bonus
+
+$(MLX_FILE)		:
+					@echo $(CUT)$(YELLOW) Get LIBMLX 🏃 $(RESET)
+					@make -C $(MLX_DIR) 
 
 .PHONY			:	clean
 clean			:
 					@rm -f $(OBJS_MAN) $(OBJS_BONUS)
 					@make -C $(LIBFT_DIR) clean
+					@make -C $(MLX_DIR) clean
 					@echo $(L_RED) Remove🧹 OBJ files in miniRT 👋 $(RESET)
 
 
@@ -112,6 +120,7 @@ clean			:
 fclean			:	clean
 					@rm -f $(NAME)
 					@make -C $(LIBFT_DIR) fclean
+					@make -C $(MLX_DIR) fclean
 					@echo $(RED) Remove🧹 $(NAME)🦪 $(RESET)
 
 

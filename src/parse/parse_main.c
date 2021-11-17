@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 20:33:42 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 20:50:11 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 static void	read_config(int fd, t_conf **hd)
 {
 	char	**elem_info;
-	char	**info_dup;
 	char	*line;
 
 	while (get_next_line(fd, &line) > 0)
