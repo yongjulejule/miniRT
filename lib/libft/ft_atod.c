@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:27:29 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 16:39:54 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 19:42:18 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ double	ft_atod(char *str, int *flag)
 	check_validity(str, flag);
 	if (*flag)
 		return (ret);
-	dot_pos = ft_strchr(str, '.') - str;
+	dot_pos = ft_strlen(str) + str - ft_strchr(str, '.');
 	rem_dot = ft_split(str, '.');
 	to_fr = ft_strjoin(rem_dot[0], rem_dot[1]);
 	free_double_ptr((void **)rem_dot);
 	ret = ato_int_d(to_fr);
 	free(to_fr);
-	while (--dot_pos >= 0)
+	while (ft_strchr(str, '.') && --dot_pos > 0)
 		ret /= 10;
 	return (ret);
 }
