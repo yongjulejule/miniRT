@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 15:46:58 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 16:59:09 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 {
 	int	cap_flag[3];
 
-	ft_bzero(cap_flag, 96);
+	cap_flag[0] = 0;
+	cap_flag[1] = 0;
+	cap_flag[2] = 0;
 	spec->obj_lst = obj_lst_new(NULL, 0);
 	while (cur)
 	{
@@ -48,6 +50,8 @@ static void	read_config(int fd, t_conf **hd)
 		if (*line != '\0')
 		{
 			elem_info = ft_split(line, ' ');
+			if (elem_info[0] == NULL)
+				is_error("Invalid configuration", NULL, EXIT_FAILURE);
 			conf_lst_addback(hd, conf_lst_new(ft_strdup(elem_info[0]),
 					ft_strsetdup(elem_info + 1)));
 			free_double_ptr((void **)elem_info);

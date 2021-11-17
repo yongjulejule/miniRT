@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:51:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 15:47:46 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 16:01:13 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ t_obj_lst	*obj_lst_new(void *object, int which)
 
 	new = (t_obj_lst *)ft_calloc(1, sizeof(t_obj_lst));
 	if (which == SPHERE)
-		new->obj->sph = (t_sph *)object;
+		new->obj.sph = (t_sph *)object;
 	else if (which == PLANE)
-		new->obj->pl = (t_pl *)object;
+		new->obj.pl = (t_pl *)object;
 	else if (which == CYLINDER)
-		new->obj->cy = (t_cy *)object;
+		new->obj.cy = (t_cy *)object;
 	new->next = NULL;
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:04:41 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 15:49:33 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 16:47:29 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	fill_cy_color(t_cy *new_cy, char **info)
 	char	**color_arr;
 	int		i;
 
-	color_arr = ft_split(info[2], ',');
+	color_arr = ft_split(info[4], ',');
 	if (ft_strsetlen(color_arr) != 3)
 		is_error("Invalid configuration", NULL, EXIT_FAILURE);
 	i = -1;

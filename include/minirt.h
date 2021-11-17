@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 15:40:36 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 16:01:08 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef union u_obj
 
 typedef struct s_obj_lst
 {
-	t_obj				*obj;
+	t_obj				obj;
 	struct s_obj_lst	*next;
 }	t_obj_lst;
 

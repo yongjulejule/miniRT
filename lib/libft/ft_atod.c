@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:27:29 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 15:45:12 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/17 16:39:54 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ static void	check_validity(char *str, int *flag)
 	int	dot_flag;
 
 	dot_flag = 0;
-	dot_flag++;
 	if (!is_charset(str[0], "+-0123456789."))
 		(*flag)++;
 	i = 0;
-	while (!(*flag) && str[++i])
+	while (str[++i] && !(*flag))
 	{
 		if (!is_charset(str[i], "0123456789."))
 			(*flag)++;
@@ -50,7 +49,7 @@ static double	ato_int_d(char *integer)
 		i = 0;
 	}
 	while (integer[++i])
-		ret = 10 * ret + integer[i] + '0';
+		ret = 10 * ret + integer[i] - '0';
 	return (sign * ret);
 }
 
