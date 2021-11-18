@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/17 20:59:09 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/18 14:08:57 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBFT_DIR		= ./lib/libft/
 LIBFT_FLAGS		= -L./$(LIBFT_DIR) -lft
 LIBFT_FILE		= $(LIBFT_DIR)libft.a
 
-MLX_DIR			= ./lib/mlx/
+MLX_DIR			= ./lib/libmlx/
 MLX_FLAGS		= -L./$(MLX_DIR) -lmlx
 MLX_FILE		= $(MLX_DIR)libmlx.a
 
