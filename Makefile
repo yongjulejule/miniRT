@@ -6,18 +6,18 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/18 14:08:57 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/19 17:02:19 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				= gcc
 
 ifdef DEBUG
-	CFLAGS = -g3 -fsanitize=address -D BUFFER_SIZE=64
+	CFLAGS = -g3 -fsanitize=address -D BUFFER_SIZE=64 -D R_WIDTH=1920 -D R_HEIGHT=1080
 else ifdef LEAKS
-	CFLAGS = -g -D BUFFER_SIZE=64
+	CFLAGS = -g -D BUFFER_SIZE=64 -D R_WIDTH=1920 -D R_HEIGHT=1080
 else 
-	CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=64
+	CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=64 -D R_WIDTH=1920 -D R_HEIGHT=1080
 endif
 
 NAME			= miniRT
