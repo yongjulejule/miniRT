@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 20:50:11 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/19 12:47:49 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	read_config(int fd, t_conf **hd)
 	free(line);
 }
 
-void	check_config(int argc, char **argv, t_spec *spec)
+void	parse_config(int argc, char **argv, t_spec *spec)
 {
 	int		fd;
 	t_conf	*head;
