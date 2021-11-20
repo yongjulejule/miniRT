@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/19 12:47:49 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/21 00:53:58 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,33 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 	}
 }
 
-static void	read_config(int fd, t_conf **hd)
+static void	str_to_conf_elem(t_conf **hd, char *line)
 {
 	char	**elem_info;
+
+	elem_info = ft_split(line, ' ');
+	if (elem_info[0] == NULL)
+		is_error("Invalid configuration", NULL, EXIT_FAILURE);
+	conf_lst_addback(hd, conf_lst_new(ft_strdup(elem_info[0]),
+			ft_strsetdup(elem_info + 1)));
+	free_double_ptr((void **)elem_info);
+}
+
+static void	read_config(int fd, t_conf **hd)
+{
 	char	*line;
 
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (*line != '\0')
-		{
-			elem_info = ft_split(line, ' ');
-			if (elem_info[0] == NULL)
-				is_error("Invalid configuration", NULL, EXIT_FAILURE);
-			conf_lst_addback(hd, conf_lst_new(ft_strdup(elem_info[0]),
-					ft_strsetdup(elem_info + 1)));
-			free_double_ptr((void **)elem_info);
-		}
+		if (line && *line != '\0')
+			str_to_conf_elem(hd, line);
 		free(line);
 		line = NULL;
 	}
+	if (line && *line != '\0')
+		str_to_conf_elem(hd, line);
 	free(line);
+	line = NULL;
 }
 
 void	parse_config(int argc, char **argv, t_spec *spec)

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 09:46:25 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/15 16:35:47 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/21 00:47:54 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft.h"
+
+# define HEAD_ELEM -2
 
 typedef struct s_gnl_lst
 {

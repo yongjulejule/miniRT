@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:05:49 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/15 16:06:45 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/21 00:49:21 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ t_gnl_lst	*gnl_lstnew(void *content, int fd)
 {
 	t_gnl_lst	*ret;
 
-	ret = (t_gnl_lst *)malloc(sizeof(t_gnl_lst));
-	if (ret == NULL)
-		return (0);
+	ret = (t_gnl_lst *)ft_calloc(1, sizeof(t_gnl_lst));
 	ret->backup = content;
 	ret->fd = fd;
-	ret->next = 0;
+	ret->next = NULL;
 	return (ret);
 }
 
