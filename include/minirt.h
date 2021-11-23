@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 14:32:02 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/23 16:34:45 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 
 # include <errno.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # include "get_next_line.h"
 # include "libft.h"
-# include "structs.h"
 # include "mlx.h"
+# include "structs.h"
 
 /* User Defines */
 
@@ -63,7 +64,8 @@ void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 
 /* Render */
 void		init_rt_struct(t_rt *rt, t_spec *spec);
-int			get_color(int *color);
+int			get_color(int *color, double ratio);
 void		get_bg_img(t_rt *rt);
+void		get_obj_img(t_rt *rt);
 
 #endif
