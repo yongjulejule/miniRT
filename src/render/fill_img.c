@@ -6,24 +6,20 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:30:51 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 17:45:45 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/23 18:01:40 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	init_obj_img(t_rt *rt)
+static void	create_sph_img(t_rt *rt, t_sph *sph)
 {
-	int	w;
-	int	h;
-	int	test[3];
-	int	circle_color;
-	double r = 100;
+	int		w;
+	int		h;
+	double	r;
 
-	test[0] = 255;
-	test[1] = 255;
-	test[2] = 0;
-	circle_color = get_color(test, 1);
+	circle_color = get_color(sph->color, 1);
+	r = sph->diameter / 2;
 	h = 0;
 	while (h < WIN_H)
 	{
@@ -45,6 +41,8 @@ static void	init_obj_img(t_rt *rt)
 
 void	get_obj_img(t_rt *rt)
 {
+	t_obj_lst	*cur;
+
 	rt->obj_img.img_ptr = mlx_new_image(rt->mlx_ptr, rt->fov_w, WIN_H);
 	if (!rt->bg_img.img_ptr)
 		is_error("Objects image init failed", NULL, EXIT_FAILURE);
@@ -52,7 +50,13 @@ void	get_obj_img(t_rt *rt)
 			&rt->obj_img.bpp, &rt->obj_img.width, &rt->obj_img.endian);
 	if (!rt->bg_img.data)
 		is_error("Getting objects image data failed", NULL, EXIT_FAILURE);
-	init_obj_img(rt);
+	cur = rt->spec->obj_lst->next;
+	while (cur)
+	{
+		if (cur->type == SPHERE)
+			create_sph_img(rt, cur->obj.sph);
+		cur = cur->next;
+	}
 }
 
 static void	init_bg_img(t_rt *rt)
