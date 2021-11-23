@@ -6,29 +6,25 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:30:51 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 16:42:35 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/23 18:01:40 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	init_obj_img(t_rt *rt)
+static void	create_sph_img(t_rt *rt, t_sph *sph)
 {
-	int	w;
-	int	h;
-	int	test[3];
-	int	circle_color;
-	double r = 100;
+	int		w;
+	int		h;
+	double	r;
 
-	test[0] = 255;
-	test[1] = 255;
-	test[2] = 0;
-	circle_color = get_color(test, 1);
+	circle_color = get_color(sph->color, 1);
+	r = sph->diameter / 2;
 	h = 0;
 	while (h < WIN_H)
 	{
 		w = 0;
-		while (w < WIN_W)
+		while (w < rt->fov_w)
 		{
 			if (w >= WIN_W / 2 - (int)sqrt(fabs(pow(r, 2) - pow((double)(h - WIN_H / 2), 2))) && w <= WIN_W / 2 + (int)sqrt(fabs(pow(r, 2) - pow((double)(h - WIN_H / 2), 2)))
 				&& (h >= WIN_H / 2 - (int)sqrt(fabs(pow(r, 2) - pow((double)(w - WIN_W / 2), 2))) && h <= WIN_H / 2 + (int)sqrt(fabs(pow(r, 2) - pow((double)(w - WIN_W / 2), 2)))))
@@ -45,14 +41,22 @@ static void	init_obj_img(t_rt *rt)
 
 void	get_obj_img(t_rt *rt)
 {
-	rt->obj_img.img_ptr = mlx_new_image(rt->mlx_ptr, WIN_W, WIN_H);
+	t_obj_lst	*cur;
+
+	rt->obj_img.img_ptr = mlx_new_image(rt->mlx_ptr, rt->fov_w, WIN_H);
 	if (!rt->bg_img.img_ptr)
 		is_error("Objects image init failed", NULL, EXIT_FAILURE);
 	rt->obj_img.data = (int *)mlx_get_data_addr(rt->obj_img.img_ptr,
 			&rt->obj_img.bpp, &rt->obj_img.width, &rt->obj_img.endian);
 	if (!rt->bg_img.data)
 		is_error("Getting objects image data failed", NULL, EXIT_FAILURE);
-	init_obj_img(rt);
+	cur = rt->spec->obj_lst->next;
+	while (cur)
+	{
+		if (cur->type == SPHERE)
+			create_sph_img(rt, cur->obj.sph);
+		cur = cur->next;
+	}
 }
 
 static void	init_bg_img(t_rt *rt)
@@ -66,7 +70,7 @@ static void	init_bg_img(t_rt *rt)
 	while (h < WIN_H)
 	{
 		w = 0;
-		while (w < WIN_W)
+		while (w < rt->fov_w)
 		{
 			rt->bg_img.data[(h * rt->bg_img.width + w * rt->bg_img.bpp / 8) / 4]
 				= bg_color;
@@ -76,9 +80,22 @@ static void	init_bg_img(t_rt *rt)
 	}
 }
 
+int	fov_applied_width(t_rt *rt)
+{
+	double	rad;
+
+	if (rt->spec->cam.fov == 180)
+		return (WIN_W);
+	rad = rt->spec->cam.fov * M_PI / 180;
+	return ((int)(2 * rt->spec->cam.vp[Z] * fabs(tan(rad / 2))));
+}
+
 void	get_bg_img(t_rt *rt)
 {
-	rt->bg_img.img_ptr = mlx_new_image(rt->mlx_ptr,  WIN_W, WIN_H);
+	rt->fov_w = fov_applied_width(rt);
+	if (rt->fov_w > WIN_W)
+		rt->fov_w = WIN_W;
+	rt->bg_img.img_ptr = mlx_new_image(rt->mlx_ptr, rt->fov_w, WIN_H);
 	if (!rt->bg_img.img_ptr)
 		is_error("Background image init failed", NULL, EXIT_FAILURE);
 	rt->bg_img.data = (int *)mlx_get_data_addr(rt->bg_img.img_ptr,

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 14:03:32 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/23 17:53:23 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_rt
 	t_spec	*spec;
 	t_img	bg_img;
 	t_img	obj_img;
+	int		fov_w;
 }	t_rt;
 
 #endif
