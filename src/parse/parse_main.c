@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/21 00:53:58 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/23 11:12:52 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,14 @@ static void	read_config(int fd, t_conf **hd)
 {
 	char	*line;
 
-	while (get_next_line(fd, &line) > 0)
+	line = NULL;
+	while (get_next_line(fd, &line) > 0 || (line && *line != '\0'))
 	{
 		if (line && *line != '\0')
 			str_to_conf_elem(hd, line);
 		free(line);
 		line = NULL;
 	}
-	if (line && *line != '\0')
-		str_to_conf_elem(hd, line);
-	free(line);
-	line = NULL;
 }
 
 void	parse_config(int argc, char **argv, t_spec *spec)
@@ -75,7 +72,7 @@ void	parse_config(int argc, char **argv, t_spec *spec)
 	t_conf	*head;
 
 	if (argc != 2)
-		is_error("miniRT must display only one scene!", NULL, EXIT_FAILURE);
+		is_error("miniRT can display only one scene!", NULL, EXIT_FAILURE);
 	else if (!argv[1] || ft_strlen(argv[1]) < 4
 		|| ft_strcmp(argv[1] + ft_strlen(argv[1]) - 3, ".rt"))
 		is_error("Invalid .rt file", NULL, EXIT_FAILURE);
