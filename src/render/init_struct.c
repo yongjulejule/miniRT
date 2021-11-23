@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 14:48:45 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 14:30:38 by ghan             ###   ########.fr       */
+/*   Created: 2021/11/23 14:30:06 by ghan              #+#    #+#             */
+/*   Updated: 2021/11/23 14:30:25 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char *argv[])
+void	init_rt_struct(t_rt *rt, t_spec *spec)
 {
-	t_spec	spec;
-	t_rt	rt;
-
-	parse_config(argc, argv, &spec);
-	init_rt_struct(&rt, &spec);
-	get_bg_img(&rt);
-	mlx_put_image_to_window(rt.mlx_ptr, rt.win_ptr, rt.bg_img.img_ptr, 0, 0);
-	mlx_loop(rt.mlx_ptr);
-	// get_obj_img();
-	// draw();
-	// mlx_loop(rt->mlx_ptr);
-	return (EXIT_SUCCESS);
+	rt->spec = spec;
+	rt->mlx_ptr = mlx_init();
+	if (!rt->mlx_ptr)
+		is_error("Mlx pointer init failed", NULL, EXIT_FAILURE);
+	rt->win_ptr = mlx_new_window(rt->mlx_ptr, WIN_W, WIN_H, "bigrt");
+	if (!rt->win_ptr)
+		is_error("Window pointer init failed", NULL, EXIT_FAILURE);
 }

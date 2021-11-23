@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/19 12:54:35 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/23 14:03:32 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,22 @@ typedef struct s_spec
 	t_light		light;
 	t_obj_lst	*obj_lst;
 }	t_spec;
+
+typedef struct s_img{
+	int		width;
+	int		bpp;
+	int		endian;
+	int		*data;
+	void	*img_ptr;
+}	t_img;
+
+typedef struct s_rt
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_spec	*spec;
+	t_img	bg_img;
+	t_img	obj_img;
+}	t_rt;
 
 #endif

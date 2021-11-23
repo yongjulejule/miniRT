@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/19 12:55:25 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/23 14:32:02 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "get_next_line.h"
 # include "libft.h"
 # include "structs.h"
+# include "mlx.h"
 
 /* User Defines */
 
@@ -59,5 +60,10 @@ void		fill_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
+
+/* Render */
+void		init_rt_struct(t_rt *rt, t_spec *spec);
+int			get_color(int *color);
+void		get_bg_img(t_rt *rt);
 
 #endif

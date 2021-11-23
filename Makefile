@@ -6,18 +6,18 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/19 17:02:19 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/23 14:19:04 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				= gcc
 
 ifdef DEBUG
-	CFLAGS = -g3 -fsanitize=address -D BUFFER_SIZE=64 -D R_WIDTH=1920 -D R_HEIGHT=1080
+	CFLAGS = -g3 -fsanitize=address -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
 else ifdef LEAKS
-	CFLAGS = -g -D BUFFER_SIZE=64 -D R_WIDTH=1920 -D R_HEIGHT=1080
+	CFLAGS = -g -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
 else 
-	CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=64 -D R_WIDTH=1920 -D R_HEIGHT=1080
+	CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
 endif
 
 NAME			= miniRT
@@ -32,7 +32,7 @@ LIBFT_FLAGS		= -L./$(LIBFT_DIR) -lft
 LIBFT_FILE		= $(LIBFT_DIR)libft.a
 
 MLX_DIR			= ./lib/libmlx/
-MLX_FLAGS		= -L./$(MLX_DIR) -lmlx
+MLX_FLAGS		= -L./$(MLX_DIR) -lmlx -framework OpenGl -framework Appkit
 MLX_FILE		= $(MLX_DIR)libmlx.a
 
 INC_DIR_MAN		= ./include/
@@ -63,6 +63,7 @@ OBJ_FILES		= $(OBJS_MAN)
 
 INC_DIR			= $(INC_DIR_MAN)
 INC_DIR_LIBFT	= ./lib/libft/
+INC_DIR_MLX		= ./lib/libmlx/
 
 ######################### Color #########################
 GREEN="\033[32m"
@@ -95,7 +96,7 @@ $(NAME)			: 	$(LIBFT_FILE) $(MLX_FILE) $(OBJ_FILES)
 					@echo $(CUT)$(UP)$(BOLD)$(L_PUPLE) 🌏 miniRT Compiled 🥳$(RESET)
 
 %.o				: 	%.c
-					@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(INC_DIR_LIBFT) -c $< -o $@
+					@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(INC_DIR_LIBFT) -I$(INC_DIR_MLX) -c $< -o $@
 					@echo $(CUT)$(BOLD)$(L_GREEN) Compiling with $(CFLAGS)...$(RESET)
 					@echo $(CUT)$(GREEN) [$(notdir $^)] to [$(notdir $@)] $(RESET)
 					@printf $(UP)$(UP)
