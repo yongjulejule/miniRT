@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/23 14:19:04 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/23 16:23:13 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ NAME			= miniRT
 
 SRCS_DIR		= ./src/
 SRCS_PARSE_DIR	= ./src/parse/
+SRCS_RENDER_DIR	= ./src/render/
 
 # TODO - Select a version of minilibx and declare LFAGS & INC
 
@@ -48,11 +49,17 @@ SRCS_PARSE		= $(addprefix $(SRCS_PARSE_DIR), \
 				get_next_line_utils.c\
 				)
 
+SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
+				fill_img.c\
+				img_util.c\
+				init_struct.c\
+				)
+
 SRCS_MAN		= $(addprefix $(SRCS_DIR), \
 				main.c\
 				)
 
-SRCS_MAN		+= $(SRCS_PARSE)
+SRCS_MAN		+= $(SRCS_PARSE) $(SRCS_RENDER)
 
 SRCS_BONUS		= $(addprefix $(SRCS_DIR_BONUS), \
 				)
