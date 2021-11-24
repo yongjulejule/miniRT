@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:53:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 15:22:46 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/24 20:19:57 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ int	is_in_circle(double w, double h, double r, int *pt_o)
 
 void	create_sph_img(t_rt *rt, t_sph *sph)
 {
+	double	r;
 	int		w;
 	int		h;
-	int		circle_color;
 	int		clear;
-	double	r;
 
 	clear = TRANSPARENT | get_color(rt->spec->amb.color, rt->spec->amb.ratio);
-	circle_color = get_color(sph->color, 1);
 	r = sph->diameter / 2;
 	h = 0;
 	while (h < WIN_H)
@@ -38,7 +36,8 @@ void	create_sph_img(t_rt *rt, t_sph *sph)
 		while (w < WIN_W)
 		{
 			if (is_in_circle((double)w, (double)h, r, rt->origin))
-				rt->obj_img.data[cur_pixel(rt, w, h, OBJECTS)] = circle_color;
+				rt->obj_img.data[cur_pixel(rt, w, h, OBJECTS)]
+					= color_per_pixel_sph(sph, rt->spec->light);
 			else
 				rt->obj_img.data[cur_pixel(rt, w, h, OBJECTS)] = clear;
 			w++;

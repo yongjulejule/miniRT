@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 15:22:33 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/24 17:13:05 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		get_obj_img(t_rt *rt);
 
 /* Draw Objects */
 void		create_sph_img(t_rt *rt, t_sph *sph);
+int			color_per_pixel_sph(t_sph *sph, t_light l_info);
 
 /* Math Util */
 double		get_distance(double x, double y);

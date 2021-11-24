@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 15:22:33 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/24 20:20:14 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_obj_lst
 
 typedef struct s_spec
 {
-	t_amb	amb;
+	t_amb		amb;
 	t_cam		cam;
 	t_light		light;
 	t_obj_lst	*obj_lst;
