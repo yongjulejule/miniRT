@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 17:53:23 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/24 15:22:33 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ typedef struct s_conf
 	struct s_conf	*next;
 }	t_conf;
 
-typedef struct s_a_light
+typedef struct s_amb
 {
 	double	ratio;
 	int		color[3];
-}	t_a_light;
+}	t_amb;
 
 typedef struct s_cam
 {
@@ -79,7 +79,7 @@ typedef struct s_obj_lst
 
 typedef struct s_spec
 {
-	t_a_light	a_light;
+	t_amb	amb;
 	t_cam		cam;
 	t_light		light;
 	t_obj_lst	*obj_lst;
@@ -101,6 +101,7 @@ typedef struct s_rt
 	t_img	bg_img;
 	t_img	obj_img;
 	int		fov_w;
+	int		origin[2];
 }	t_rt;
 
 #endif

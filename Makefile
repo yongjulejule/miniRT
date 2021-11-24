@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/23 16:23:13 by ghan             ###   ########.fr        #
+#    Updated: 2021/11/24 14:24:02 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,13 @@ SRCS_PARSE		= $(addprefix $(SRCS_PARSE_DIR), \
 				)
 
 SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
+				create_cy_img.c\
+				create_pl_img.c\
+				create_sph_img.c\
 				fill_img.c\
 				img_util.c\
 				init_struct.c\
+				math_util.c\
 				)
 
 SRCS_MAN		= $(addprefix $(SRCS_DIR), \
