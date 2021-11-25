@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:04:41 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 18:03:24 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/24 15:07:22 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	fill_cy_center(t_cy *new_cy, char **info, int cv_flag)
 	i = -1;
 	while (center_arr[++i])
 	{
-		new_cy->center[i] = ft_atod(center_arr[i], &cv_flag);
+		new_cy->center[i] = ft_atod(center_arr[i], &cv_flag) * 10;
 		if (cv_flag)
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
 	}
@@ -78,10 +78,10 @@ void	fill_cylinder(t_obj_lst **hd, char **info, int cv_flag)
 	obj_lst_addback(hd, obj_lst_new((void *)new_cy, CYLINDER));
 	fill_cy_center(new_cy, info, 0);
 	fill_cy_o_vect(new_cy, info, 0);
-	new_cy->diameter = ft_atod(info[2], &cv_flag);
+	new_cy->diameter = ft_atod(info[2], &cv_flag) * 10;
 	if (cv_flag || new_cy->diameter < 0)
 		is_error("Invalid configuration", NULL, EXIT_FAILURE);
-	new_cy->height = ft_atod(info[3], &cv_flag);
+	new_cy->height = ft_atod(info[3], &cv_flag) * 10;
 	if (cv_flag || new_cy->height < 0)
 		is_error("Invalid configuration", NULL, EXIT_FAILURE);
 	fill_cy_color(new_cy, info);

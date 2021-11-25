@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:15:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 18:02:24 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/24 15:06:52 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	fill_sphere(t_obj_lst **hd, char **info, int cv_flag)
 	i = -1;
 	while (center_arr[++i])
 	{
-		new_sph->center[i] = ft_atod(center_arr[i], &cv_flag);
+		new_sph->center[i] = ft_atod(center_arr[i], &cv_flag) * 10;
 		if (cv_flag)
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
 	}
 	free_double_ptr((void **)center_arr);
-	new_sph->diameter = ft_atod(info[1], &cv_flag);
+	new_sph->diameter = ft_atod(info[1], &cv_flag) * 10;
 	if (cv_flag || new_sph->diameter < 0)
 		is_error("Invalid configuration", NULL, EXIT_FAILURE);
 	fill_sphere_two(new_sph, info);
@@ -113,7 +113,7 @@ void	fill_plane(t_obj_lst **hd, char **info, int cv_flag)
 	i = -1;
 	while (center_arr[++i])
 	{
-		new_pl->center[i] = ft_atod(center_arr[i], &cv_flag);
+		new_pl->center[i] = ft_atod(center_arr[i], &cv_flag) * 10;
 		if (cv_flag)
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
 	}

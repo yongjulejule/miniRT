@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 14:21:05 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/24 15:22:33 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 {
 	int	cap_flag[3];
 
-	cap_flag[0] = 0;
-	cap_flag[1] = 0;
-	cap_flag[2] = 0;
+	ft_bzero(cap_flag, 3 * sizeof(int));
 	spec->obj_lst = obj_lst_new(NULL, 0);
 	while (cur)
 	{
 		if (!ft_strcmp(cur->elem, "A") && !cap_flag[0])
-			fill_a_light(spec, cur->info, cap_flag, 0);
+			fill_amb(spec, cur->info, cap_flag, 0);
 		else if (!ft_strcmp(cur->elem, "C") && !cap_flag[1])
 			fill_cam(spec, cur->info, cap_flag, 0);
 		else if (!ft_strcmp(cur->elem, "L") && !cap_flag[2])

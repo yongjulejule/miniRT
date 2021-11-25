@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/23 16:34:45 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/24 17:13:05 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@
 # define G 1
 # define B 2
 
+# define TRANSPARENT 0xff000000
+
+# define OBJECTS 0
+# define BG 1
+
 /* Functions */
 
 /* Parse */
@@ -55,7 +60,7 @@ t_obj_lst	*obj_lst_last(t_obj_lst *obj);
 void		obj_lst_addback(t_obj_lst **hd, t_obj_lst *new);
 
 /* Fill Elements */
-void		fill_a_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_amb(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_cam(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
@@ -65,7 +70,15 @@ void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 /* Render */
 void		init_rt_struct(t_rt *rt, t_spec *spec);
 int			get_color(int *color, double ratio);
+int			cur_pixel(t_rt *rt, int w, int h, int flag);
 void		get_bg_img(t_rt *rt);
 void		get_obj_img(t_rt *rt);
+
+/* Draw Objects */
+void		create_sph_img(t_rt *rt, t_sph *sph);
+int			color_per_pixel_sph(t_sph *sph, t_light l_info);
+
+/* Math Util */
+double		get_distance(double x, double y);
 
 #endif
