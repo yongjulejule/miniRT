@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 17:13:05 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/28 08:54:07 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@
 # define OBJECTS 0
 # define BG 1
 
+# define KEY_PRESS 2
+# define KEY_ESC 53
+# define RED_DOT 17
+
 /* Functions */
 
 /* Parse */
@@ -73,6 +77,9 @@ int			get_color(int *color, double ratio);
 int			cur_pixel(t_rt *rt, int w, int h, int flag);
 void		get_bg_img(t_rt *rt);
 void		get_obj_img(t_rt *rt);
+
+/* Hook */
+void		hook_minirt(t_rt *rt);
 
 /* Draw Objects */
 void		create_sph_img(t_rt *rt, t_sph *sph);
