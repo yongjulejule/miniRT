@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hook_minirt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 14:48:45 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/28 08:54:31 by yongjule         ###   ########.fr       */
+/*   Created: 2021/11/28 08:47:35 by yongjule          #+#    #+#             */
+/*   Updated: 2021/11/28 08:53:55 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char *argv[])
+static int	close_window(void *param)
 {
-	t_spec	spec;
-	t_rt	rt;
+	t_rt	*rt;
 
-	parse_config(argc, argv, &spec);
-	init_rt_struct(&rt, &spec);
-	get_bg_img(&rt);
-	get_obj_img(&rt);
-	// draw();
-	mlx_put_image_to_window(rt.mlx_ptr, rt.win_ptr, rt.bg_img.img_ptr, 0, 0);
-	mlx_put_image_to_window(rt.mlx_ptr, rt.win_ptr, rt.obj_img.img_ptr, 0, 0);
-	hook_minirt(&rt);
-	mlx_loop(rt.mlx_ptr);
+	rt = (t_rt *)param;
+	exit(EXIT_SUCCESS);
+}
+
+static int	key_press(int keycode, void *param)
+{
+	t_rt	*rt;
+
+	rt = (t_rt *)param;
+	if (keycode == KEY_ESC)
+		exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
+}
+
+void	hook_minirt(t_rt *rt)
+{
+	mlx_hook(rt->win_ptr, KEY_PRESS, 0, key_press, rt);
+	mlx_hook(rt->win_ptr, RED_DOT, 0, close_window, rt);
 }
