@@ -6,7 +6,7 @@
 #    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/28 08:55:40 by yongjule         ###   ########.fr        #
+#    Updated: 2021/11/29 16:29:39 by yongjule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,9 @@ SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
 				img_util.c\
 				init_struct.c\
 				math_util.c\
+				vect_ops.c\
+				vect_util.c\
+				view_transform.c\
 				)
 
 SRCS_MAN		= $(addprefix $(SRCS_DIR), \

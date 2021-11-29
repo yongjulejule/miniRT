@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/28 08:54:07 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:21:56 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define X 0
 # define Y 1
 # define Z 2
+# define W 3
 
 # define R 0
 # define G 1
@@ -77,6 +78,7 @@ int			get_color(int *color, double ratio);
 int			cur_pixel(t_rt *rt, int w, int h, int flag);
 void		get_bg_img(t_rt *rt);
 void		get_obj_img(t_rt *rt);
+void		view_transform(t_rt *rt);
 
 /* Hook */
 void		hook_minirt(t_rt *rt);
@@ -87,5 +89,13 @@ int			color_per_pixel_sph(t_sph *sph, t_light l_info);
 
 /* Math Util */
 double		get_distance(double x, double y);
+
+/* 3D Vect Util */
+void		update_vect(double *dst, double *src, int xyz, int size);
+double		dot_product(double *vect_1, double *vect_2);
+void		cross_product(double *ret, double *vect_1, double *vect_2);
+void		fill_vect(double *vect, double x, double y, double z);
+double		vect_size(double *vect);
+void		normalize_vect(double *vect);
 
 #endif
