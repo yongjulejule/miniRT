@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/11/29 18:22:06 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:26:37 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	get_transf_matrix(double *vp, double *transf)
 	transf[15] = 1;
 }
 
-void	mulitiply_vect(double *transf, double *dst)
+void	multiply_vect(double *transf, double *dst)
 {
 	double	homo_v[4];
 	int		row;
@@ -73,16 +73,16 @@ void	transf_obj(t_spec *spec, double *transf)
 	while (cur)
 	{
 		if (cur->type == SPHERE)
-			multiply_vect(transf, cur->obj->sph->center);
+			multiply_vect(transf, cur->obj.sph->center);
 		else if (cur->type == PLANE)
 		{
-			multiply_vect(transf, cur->obj->pl->center);
-			multiply_vect(transf, cur->obj->pl->o_vect);
+			multiply_vect(transf, cur->obj.pl->center);
+			multiply_vect(transf, cur->obj.pl->o_vect);
 		}
 		else if (cur->type == CYLINDER)
 		{
-			multiply_vect(transf, cur->obj->cy->center);
-			multiply_vect(transf, cur->obj->cy->o_vect);
+			multiply_vect(transf, cur->obj.cy->center);
+			multiply_vect(transf, cur->obj.cy->o_vect);
 		}
 		cur = cur->next;
 	}
