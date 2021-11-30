@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:27:04 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 17:39:38 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 12:38:53 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ int	get_color(int *color, double ratio)
 			| (int)(color[G] * ratio) << 8 | (int)(color[B] * ratio));
 }
 
-int	cur_pixel(t_rt *rt, int w, int h, int flag)
+int	cur_pixel(t_rt *rt, int w, int h)
 {
-	if (flag == OBJECTS)
-		return ((h * rt->obj_img.width + w * rt->obj_img.bpp / 8) / 4);
-	return ((h * rt->bg_img.width + w * rt->bg_img.bpp / 8) / 4);
+	return ((h * rt->obj_img.width + w * rt->obj_img.bpp / 8) / 4);
 }
 
 int	color_per_pixel_sph(t_sph *sph, t_light l_info)

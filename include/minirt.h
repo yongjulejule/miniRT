@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 10:26:15 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 12:39:18 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@
 
 # define TRANSPARENT 0xff000000
 
-# define OBJECTS 0
-# define BG 1
-
 # define KEY_PRESS 2
 # define KEY_ESC 53
 # define RED_DOT 17
@@ -75,7 +72,7 @@ void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 /* Render */
 void		init_rt_struct(t_rt *rt, t_spec *spec);
 int			get_color(int *color, double ratio);
-int			cur_pixel(t_rt *rt, int w, int h, int flag);
+int			cur_pixel(t_rt *rt, int w, int h);
 void		get_obj_img(t_rt *rt);
 void		view_transform(t_rt *rt);
 
