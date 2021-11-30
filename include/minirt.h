@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/29 18:21:56 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/11/30 10:26:15 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
 int			get_color(int *color, double ratio);
 int			cur_pixel(t_rt *rt, int w, int h, int flag);
-void		get_bg_img(t_rt *rt);
 void		get_obj_img(t_rt *rt);
 void		view_transform(t_rt *rt);
 
