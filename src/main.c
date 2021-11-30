@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:48:45 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 12:39:44 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 14:37:12 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char *argv[])
 	parse_config(argc, argv, &spec);
 	init_rt_struct(&rt, &spec);
 	view_transform(&rt);
+	ray_tracing(&rt);
 	// put_data_to_img();
 	// put_img_to_window();
 	hook_minirt(&rt);

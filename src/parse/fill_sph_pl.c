@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:15:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 10:37:11 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 15:42:36 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static void	fill_plane_two(t_pl *new_pl, char **info, int cv_flag)
 		new_pl->o_vect[i] = ft_atod(o_vect_arr[i], &cv_flag);
 		if (cv_flag || new_pl->o_vect[i] < -1 || new_pl->o_vect[i] > 1)
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
-		normalize_vect(new_pl->o_vect);
 	}
+	normalize_vect(new_pl->o_vect);
 	free_double_ptr((void **)o_vect_arr);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 10:25:16 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 15:25:11 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ typedef struct s_rt
 	void	*win_ptr;
 	t_spec	*spec;
 	t_img	obj_img;
-	int		fov_w;
-	int		origin[2];
 }	t_rt;
 
 #endif

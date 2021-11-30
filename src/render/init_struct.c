@@ -6,21 +6,11 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:30:06 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 15:11:14 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 15:25:00 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static int	fov_applied_width(t_rt *rt)
-{
-	double	rad;
-
-	if (rt->spec->cam.fov == 180)
-		return (WIN_W);
-	rad = rt->spec->cam.fov * M_PI / 180;
-	return ((int)(2 * rt->spec->cam.vp[Z] * fabs(tan(rad / 2))));
-}
 
 void	init_rt_struct(t_rt *rt, t_spec *spec)
 {
@@ -31,9 +21,4 @@ void	init_rt_struct(t_rt *rt, t_spec *spec)
 	rt->win_ptr = mlx_new_window(rt->mlx_ptr, WIN_W, WIN_H, "bigrt");
 	if (!rt->win_ptr)
 		is_error("Window pointer init failed", NULL, EXIT_FAILURE);
-	rt->fov_w = fov_applied_width(rt);
-	if (rt->fov_w > WIN_W)
-		rt->fov_w = WIN_W;
-	rt->origin[X] = WIN_W / 2;
-	rt->origin[Y] = WIN_H / 2;
 }
