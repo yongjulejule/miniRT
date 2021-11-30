@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 15:25:11 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 17:35:29 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_cam
 {
 	double	vp[3];
 	double	o_vect[3];
-	int		fov;
+	double	fov;
 }	t_cam;
 
 typedef struct s_light
@@ -99,6 +99,7 @@ typedef struct s_rt
 	void	*win_ptr;
 	t_spec	*spec;
 	t_img	obj_img;
+	double	c_to_s;
 }	t_rt;
 
 #endif

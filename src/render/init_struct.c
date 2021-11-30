@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:30:06 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 15:25:00 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 17:36:32 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	init_rt_struct(t_rt *rt, t_spec *spec)
 	rt->win_ptr = mlx_new_window(rt->mlx_ptr, WIN_W, WIN_H, "bigrt");
 	if (!rt->win_ptr)
 		is_error("Window pointer init failed", NULL, EXIT_FAILURE);
+	rt->c_to_s = WIN_W / (2 * tan(rt->spec->cam.fov / 2));
 }
