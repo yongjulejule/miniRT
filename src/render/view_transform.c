@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/11/29 18:26:37 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/11/30 12:37:17 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ void	view_transform(t_rt *rt)
 
 	get_coord_system(rt->spec, transf);
 	get_transf_matrix(rt->spec->cam.vp, transf);
-	transf_objs(rt->spec, transf);
-	transf_light(rt->spec, transf);
+	// transf_objs(rt->spec, transf);
+	// transf_light(rt->spec, transf);
 }

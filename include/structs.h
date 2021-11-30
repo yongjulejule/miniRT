@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/29 14:55:54 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/11/30 10:25:16 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct s_rt
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_spec	*spec;
-	t_img	bg_img;
 	t_img	obj_img;
 	int		fov_w;
 	int		origin[2];
