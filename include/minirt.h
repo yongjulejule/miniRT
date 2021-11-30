@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 14:32:03 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 15:36:19 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
 void		get_obj_img(t_rt *rt);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
+void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
 
 /* Hook */
@@ -81,7 +82,6 @@ void		hook_minirt(t_rt *rt);
 
 /* Draw Objects */
 int			color_per_pixel_sph(t_sph *sph, t_light l_info);
-void		create_sph_img(t_rt *rt, t_sph *sph);
 
 /* Math Util */
 double		get_distance(double x, double y);

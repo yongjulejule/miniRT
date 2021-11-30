@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/11/29 16:29:39 by yongjule         ###   ########.fr        #
+#    Updated: 2021/11/30 15:47:52 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,11 @@ SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
 				create_cy_img.c\
 				create_pl_img.c\
 				create_sph_img.c\
-				fill_img.c\
 				hook_minirt.c\
 				img_util.c\
 				init_struct.c\
 				math_util.c\
+				ray_tracing.c\
 				vect_ops.c\
 				vect_util.c\
 				view_transform.c\
