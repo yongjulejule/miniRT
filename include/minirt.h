@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 12:39:18 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 14:32:03 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,47 +51,48 @@
 /* Functions */
 
 /* Parse */
-int			get_next_line(int fd, char **line);
-void		parse_config(int argc, char **argv, t_spec *spec);
-t_conf		*conf_lst_new(char *elem, char **info);
-t_conf		*conf_lst_last(t_conf *elem);
 void		conf_lst_addback(t_conf **hd, t_conf *new);
+t_conf		*conf_lst_last(t_conf *elem);
+t_conf		*conf_lst_new(char *elem, char **info);
 void		free_config(t_conf *hd);
-t_obj_lst	*obj_lst_new(void *object, int which);
-t_obj_lst	*obj_lst_last(t_obj_lst *obj);
+int			get_next_line(int fd, char **line);
 void		obj_lst_addback(t_obj_lst **hd, t_obj_lst *new);
+t_obj_lst	*obj_lst_last(t_obj_lst *obj);
+t_obj_lst	*obj_lst_new(void *object, int which);
+void		parse_config(int argc, char **argv, t_spec *spec);
 
 /* Fill Elements */
 void		fill_amb(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_cam(t_spec *spec, char **info, int *cap_flag, int cv_flag);
-void		fill_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
-void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
-void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
+void		fill_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
+void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 
 /* Render */
-void		init_rt_struct(t_rt *rt, t_spec *spec);
-int			get_color(int *color, double ratio);
 int			cur_pixel(t_rt *rt, int w, int h);
+int			get_color(int *color, double ratio);
 void		get_obj_img(t_rt *rt);
+void		init_rt_struct(t_rt *rt, t_spec *spec);
 void		view_transform(t_rt *rt);
 
 /* Hook */
 void		hook_minirt(t_rt *rt);
 
 /* Draw Objects */
-void		create_sph_img(t_rt *rt, t_sph *sph);
 int			color_per_pixel_sph(t_sph *sph, t_light l_info);
+void		create_sph_img(t_rt *rt, t_sph *sph);
 
 /* Math Util */
 double		get_distance(double x, double y);
 
 /* 3D Vect Util */
-void		update_vect(double *dst, double *src, int xyz, int size);
-double		dot_product(double *vect_1, double *vect_2);
 void		cross_product(double *ret, double *vect_1, double *vect_2);
+double		dot_product(double *vect_1, double *vect_2);
 void		fill_vect(double *vect, double x, double y, double z);
-double		vect_size(double *vect);
+void		multiply_vect(double *transf, double *dst);
 void		normalize_vect(double *vect);
+void		update_vect(double *dst, double *src, int xyz, int size);
+double		vect_size(double *vect);
 
 #endif

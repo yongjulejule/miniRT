@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/11/30 12:37:17 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 14:32:31 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,7 @@ static void	get_transf_matrix(double *vp, double *transf)
 	transf[15] = 1;
 }
 
-void	multiply_vect(double *transf, double *dst)
-{
-	double	homo_v[4];
-	int		row;
-
-	fill_vect(homo_v, dst[X], dst[Y], dst[Z]);
-	homo_v[W] = 1; // NOTE homo_v[3] may have to be 0 for o_vects
-	row = 0;
-	while (row < 3)
-	{
-		dst[row] = transf[row * 4 + X] * homo_v[X]
-			+ transf[row * 4 + Y] * homo_v[Y]
-			+ transf[row * 4 + Z] * homo_v[Z]
-			+ transf[row * 4 + W] * homo_v[W];
-		row++;
-	}
-}
-
-void	transf_obj(t_spec *spec, double *transf)
+void	transf_obj_light(t_spec *spec, double *transf)
 {
 	t_obj_lst	*cur;
 
@@ -78,14 +60,17 @@ void	transf_obj(t_spec *spec, double *transf)
 		{
 			multiply_vect(transf, cur->obj.pl->center);
 			multiply_vect(transf, cur->obj.pl->o_vect);
+			normalize_vect(cur->obj.pl->o_vect);
 		}
 		else if (cur->type == CYLINDER)
 		{
 			multiply_vect(transf, cur->obj.cy->center);
 			multiply_vect(transf, cur->obj.cy->o_vect);
+			normalize_vect(cur->obj.cy->o_vect);
 		}
 		cur = cur->next;
 	}
+	multiply_vect(transf, spec->light.lp);
 }
 
 void	view_transform(t_rt *rt)
@@ -94,6 +79,5 @@ void	view_transform(t_rt *rt)
 
 	get_coord_system(rt->spec, transf);
 	get_transf_matrix(rt->spec->cam.vp, transf);
-	// transf_objs(rt->spec, transf);
-	// transf_light(rt->spec, transf);
+	transf_obj_light(rt->spec, transf);
 }

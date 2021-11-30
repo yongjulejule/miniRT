@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:53:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 20:19:57 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 14:31:56 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	create_sph_img(t_rt *rt, t_sph *sph)
 		while (w < WIN_W)
 		{
 			if (is_in_circle((double)w, (double)h, r, rt->origin))
-				rt->obj_img.data[cur_pixel(rt, w, h, OBJECTS)]
+				rt->obj_img.data[cur_pixel(rt, w, h)]
 					= color_per_pixel_sph(sph, rt->spec->light);
 			else
-				rt->obj_img.data[cur_pixel(rt, w, h, OBJECTS)] = clear;
+				rt->obj_img.data[cur_pixel(rt, w, h)] = clear;
 			w++;
 		}
 		h++;

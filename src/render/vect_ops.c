@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   vect_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:22 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/29 18:21:54 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:27:31 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	multiply_vect(double *transf, double *dst)
+{
+	double	homo_v[4];
+	int		row;
+
+	fill_vect(homo_v, dst[X], dst[Y], dst[Z]);
+	homo_v[W] = 1; // NOTE homo_v[3] may have to be 0 for o_vects
+	row = 0;
+	while (row < 3)
+	{
+		dst[row] = transf[row * 4 + X] * homo_v[X]
+			+ transf[row * 4 + Y] * homo_v[Y]
+			+ transf[row * 4 + Z] * homo_v[Z]
+			+ transf[row * 4 + W] * homo_v[W];
+		row++;
+	}
+}
 
 void	cross_product(double *ret, double *vect_1, double *vect_2)
 {
