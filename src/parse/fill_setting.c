@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:23:37 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 15:42:32 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 16:52:22 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ void	fill_cam(t_spec *spec, char **info, int *cap_flag, int cv_flag)
 	}
 	free_double_ptr((void **)coord_arr);
 	fill_cam_two(spec, info, 0);
-	if (!ft_isint(info[2]))
+	spec->cam.fov = ft_atod(info[2], &cv_flag);
+	if (cv_flag || spec->cam.fov < 0 || spec->cam.fov > 180)
 		is_error("Invalid configuration", NULL, EXIT_FAILURE);
-	spec->cam.fov = ft_atoi(info[2]);
+	spec->cam.fov *= M_PI / 180;
 }
 
 static void	fill_light_two(t_spec *spec, char **info)
