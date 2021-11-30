@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:23:37 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 15:22:33 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 10:34:48 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	fill_cam_two(t_spec *spec, char **info, int cv_flag)
 		spec->cam.o_vect[i] = ft_atod(o_vect_arr[i], &cv_flag);
 		if (cv_flag || spec->cam.o_vect[i] < -1 || spec->cam.o_vect[i] > 1)
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
+		normalize_vect(spec->cam.o_vect);
 	}
 	free_double_ptr((void **)o_vect_arr);
 }

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:04:41 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 15:07:22 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 10:37:25 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	fill_cy_o_vect(t_cy *new_cy, char **info, int cv_flag)
 		new_cy->o_vect[i] = ft_atod(o_vect_arr[i], &cv_flag);
 		if (cv_flag || new_cy->o_vect[i] < -1 || new_cy->o_vect[i] > 1)
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
+		normalize_vect(new_cy->o_vect);
 	}
 	free_double_ptr((void **)o_vect_arr);
 }
