@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/11/30 14:27:23 by ghan             ###   ########.fr       */
+/*   Updated: 2021/11/30 14:32:31 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	view_transform(t_rt *rt)
 
 	get_coord_system(rt->spec, transf);
 	get_transf_matrix(rt->spec->cam.vp, transf);
-	transf_objs_light(rt->spec, transf);
+	transf_obj_light(rt->spec, transf);
 }
