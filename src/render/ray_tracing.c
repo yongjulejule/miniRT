@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 16:08:50 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/01 17:19:23 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,30 @@ void	init_obj_img(t_rt *rt)
 		is_error("Getting objects image data failed", NULL, EXIT_FAILURE);
 }
 
-// int	shoot_ray()
-// {
-	
-// }
+int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
+{
+	double		o_vect[3];
+	t_obj_lst	*cur;
+	t_pt_info	pt_info;
+
+	pt_info.pt[Z] = 1;
+	fill_vect(o_vect, vs_x, vs_y, rt->c_to_s);
+	normalize_vect(o_vect);
+	cur = rt->spec->obj_lst->next;
+	while (cur)
+	{
+		if (cur->type == SPHERE)
+			intersect_sph(o_vect, &pt_info, cur->obj.sph);
+		// else if (cur->type == PLANE)
+		// 	intersect_pl(o_vect, &pt_info, cur->obj.pl);
+		// else if (cur->type == CYLINDER)
+		// 	intersect_cy(o_vect, &pt_info, cur->obj.cy);
+		cur = cur->next;
+	}
+	if (pt_info.pt[Z] <= 0)
+		return (get_phong_light_sph(rt, &pt_info));
+	return (TRANSPARENT);
+}
 
 void	ray_tracing(t_rt *rt)
 {
@@ -44,7 +64,7 @@ void	ray_tracing(t_rt *rt)
 		while (w < WIN_W)
 		{
 			vs_x = w - WIN_W / 2;
-			// rt->obj_img.data[cur_pixel(rt, w, h)] = shoot_ray(rt, vs_x, vs_y);
+			rt->obj_img.data[cur_pixel(rt, w, h)] = shoot_ray(rt, vs_x, vs_y);
 			w++;
 		}
 		h++;

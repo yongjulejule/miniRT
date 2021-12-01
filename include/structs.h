@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 17:35:29 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/01 15:21:06 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,13 @@ typedef struct s_img{
 	int		*data;
 	void	*img_ptr;
 }	t_img;
+
+typedef struct s_pt_info
+{
+	int		type;
+	double	pt[3];
+	t_obj	obj;
+}	t_pt_info;
 
 typedef struct s_rt
 {
