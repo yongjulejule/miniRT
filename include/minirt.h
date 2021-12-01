@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/01 17:09:25 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:59:03 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int			get_color(int *color, double ratio);
 void		get_obj_img(t_rt *rt);
 int			get_phong_light_sph(t_rt *rt, t_pt_info *pt_info);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
+void		intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
@@ -94,6 +95,7 @@ double		dot_product(double *vect_1, double *vect_2);
 void		fill_vect(double *vect, double x, double y, double z);
 void		multiply_vect(double *transf, double *dst);
 void		normalize_vect(double *vect);
+void		sub_vect(double *vect, double *dst, double *src);
 void		update_vect(double *dst, double *src, int xyz, int size);
 double		vect_size(double *vect);
 
