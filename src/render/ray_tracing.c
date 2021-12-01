@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/01 17:19:23 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:12:06 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 	{
 		if (cur->type == SPHERE)
 			intersect_sph(o_vect, &pt_info, cur->obj.sph);
+		else
+			printf("not sph\n");
 		// else if (cur->type == PLANE)
 		// 	intersect_pl(o_vect, &pt_info, cur->obj.pl);
 		// else if (cur->type == CYLINDER)
 		// 	intersect_cy(o_vect, &pt_info, cur->obj.cy);
 		cur = cur->next;
 	}
-	if (pt_info.pt[Z] <= 0)
+	if (pt_info.pt[Z] > 1)
 		return (get_phong_light_sph(rt, &pt_info));
 	return (TRANSPARENT);
 }
