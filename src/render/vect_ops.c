@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:22 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/30 14:27:31 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/01 21:58:38 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,11 @@ void	normalize_vect(double *vect)
 	vect[X] /= size;
 	vect[Y] /= size;
 	vect[Z] /= size;
+}
+
+void	sub_vect(double *vect, double *dst, double *src)
+{
+	vect[X] = dst[X] - src[X];
+	vect[Y] = dst[Y] - src[Y];
+	vect[Z] = dst[Z] - src[Z];
 }

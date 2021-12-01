@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sph.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:07:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/01 20:30:25 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/01 22:41:43 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static double	meet_sph(double *o_vect, t_sph *sph)
 {
 	return (pow(dot_product(o_vect, sph->center), 2)
-			- (dot_product(sph->center, sph->center)
+		- (dot_product(sph->center, sph->center)
 			- pow(sph->diameter / 2, 2)));
 }
 
@@ -29,7 +29,7 @@ void	intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph)
 	if (d < 0)
 		return ;
 	t = (dot_product(o_vect, sph->center) - sqrt(d)) / 2;
-	if (pt_info->pt[Z] < o_vect[Z] * t)
+	if (pt_info->pt[Z] < o_vect[Z] * t) // NOTE - WRONG
 		pt_info->pt[Z] = o_vect[Z] * t;
 	else
 		return ;

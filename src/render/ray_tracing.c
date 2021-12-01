@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/01 20:12:06 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/01 22:41:32 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,20 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 	t_pt_info	pt_info;
 
 	pt_info.pt[Z] = 1;
-	fill_vect(o_vect, vs_x, vs_y, rt->c_to_s);
+	fill_vect(o_vect, vs_x, vs_y, -1 * rt->c_to_s); // NOTE - view space o_vect towards -ve direction.
 	normalize_vect(o_vect);
 	cur = rt->spec->obj_lst->next;
 	while (cur)
 	{
 		if (cur->type == SPHERE)
 			intersect_sph(o_vect, &pt_info, cur->obj.sph);
-		else
-			printf("not sph\n");
-		// else if (cur->type == PLANE)
-		// 	intersect_pl(o_vect, &pt_info, cur->obj.pl);
+		else if (cur->type == PLANE)
+			intersect_pl(o_vect, &pt_info, cur->obj.pl);
 		// else if (cur->type == CYLINDER)
 		// 	intersect_cy(o_vect, &pt_info, cur->obj.cy);
 		cur = cur->next;
 	}
-	if (pt_info.pt[Z] > 1)
+	if (pt_info.pt[Z] > 1) // NOTE - WRONG!
 		return (get_phong_light_sph(rt, &pt_info));
 	return (TRANSPARENT);
 }
