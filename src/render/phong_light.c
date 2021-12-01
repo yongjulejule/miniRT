@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/01 20:51:55 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:19:32 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,20 @@ int	get_phong_light_sph(t_rt *rt, t_pt_info *pt_info)
 	normalize_vect(o_ray);
 	shadow = 1;
 	/* Need to make R G B as [0, 1] */
-	color[R] = shadow * (dot_product(o_ray, n_vect) * rt->spec->light.color[R] * rt->spec->light.bright) + rt->spec->amb.ratio * rt->spec->amb.color[R];
+	color[R] = shadow * (dot_product(o_ray, n_vect) * (double)rt->spec->light.color[R] * rt->spec->light.bright) + rt->spec->amb.ratio * (double)rt->spec->amb.color[R];
 	if (color[R] > 255)
 		color[R] = 255;
-	color[G] = shadow * (dot_product(o_ray, n_vect) * rt->spec->light.color[G] * rt->spec->light.bright) + rt->spec->amb.ratio * rt->spec->amb.color[G];
+	else if (color[R] < 0)
+		color[R] = 0;
+	color[G] = shadow * (dot_product(o_ray, n_vect) * (double)rt->spec->light.color[G] * rt->spec->light.bright) + rt->spec->amb.ratio * (double)rt->spec->amb.color[G];
 	if (color[G] > 255)
 		color[G] = 255;
-	color[B] = shadow * (dot_product(o_ray, n_vect) * rt->spec->light.color[B] * rt->spec->light.bright) + rt->spec->amb.ratio * rt->spec->amb.color[B];
+	else if (color[G] < 0)
+		color[G] = 0;
+	color[B] = shadow * (dot_product(o_ray, n_vect) * (double)rt->spec->light.color[B] * rt->spec->light.bright) + rt->spec->amb.ratio * (double)rt->spec->amb.color[B];
 	if (color[B] > 255)
 		color[B] = 255;
+	else if (color[B] < 0)
+		color[B] = 0;
 	return (get_color(color, 1));
 }
