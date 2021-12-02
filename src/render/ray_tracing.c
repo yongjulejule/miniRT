@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/01 22:41:32 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/02 14:29:48 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 	t_pt_info	pt_info;
 
 	pt_info.pt[Z] = 1;
-	fill_vect(o_vect, vs_x, vs_y, -1 * rt->c_to_s); // NOTE - view space o_vect towards -ve direction.
+	fill_vect(o_vect, vs_x, vs_y, -1 * rt->c_to_s);
 	normalize_vect(o_vect);
 	cur = rt->spec->obj_lst->next;
 	while (cur)
@@ -43,7 +43,7 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 		// 	intersect_cy(o_vect, &pt_info, cur->obj.cy);
 		cur = cur->next;
 	}
-	if (pt_info.pt[Z] > 1) // NOTE - WRONG!
+	if (pt_info.pt[Z] < 1) // NOTE - WRONG!
 		return (get_phong_light_sph(rt, &pt_info));
 	return (TRANSPARENT);
 }
@@ -60,7 +60,7 @@ void	ray_tracing(t_rt *rt)
 	while (h < WIN_H)
 	{
 		w = 0;
-		vs_y = WIN_H / 2 - h;
+		vs_y = h - WIN_H / 2;
 		while (w < WIN_W)
 		{
 			vs_x = w - WIN_W / 2;

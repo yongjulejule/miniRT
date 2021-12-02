@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/01 21:53:05 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/02 14:29:43 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ static void	get_coord_system(t_spec *spec, double *transf)
 	double	ref[4];
 	double	x_axis[4];
 	double	y_axis[4];
+	double	z_axis[4];
 
 	ft_bzero(transf, sizeof(double) * 16);
-	fill_vect(ref, 0, 0, 1);
-	update_vect(transf, spec->cam.o_vect, Z, 4);
+	fill_vect(ref, 0, 0, -1);
+	fill_vect(z_axis, -1 * spec->cam.o_vect[X], -1 * spec->cam.o_vect[Y], -1 * spec->cam.o_vect[Z]);
+	update_vect(transf, z_axis, Z, 4);
 	if (!spec->cam.o_vect[X] && !spec->cam.o_vect[Y]
-		&& (spec->cam.o_vect[Z] == 1 || spec->cam.o_vect[Z] == -1))
+		&& (spec->cam.o_vect[Z] == -1)) // NOTE : could be wrong
 		return ;
 	cross_product(x_axis, ref, spec->cam.o_vect);
 	normalize_vect(x_axis);
@@ -55,22 +57,24 @@ void	transf_obj_light(t_spec *spec, double *transf)
 	while (cur)
 	{
 		if (cur->type == SPHERE)
-			multiply_vect(transf, cur->obj.sph->center);
+			multiply_vect(transf, cur->obj.sph->center, POINT);
 		else if (cur->type == PLANE)
 		{
-			multiply_vect(transf, cur->obj.pl->center);
-			multiply_vect(transf, cur->obj.pl->o_vect);
+			multiply_vect(transf, cur->obj.pl->center, POINT);
+			multiply_vect(transf, cur->obj.pl->o_vect, VECTOR);
 			normalize_vect(cur->obj.pl->o_vect);
 		}
 		else if (cur->type == CYLINDER)
 		{
-			multiply_vect(transf, cur->obj.cy->center);
-			multiply_vect(transf, cur->obj.cy->o_vect);
+			multiply_vect(transf, cur->obj.cy->center, POINT);
+			multiply_vect(transf, cur->obj.cy->o_vect, VECTOR);
 			normalize_vect(cur->obj.cy->o_vect);
 		}
 		cur = cur->next;
 	}
-	multiply_vect(transf, spec->light.lp);
+	multiply_vect(transf, spec->light.lp, POINT);
+	multiply_vect(transf, spec->cam.o_vect, VECTOR);
+	normalize_vect(spec->cam.o_vect);
 }
 
 void	view_transform(t_rt *rt)

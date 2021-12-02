@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   vect_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:22 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/01 21:58:38 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/02 13:39:31 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	multiply_vect(double *transf, double *dst)
+void	multiply_vect(double *transf, double *dst, int which)
 {
 	double	homo_v[4];
 	int		row;
 
 	fill_vect(homo_v, dst[X], dst[Y], dst[Z]);
 	homo_v[W] = 1; // NOTE homo_v[3] may have to be 0 for o_vects
+	if (which == VECTOR)
+		homo_v[W] = 0;
 	row = 0;
 	while (row < 3)
 	{

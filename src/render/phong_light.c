@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/01 22:37:58 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/02 12:56:59 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-/* get RGB value and make it int */
-
-static double	phong_rgb(t_rt *rt, double *n_vect, double *o_ray, int rgb)
-{
-	return (dot_product(o_ray, n_vect)
-		* (double)rt->spec->light.color[rgb]
-		* rt->spec->light.bright
-		+ rt->spec->amb.ratio * (double)rt->spec->amb.color[rgb]);
-}
 
 static void	check_rgb_range(int *color)
 {
@@ -37,11 +27,11 @@ static void	check_rgb_range(int *color)
 	}
 }
 
-int	get_phong_light_sph(t_rt *rt, t_pt_info *pt_info)
+static void	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 {
 	double	n_vect[3];
 	double	o_ray[3];
-	int		color[3];
+	int		i;
 	int		shadow;
 
 	sub_vect(n_vect, pt_info->pt, pt_info->obj.sph->center);
@@ -49,10 +39,24 @@ int	get_phong_light_sph(t_rt *rt, t_pt_info *pt_info)
 	sub_vect(o_ray, rt->spec->light.lp, pt_info->pt);
 	normalize_vect(o_ray);
 	shadow = 1;
-	/* Need to make R G B as [0, 1] */
-	color[R] = shadow * phong_rgb(rt, n_vect, o_ray, R);
-	color[G] = shadow * phong_rgb(rt, n_vect, o_ray, G);
-	color[B] = shadow * phong_rgb(rt, n_vect, o_ray, B);
+	i = 0;
+	while (i < 3)
+	{
+		color[i] = (shadow * (dot_product(o_ray, n_vect)
+			* (double)rt->spec->light.color[i] / 255
+				* rt->spec->light.bright)
+				* pt_info->obj.sph->color[i] / 255
+				+ (rt->spec->amb.ratio * (double)rt->spec->amb.color[i] / 255))
+			* 255;
+		i++;
+	}
+}
+
+int	get_phong_light_sph(t_rt *rt, t_pt_info *pt_info)
+{
+	int		color[3];
+
+	phong_rgb(rt, pt_info, color);
 	check_rgb_range(color);
 	return (get_color(color, 1));
 }
