@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/01 21:59:03 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/02 11:38:35 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@
 # define KEY_PRESS 2
 # define KEY_ESC 53
 # define RED_DOT 17
+
+# define POINT 0
+# define VECTOR 1
 
 /* Functions */
 
@@ -93,7 +96,7 @@ double		get_distance(double x, double y);
 void		cross_product(double *ret, double *vect_1, double *vect_2);
 double		dot_product(double *vect_1, double *vect_2);
 void		fill_vect(double *vect, double x, double y, double z);
-void		multiply_vect(double *transf, double *dst);
+void		multiply_vect(double *transf, double *dst, int which);
 void		normalize_vect(double *vect);
 void		sub_vect(double *vect, double *dst, double *src);
 void		update_vect(double *dst, double *src, int xyz, int size);
