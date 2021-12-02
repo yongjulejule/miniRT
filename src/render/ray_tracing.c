@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/02 14:29:48 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:58:33 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 		cur = cur->next;
 	}
 	if (pt_info.pt[Z] < 1) // NOTE - WRONG!
-		return (get_phong_light_sph(rt, &pt_info));
+		return (get_phong_light(rt, &pt_info));
 	return (TRANSPARENT);
 }
 
