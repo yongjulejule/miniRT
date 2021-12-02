@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:07:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/02 14:29:51 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:58:56 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph)
 	if (d < 0)
 		return ;
 	t = (dot_product(o_vect, sph->center) - sqrt(d)) / 2;
-	if (pt_info->pt[Z] > o_vect[Z] * t) // NOTE - WRONG
+	if (pt_info->pt[Z] == 1 || pt_info->pt[Z] <= o_vect[Z] * t) // NOTE - WRONG
 		pt_info->pt[Z] = o_vect[Z] * t;
 	else
 		return ;
