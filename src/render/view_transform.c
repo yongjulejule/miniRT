@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/04 13:59:02 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/05 01:38:04 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ static void	get_coord_system(t_spec *spec, double *transf)
 	double	z_axis[4];
 
 	ft_bzero(transf, sizeof(double) * 16);
-	fill_vect(z_axis, -1 * spec->cam.o_vect[X], -1 * spec->cam.o_vect[Y], -1 * spec->cam.o_vect[Z]);
+	fill_vect(z_axis, -1 * spec->cam.o_vect[X],
+		-1 * spec->cam.o_vect[Y], -1 * spec->cam.o_vect[Z]);
 	update_vect(transf, z_axis, Z, 4);
 	if (!spec->cam.o_vect[X] && !spec->cam.o_vect[Y]
 		&& (spec->cam.o_vect[Z] == -1)) // NOTE : could be wrong
 		return ;
 	fill_vect(ref, 0, 1, 0);
-	// cross_product(y_axis, z_axis, ref);
-	// normalize_vect(y_axis);
-	// update_vect(transf, y_axis, Y, 4);
 	cross_product(x_axis, ref, z_axis);
 	normalize_vect(x_axis);
 	update_vect(transf, x_axis, X, 4);
