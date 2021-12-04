@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/04 20:01:32 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/05 01:41:26 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@
 # define POINT 0
 # define VECTOR 1
 
+# define SHADED 0
+# define NOT_SHADED 1
+
 /* Functions */
 
 /* Parse */
@@ -75,29 +78,24 @@ void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 /* Render */
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
-void		get_obj_img(t_rt *rt);
-int			get_phong_light(t_rt *rt, t_pt_info *pt_info, t_obj_lst *cur_obj);
+int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
 int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
-int			intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
+void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
 double		meet_pl(double *o_vect, t_pl *pl);
-double		meet_sph(double *o_vect, t_sph *sph);
+double		meet_sph(double *o_vect, double *origin, t_sph *sph);
+double		get_shadow(t_rt *rt, t_pt_info *pt_info);
 
 /* Hook */
 void		hook_minirt(t_rt *rt);
-
-/* Draw Objects */
-int			color_per_pixel_sph(t_sph *sph, t_light l_info);
-
-/* Math Util */
-double		get_distance(double x, double y);
 
 /* 3D Vect Util */
 void		cross_product(double *ret, double *vect_1, double *vect_2);
 double		dot_product(double *vect_1, double *vect_2);
 void		fill_vect(double *vect, double x, double y, double z);
+double		get_distance(double x, double y);
 void		multiply_vect(double *transf, double *dst, int which);
 void		normalize_vect(double *vect);
 void		sub_vect(double *vect, double *dst, double *src);
