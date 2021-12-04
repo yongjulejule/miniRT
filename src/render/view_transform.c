@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/02 14:29:43 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/04 11:08:33 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ static void	get_coord_system(t_spec *spec, double *transf)
 	if (!spec->cam.o_vect[X] && !spec->cam.o_vect[Y]
 		&& (spec->cam.o_vect[Z] == -1)) // NOTE : could be wrong
 		return ;
-	cross_product(x_axis, ref, spec->cam.o_vect);
+	cross_product(y_axis, z_axis, ref);
+	// normalize_vect(y_axis);
+	// update_vect(transf, y_axis, Y, 4);
+	cross_product(x_axis, z_axis, y_axis);
 	normalize_vect(x_axis);
 	update_vect(transf, x_axis, X, 4);
-	cross_product(y_axis, spec->cam.o_vect, x_axis);
+	cross_product(y_axis, z_axis, x_axis);
 	normalize_vect(y_axis);
 	update_vect(transf, y_axis, Y, 4);
 }
@@ -40,7 +43,7 @@ static void	get_transf_matrix(double *vp, double *transf)
 
 	fill_vect(ref, transf[X], transf[X + 1], transf[X + 2]);
 	transf[3] = -1 * dot_product(ref, vp);
-	fill_vect(ref, transf[Y * 4], transf[Y * 4 + 1], transf[Y * 4 + 1]);
+	fill_vect(ref, transf[Y * 4], transf[Y * 4 + 1], transf[Y * 4 + 2]);
 	transf[7] = -1 * dot_product(ref, vp);
 	fill_vect(ref, transf[Z * 4], transf[Z * 4 + 1], transf[Z * 4 + 2]);
 	transf[11] = -1 * dot_product(ref, vp);
