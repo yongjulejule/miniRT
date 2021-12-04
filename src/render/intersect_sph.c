@@ -29,7 +29,7 @@ void	intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph)
 	if (d < 0)
 		return ;
 	t = (dot_product(o_vect, sph->center) - sqrt(d));
-	if (pt_info->pt[Z] == 1 || pt_info->pt[Z] <= o_vect[Z] * t) // NOTE - WRONG
+	if (pt_info->pt[Z] == 1 || pt_info->pt[Z] <= o_vect[Z] * t)
 		pt_info->pt[Z] = o_vect[Z] * t;
 	else
 		return ;
