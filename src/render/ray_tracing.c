@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/04 15:39:11 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/04 20:03:45 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 {
 	double		o_vect[3];
 	t_obj_lst	*cur;
+	t_obj_lst	*cur_obj;
 	t_pt_info	pt_info;
 
 	pt_info.pt[Z] = 1;
@@ -36,15 +37,21 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 	while (cur)
 	{
 		if (cur->type == SPHERE)
-			intersect_sph(o_vect, &pt_info, cur->obj.sph);
+		{
+			if (intersect_sph(o_vect, &pt_info, cur->obj.sph))
+				cur_obj = cur;
+		}
 		else if (cur->type == PLANE)
-			intersect_pl(o_vect, &pt_info, cur->obj.pl);
+		{
+			if (intersect_pl(o_vect, &pt_info, cur->obj.pl))
+				cur_obj = cur;
+		}
 		// else if (cur->type == CYLINDER)
 		// 	intersect_cy(o_vect, &pt_info, cur->obj.cy);
 		cur = cur->next;
 	}
 	if (pt_info.pt[Z] < 1)
-		return (get_phong_light(rt, &pt_info));
+		return (get_phong_light(rt, &pt_info, cur_obj));
 	return (TRANSPARENT);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/02 16:18:38 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/04 20:01:32 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
 void		get_obj_img(t_rt *rt);
-int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
+int			get_phong_light(t_rt *rt, t_pt_info *pt_info, t_obj_lst *cur_obj);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
-void		intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
-void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
+int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
+int			intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
+double		meet_pl(double *o_vect, t_pl *pl);
+double		meet_sph(double *o_vect, t_sph *sph);
 
 /* Hook */
 void		hook_minirt(t_rt *rt);
