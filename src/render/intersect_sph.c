@@ -12,9 +12,12 @@
 
 #include "minirt.h"
 
-double	meet_sph(double *o_vect, double *origin, t_sph *sph)
+double	meet_sph(double *o_vect, double *origin, t_sph *sph, double r_size)
 {
 	double	diff[3];
+	double	size[3];
+	double	d;
+	double	t;
 
 	if (!origin)
 	{
@@ -23,8 +26,19 @@ double	meet_sph(double *o_vect, double *origin, t_sph *sph)
 				- pow(sph->diameter / 2, 2)));
 	}
 	sub_vect(diff, origin, sph->center);
-	return (pow(dot_product(o_vect, diff), 2)
-		- (pow(vect_size(diff), 2) - pow(sph->diameter / 2, 2)));
+	d = (pow(dot_product(o_vect, diff), 2)
+			- (pow(vect_size(diff), 2) - pow(sph->diameter / 2, 2)));
+	if (d < 0)
+		return (-1);
+	t = dot_product(diff, o_vect) - sqrt(d);
+	size[X] = origin[X] + o_vect[X] * t;
+	size[Y] = origin[Y] + o_vect[Y] * t;
+	size[Z] = origin[Z] + o_vect[Z] * t;
+	sub_vect(diff, size, origin);
+	d = vect_size(diff);
+	if (d - r_size > 0)
+		return (-1);
+	return (1);
 }
 
 void	intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph)
@@ -32,7 +46,7 @@ void	intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph)
 	double	d;
 	double	t;
 
-	d = meet_sph(o_vect, NULL, sph);
+	d = meet_sph(o_vect, NULL, sph, 0);
 	if (d < 0)
 		return ;
 	t = (dot_product(o_vect, sph->center) - sqrt(d));
