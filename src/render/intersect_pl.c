@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_pl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:08:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/05 01:22:53 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/05 16:28:49 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl)
 		return (0);
 	t = (dot_product(pl->center, pl->o_vect) - dot_product(o_vect, pl->o_vect))
 		/ dot_product(o_vect, pl->o_vect);
+	if (t < 0)
+		return (0);
 	if (pt_info->pt[Z] == 1 || pt_info->pt[Z] <= o_vect[Z] + o_vect[Z] * t)
 		pt_info->pt[Z] = o_vect[Z] + o_vect[Z] * t;
 	else
