@@ -12,51 +12,46 @@
 
 #include "minirt.h"
 
-double	meet_sph(double *o_vect, double *origin, t_sph *sph, double r_size)
+double	meet_sph(double *ray, double *origin, t_sph *sph, double r_size)
 {
 	double	diff[3];
-	double	size[3];
+	double	int_pt[3];
 	double	d;
 	double	t;
 
 	if (!origin)
 	{
-		return (pow(dot_product(o_vect, sph->center), 2)
+		return (pow(dot_product(ray, sph->center), 2)
 			- (dot_product(sph->center, sph->center)
 				- pow(sph->diameter / 2, 2)));
 	}
 	sub_vect(diff, origin, sph->center);
-	d = (pow(dot_product(o_vect, diff), 2)
+	d = (pow(dot_product(ray, diff), 2)
 			- (pow(vect_size(diff), 2) - pow(sph->diameter / 2, 2)));
 	if (d < 0)
 		return (-1);
-	t = dot_product(diff, o_vect) - sqrt(d);
-	size[X] = origin[X] + o_vect[X] * t;
-	size[Y] = origin[Y] + o_vect[Y] * t;
-	size[Z] = origin[Z] + o_vect[Z] * t;
-	sub_vect(diff, size, origin);
-	d = vect_size(diff);
-	if (d - r_size > 0)
+	t = -1 * dot_product(diff, ray) - sqrt(d);
+	if (t > 0)
+		return (1);
+	get_pt_on_line(int_pt, origin, ray, t);
+	sub_vect(diff, int_pt, origin);
+	if (vect_size(diff) - r_size > 0)
 		return (-1);
 	return (1);
 }
 
-void	intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph)
+void	intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph)
 {
 	double	d;
 	double	t;
 
-	d = meet_sph(o_vect, NULL, sph, 0);
+	d = meet_sph(ray, NULL, sph, 0);
 	if (d < 0)
 		return ;
-	t = (dot_product(o_vect, sph->center) - sqrt(d));
-	if (pt_info->pt[Z] == 1 || pt_info->pt[Z] <= o_vect[Z] * t)
-		pt_info->pt[Z] = o_vect[Z] * t;
-	else
+	t = dot_product(ray, sph->center) - sqrt(d);
+	if (pt_info->pt[Z] != 1 && pt_info->pt[Z] >= ray[Z] * t)
 		return ;
-	pt_info->pt[X] = o_vect[X] * t;
-	pt_info->pt[Y] = o_vect[Y] * t;
+	get_pt_on_line(pt_info->pt, NULL, ray, t);
 	pt_info->type = SPHERE;
 	pt_info->obj.sph = sph;
-	return ;
 }

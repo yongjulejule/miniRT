@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect_util.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:54:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/05 00:16:17 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/06 11:30:07 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,20 @@ void	fill_vect(double *vect, double x, double y, double z)
 double	vect_size(double *vect)
 {
 	return (sqrt(pow(vect[X], 2) + pow(vect[Y], 2) + pow(vect[Z], 2)));
+}
+
+void	get_pt_on_line(double *dst, double *pt, double *dir, double t)
+{
+	if (!pt)
+	{
+		dst[X] = dir[X] * t;
+		dst[Y] = dir[Y] * t;
+		dst[Z] = dir[Z] * t;
+	}
+	else
+	{
+		dst[X] = pt[X] + dir[X] * t;
+		dst[Y] = pt[Y] + dir[Y] * t;
+		dst[Z] = pt[Z] + dir[Z] * t;
+	}
 }
