@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:08:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/06 16:43:09 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:02:53 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ int	pl_shadow(double *ray, t_pt_info *pt_info, t_pl *pl, double r_size)
 		return (0);
 	t = (dot_product(pl->center, pl->o_vect) - dot_product(pt_info->pt,
 				pl->o_vect)) / dot_product(ray, pl->o_vect);
-	if (t < 0)
-		return (0);
 	get_pt_on_line(pt, pt_info->pt, ray, t);
 	sub_vect(int_pt, pt, pt_info->pt);
 	d = vect_size(int_pt);
-	if (d < r_size)
+	if (d < r_size && t > 0)
 		return (1);
 	return (0);
 }

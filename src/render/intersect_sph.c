@@ -31,13 +31,13 @@ double	meet_sph(double *ray, double *origin, t_sph *sph, double r_size)
 	if (d < 0)
 		return (-1);
 	t = -1 * dot_product(diff, ray) - sqrt(d);
-	if (t > 0)
-		return (1);
 	get_pt_on_line(int_pt, origin, ray, t);
 	sub_vect(diff, int_pt, origin);
-	if (vect_size(diff) - r_size > 0)
-		return (-1);
-	return (1);
+	if (vect_size(diff) - r_size < 0 && t > 0)
+		return (1);
+	// if (t > 0)
+	// 	return (1);
+	return (-1);
 }
 
 void	intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph)
