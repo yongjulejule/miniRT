@@ -33,7 +33,7 @@ double	meet_sph(double *ray, double *origin, t_sph *sph, double r_size)
 	t = -1 * dot_product(diff, ray) - sqrt(d);
 	get_pt_on_line(int_pt, origin, ray, t);
 	sub_vect(diff, int_pt, origin);
-	if (vect_size(diff) - r_size < 0 && t > 0)
+	if (vect_size(diff) < r_size - 0.5 && t > 0)
 		return (1);
 	// if (t > 0)
 	// 	return (1);
