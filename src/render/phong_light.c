@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/06 18:01:42 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:57:18 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,8 @@ static void	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 	if (pt_info->type == SPHERE)
 		sub_vect(n_vect, pt_info->pt, pt_info->obj.sph->center);
 	else if (pt_info->type == PLANE)
-	{
-		if (dot_product(rt->spec->cam.o_vect, pt_info->obj.pl->o_vect) > 0)
-			fill_vect(n_vect, -1 * pt_info->obj.pl->o_vect[X],
-			-1 * pt_info->obj.pl->o_vect[Y], -1 * pt_info->obj.pl->o_vect[Z]);
-		else
-			fill_vect(n_vect, pt_info->obj.pl->o_vect[X],
-				pt_info->obj.pl->o_vect[Y], pt_info->obj.pl->o_vect[Z]);
-	}
+		fill_vect(n_vect, pt_info->obj.pl->o_vect[X],
+			pt_info->obj.pl->o_vect[Y], pt_info->obj.pl->o_vect[Z]);
 	else if (pt_info->type == CYLINDER)
 		fill_vect(n_vect, pt_info->obj.cy->o_vect[X],
 			pt_info->obj.cy->o_vect[Y], pt_info->obj.cy->o_vect[Z]);
