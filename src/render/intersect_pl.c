@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:08:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/06 15:54:57 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:43:09 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ double	meet_pl(double *o_vect, t_pl *pl)
 {
 	return (dot_product(o_vect, pl->o_vect));
 }
-
-/*
-	o_vect : point to ray-origin
-	pt_info : current point
-	pl : plane
-	lp : light origin
-*/
 
 int	intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl)
 {
