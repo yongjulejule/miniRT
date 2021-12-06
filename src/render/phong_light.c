@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/05 01:36:24 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/06 15:04:13 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,28 @@ static void	check_rgb_range(int *color)
 static void	each_rgb_phong(int *color, double pre_cal
 			, t_rt *rt, t_pt_info *pt_i)
 {
-	int		i;
+	int	i;
 
 	i = 0;
+	if (pre_cal < 0)
+		pre_cal = 0;
 	while (i < 3)
 	{
 		if (pt_i->type == SPHERE)
-			color[i] = (pre_cal * (double)rt->spec->light.color[i] / 255
-					* pt_i->obj.sph->color[i] / 255 + (rt->spec->amb.ratio
-						* (double)rt->spec->amb.color[i] / 255))
-				* 255;
+			color[i] = ((pre_cal * (double)rt->spec->light.color[i] / 255
+						* (double)pt_i->obj.sph->color[i] / 255)
+					+ (rt->spec->amb.ratio * (double)rt->spec->amb.color[i]
+						/ 255)) * 255;
 		else if (pt_i->type == PLANE)
-			color[i] = (pre_cal * (double)rt->spec->light.color[i] / 255
-					* pt_i->obj.pl->color[i] / 255 + (rt->spec->amb.ratio
-						* (double)rt->spec->amb.color[i] / 255))
-				* 255;
+			color[i] = ((pre_cal * (double)rt->spec->light.color[i] / 255
+						* (double)pt_i->obj.pl->color[i] / 255)
+					+ (rt->spec->amb.ratio * (double)rt->spec->amb.color[i]
+						/ 255)) * 255;
 		else if (pt_i->type == CYLINDER)
-			color[i] = (pre_cal * (double)rt->spec->light.color[i] / 255
-					* pt_i->obj.cy->color[i] / 255 + (rt->spec->amb.ratio
-						* (double)rt->spec->amb.color[i] / 255))
-				* 255;
+			color[i] = ((pre_cal * (double)rt->spec->light.color[i] / 255
+						* (double)pt_i->obj.cy->color[i] / 255)
+					+ (rt->spec->amb.ratio * (double)rt->spec->amb.color[i]
+						/ 255)) * 255;
 		i++;
 	}
 }

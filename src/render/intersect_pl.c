@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:08:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/05 16:28:49 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/06 15:54:57 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,47 @@ double	meet_pl(double *o_vect, t_pl *pl)
 	return (dot_product(o_vect, pl->o_vect));
 }
 
-int	intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl)
+/*
+	o_vect : point to ray-origin
+	pt_info : current point
+	pl : plane
+	lp : light origin
+*/
+
+int	intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl)
 {
 	double	t;
 
-	if (!meet_pl(o_vect, pl))
+	if (!meet_pl(ray, pl))
 		return (0);
-	t = (dot_product(pl->center, pl->o_vect) - dot_product(o_vect, pl->o_vect))
-		/ dot_product(o_vect, pl->o_vect);
+	t = (dot_product(pl->center, pl->o_vect)) / dot_product(ray, pl->o_vect);
 	if (t < 0)
 		return (0);
-	if (pt_info->pt[Z] == 1 || pt_info->pt[Z] <= o_vect[Z] + o_vect[Z] * t)
-		pt_info->pt[Z] = o_vect[Z] + o_vect[Z] * t;
-	else
+	if (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t)
 		return (0);
-	pt_info->pt[X] = o_vect[X] + o_vect[X] * t;
-	pt_info->pt[Y] = o_vect[Y] + o_vect[Y] * t;
+	get_pt_on_line(pt_info->pt, NULL, ray, t);
 	pt_info->type = PLANE;
 	pt_info->obj.pl = pl;
 	return (1);
+}
+
+int	pl_shadow(double *ray, t_pt_info *pt_info, t_pl *pl, double r_size)
+{
+	double	t;
+	double	d;
+	double	pt[3];
+	double	int_pt[3];
+
+	if (!meet_pl(ray, pl))
+		return (0);
+	t = (dot_product(pl->center, pl->o_vect) - dot_product(pt_info->pt,
+				pl->o_vect)) / dot_product(ray, pl->o_vect);
+	if (t < 0)
+		return (0);
+	get_pt_on_line(pt, pt_info->pt, ray, t);
+	sub_vect(int_pt, pt, pt_info->pt);
+	d = vect_size(int_pt);
+	if (d < r_size)
+		return (1);
+	return (0);
 }

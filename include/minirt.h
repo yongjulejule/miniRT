@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/05 16:06:14 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:28:41 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void		view_transform(t_rt *rt);
 double		meet_pl(double *o_vect, t_pl *pl);
 double		meet_sph(double *o_vect, double *origin, t_sph *sph, double r_size);
 double		get_shadow(t_rt *rt, t_pt_info *pt_info);
+int			pl_shadow(double *o_vect, t_pt_info *pt_info,
+				t_pl *pl, double r_size);
 
 /* Hook */
 void		hook_minirt(t_rt *rt);
@@ -96,6 +98,7 @@ void		cross_product(double *ret, double *vect_1, double *vect_2);
 double		dot_product(double *vect_1, double *vect_2);
 void		fill_vect(double *vect, double x, double y, double z);
 double		get_distance(double x, double y);
+void		get_pt_on_line(double *dst, double *pt, double *dir, double t);
 void		multiply_vect(double *transf, double *dst, int which);
 void		normalize_vect(double *vect);
 void		sub_vect(double *vect, double *dst, double *src);
