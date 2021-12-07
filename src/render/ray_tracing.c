@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/06 17:08:23 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/07 20:48:28 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@ void	init_obj_img(t_rt *rt)
 
 int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 {
-	double		o_vect[3];
+	double		ray[3];
 	t_obj_lst	*cur;
 	t_pt_info	pt_info;
 
 	pt_info.pt[Z] = 1;
-	fill_vect(o_vect, vs_x, vs_y, -1 * rt->c_to_s);
-	normalize_vect(o_vect);
+	fill_vect(ray, vs_x, vs_y, -1 * rt->c_to_s);
+	normalize_vect(ray);
 	cur = rt->spec->obj_lst->next;
 	while (cur)
 	{
 		if (cur->type == SPHERE)
-			intersect_sph(o_vect, &pt_info, cur->obj.sph);
+			intersect_sph(ray, &pt_info, cur->obj.sph);
 		else if (cur->type == PLANE)
-			intersect_pl(o_vect, &pt_info, cur->obj.pl);
+			intersect_pl(ray, &pt_info, cur->obj.pl);
 		// TODO - CYLINDER INTERSECTION
-		// else if (cur->type == CYLINDER)
-		// 	intersect_cy(o_vect, &pt_info, cur->obj.cy);
+		else if (cur->type == CYLINDER)
+			intersect_cy(ray, &pt_info, cur->obj.cy);
 		cur = cur->next;
 	}
 	if (pt_info.pt[Z] < 1)

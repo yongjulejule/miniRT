@@ -3,16 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/05 01:39:09 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/07 21:04:16 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minirt.h"
+#include "minirt.h"
 
-// TODO - CY INTERSECTION FUNCTION
-// void	intersect_cy(double *o_vect, t_pt_info *pt_info, t_pl *cy)
+// int	meet_cy(double *ray, t_cy *cy, double min_angle)
 // {
+// 	double	start;
+// 	double	end;
+
+// 	start = pow(dot_product(ray, cy->o_vect), 2)
+// 		- pow(vect_size(cy->center) - (cy->diameter / 2), 2);
+// 	end = pow(dot_product(ray, cy->o_vect), 2)
+// 		- pow(vect_size(cy->center) - ((cy->diameter / 2) / sin(min_angle)), 2);
+// 	if (start < 0 && end < 0)
+// 		return (-1);
+// 	return (0);
 // }
+
+static double	get_pt_on_cy(double *ray, t_cy *cy/* , double *origin */)
+{
+	double	a;
+	double	b;
+	double	c;
+
+	a = 2 * (pow(cy->o_vect[Z] * ray[Y], 2) + pow(cy->o_vect[X] * ray[Z], 2) 
+			+ pow(cy->o_vect[Y] * ray[X], 2) - cy->o_vect[Z] * cy->o_vect[Y]
+			* ray[Y] * ray[Z] - cy->o_vect[X] * cy->o_vect[Z] * ray[Z] * ray[X]
+			- cy->o_vect[Y] * cy->o_vect[X] * ray[X] * ray[Y]);
+	b = -2 * (2 * (pow(cy->o_vect[Z], 2) * ray[Y] * cy->center[Y]
+				+ pow(cy->o_vect[X], 2) * ray[Z] * cy->center[Z]
+				+ pow(cy->o_vect[Y], 2) * ray[X] * cy->center[X])
+			-1 * (cy->o_vect[Z] * cy->o_vect[Y] * (ray[Y] * cy->center[Z]
+					+ ray[Z] * cy->center[Y]) + cy->o_vect[X] * cy->o_vect[Z]
+				* (ray[Z] * cy->center[X] + ray[X] * cy->center[Z])
+				+ cy->o_vect[Y] * cy->o_vect[X]
+				* (ray[X] * cy->center[Y] + ray[Y] * cy->center[X])));
+	c = 2 * (pow(cy->o_vect[Z] * cy->center[Y], 2)
+			+ pow(cy->o_vect[X] * cy->center[Z], 2)
+			+ pow(cy->o_vect[Y] * cy->center[X], 2)
+			- cy->o_vect[Z] * cy->o_vect[Y] * cy->center[Y] * cy->center[Z]
+			- cy->o_vect[X] * cy->o_vect[Z] * cy->center[Z] * cy->center[X]
+			- cy->o_vect[Y] * cy->o_vect[X] * cy->center[X] * cy->center[Y])
+		- pow(cy->diameter / 2, 2);
+	if (pow(b, 2) - 4 * a * c < 0)
+		return (-1);
+	return ((-1 * b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a));
+}
+
+void	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy)
+{
+	double	t;
+	double	min_angle;
+	double	origin[3];
+	double	diff[3];
+
+	// min_angle = atan(cy->height / (cy->diameter / 2));
+	// if (meet_cy(ray, cy, min_angle) < 0)
+	// 	return ;
+	fill_vect(origin, 0, 0, 0);
+	t = get_pt_on_cy(ray, cy/* , origin */);
+	if (t < 0)
+		return ;
+	if (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t)
+		return ;
+	get_pt_on_line(pt_info->pt, NULL, ray, t);
+	sub_vect(diff, pt_info->pt, cy->center);	
+	if (dot_product(diff, cy->o_vect) > cy->height)
+	{
+		pt_info->pt[Z] = 1;
+		return ;
+	}
+	pt_info->type = CYLINDER;
+	pt_info->obj.cy = cy;
+}
