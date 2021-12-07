@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/07 14:02:31 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/07 20:21:31 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
 int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
+void		intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
 double		meet_pl(double *o_vect, t_pl *pl);
