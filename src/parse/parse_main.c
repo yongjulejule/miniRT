@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/06 19:56:19 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:57:36 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	read_config(int fd, t_conf **hd)
 		free(line);
 }
 
-static void	preprocess_objs(t_spec *spec)
+static void	decide_pl_orientation(t_spec *spec)
 {
 	t_obj_lst	*cur;
 
@@ -100,6 +100,6 @@ void	parse_config(int argc, char **argv, t_spec *spec)
 	read_config(fd, &head);
 	close(fd);
 	config_to_spec(head->next, spec);
-	preprocess_objs(spec);
+	decide_pl_orientation(spec);
 	free_config(head);
 }
