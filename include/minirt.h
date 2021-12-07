@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/06 11:28:41 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:02:31 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 /* Functions */
 
 /* Parse */
+char		**check_commas_split(char *vect);
 void		conf_lst_addback(t_conf **hd, t_conf *new);
 t_conf		*conf_lst_last(t_conf *elem);
 t_conf		*conf_lst_new(char *elem, char **info);

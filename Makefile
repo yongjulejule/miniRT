@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/05 01:42:11 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/07 14:01:39 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,15 @@ MLX_FILE		= $(MLX_DIR)libmlx.a
 INC_DIR_MAN		= ./include/
 
 SRCS_PARSE		= $(addprefix $(SRCS_PARSE_DIR), \
-				parse_main.c\
 				conf_lst.c\
-				obj_lst.c\
+				check_commas.c\
+				fill_cy.c\
 				fill_setting.c\
 				fill_sph_pl.c\
-				fill_cy.c\
 				get_next_line.c\
 				get_next_line_utils.c\
+				obj_lst.c\
+				parse_main.c\
 				)
 
 SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
