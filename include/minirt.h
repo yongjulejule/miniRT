@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/08 23:17:08 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/09 00:21:54 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
 int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
-void		intersect_circle(double *ray, t_pt_info *pt_i, t_cy *cy, double *cam_o_v);
+void		intersect_circle(double *ray, t_pt_info *pt_i,
+				t_cy *cy, double *cam_o_v);
 int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);

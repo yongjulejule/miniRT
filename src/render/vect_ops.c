@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:22 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/04 15:46:28 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 00:21:18 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	multiply_vect(double *transf, double *dst, int which)
 	int		row;
 
 	fill_vect(homo_v, dst[X], dst[Y], dst[Z]);
-	homo_v[W] = 1; // NOTE homo_v[3] may have to be 0 for o_vects
+	homo_v[W] = 1;
 	if (which == VECTOR)
 		homo_v[W] = 0;
 	row = 0;

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/08 23:23:04 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/08 23:41:51 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 	else if (pt_info->type == PLANE)
 		vect_copy(n_vect, pt_info->obj.pl->o_vect);
 	else if (pt_info->type == CYLINDER)
-		vect_copy(n_vect, pt_info->obj.cy->o_vect);
+		sub_vect(n_vect, pt_info->pt, pt_info->obj.cy->center);
 	else if (pt_info->type == CY_CIRCLE)
 		vect_copy(n_vect, pt_info->c_o_vect);
 	normalize_vect(n_vect);
