@@ -23,11 +23,11 @@ double	meet_sph(double *ray, double *origin, t_sph *sph, double r_size)
 	{
 		return (pow(dot_product(ray, sph->center), 2)
 			- (dot_product(sph->center, sph->center)
-				- pow(sph->diameter / 2, 2)));
+				- pow(sph->radius, 2)));
 	}
 	sub_vect(diff, origin, sph->center);
 	d = (pow(dot_product(ray, diff), 2)
-			- (pow(vect_size(diff), 2) - pow(sph->diameter / 2, 2)));
+			- (pow(vect_size(diff), 2) - pow(sph->radius, 2)));
 	if (d < 0)
 		return (-1);
 	t = -1 * dot_product(diff, ray) - sqrt(d);

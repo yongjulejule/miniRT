@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/08 09:28:45 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:46:06 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define SPHERE 0
 # define PLANE 1
 # define CYLINDER 2
+# define CY_CIRCLE 3
 
 # define X 0
 # define Y 1
@@ -83,7 +84,8 @@ int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
 int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
-void		intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
+void		intersect_circle(double *ray, t_pt_info *pt_i, t_cy *cy, double *cam_o_v);
+int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
 double		meet_pl(double *o_vect, t_pl *pl);

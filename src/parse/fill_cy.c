@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:04:41 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/07 14:36:25 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/08 17:20:34 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	fill_cylinder(t_obj_lst **hd, char **info, int cv_flag)
 	fill_cy_center(new_cy, info, 0);
 	fill_cy_o_vect(new_cy, info, 0);
 	new_cy->diameter = ft_atod(info[2], &cv_flag) * 10;
+	new_cy->radius = new_cy->diameter / 2;
 	if (cv_flag || new_cy->diameter < 0)
 		is_error("Invalid configuration (CY DIAMETER)", NULL, EXIT_FAILURE);
 	new_cy->height = ft_atod(info[3], &cv_flag) * 10;
