@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_sph_pl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:15:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/07 14:39:10 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/08 17:20:21 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	fill_sphere(t_obj_lst **hd, char **info, int cv_flag)
 	}
 	free_double_ptr((void **)center_arr);
 	new_sph->diameter = ft_atod(info[1], &cv_flag) * 10;
+	new_sph->radius = new_sph->diameter / 2;
 	if (cv_flag || new_sph->diameter < 0)
 		is_error("Invalid configuration (SPH DIAMETER)", NULL, EXIT_FAILURE);
 	fill_sphere_two(new_sph, info);

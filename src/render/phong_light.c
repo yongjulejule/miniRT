@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/08 13:34:51 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/08 17:35:27 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	each_rgb_phong(int *color, double pre_cal
 						* (double)pt_i->obj.pl->color[i] / 255)
 					+ (rt->spec->amb.ratio * (double)rt->spec->amb.color[i]
 						/ 255)) * 255;
-		else if (pt_i->type == CYLINDER)
+		else if (pt_i->type == CYLINDER || pt_i->type == CY_CIRCLE)
 			color[i] = ((pre_cal * (double)rt->spec->light.color[i] / 255
 						* (double)pt_i->obj.cy->color[i] / 255)
 					+ (rt->spec->amb.ratio * (double)rt->spec->amb.color[i]
@@ -72,6 +72,9 @@ static void	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 	else if (pt_info->type == CYLINDER)
 		fill_vect(n_vect, pt_info->obj.cy->o_vect[X],
 			pt_info->obj.cy->o_vect[Y], pt_info->obj.cy->o_vect[Z]);
+	else if (pt_info->type == CY_CIRCLE)
+		fill_vect(n_vect, pt_info->c_o_vect[X], pt_info->c_o_vect[Y],
+			pt_info->c_o_vect[Z]);
 	normalize_vect(n_vect);
 	shadow = get_shadow(rt, pt_info);
 	each_rgb_phong(color, shadow * dot_product(o_ray, n_vect)

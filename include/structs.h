@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/05 00:29:40 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/08 17:20:22 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_sph
 {
 	double	center[3];
 	double	diameter;
+	double	radius;
 	int		color[3];
 }	t_sph;
 
@@ -59,6 +60,7 @@ typedef struct s_cy
 	double	center[3];
 	double	o_vect[3];
 	double	diameter;
+	double	radius;
 	double	height;
 	int		color[3];
 }	t_cy;
@@ -85,7 +87,8 @@ typedef struct s_spec
 	t_obj_lst	*obj_lst;
 }	t_spec;
 
-typedef struct s_img{
+typedef struct s_img
+{
 	int		width;
 	int		bpp;
 	int		endian;
@@ -95,9 +98,10 @@ typedef struct s_img{
 
 typedef struct s_pt_info
 {
-	int		type;
-	double	pt[3];
-	t_obj	obj;
+	int			type;
+	double		pt[3];
+	t_obj		obj;
+	double		c_o_vect[3];
 }	t_pt_info;
 
 typedef struct s_rt

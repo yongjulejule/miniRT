@@ -12,9 +12,9 @@
 
 #include "minirt.h"
 
-double	meet_pl(double *o_vect, t_pl *pl)
+double	meet_pl(double *ray, t_pl *pl)
 {
-	return (dot_product(o_vect, pl->o_vect));
+	return (dot_product(ray, pl->o_vect));
 }
 
 int	intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl)
