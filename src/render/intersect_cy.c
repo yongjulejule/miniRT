@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/08 18:22:48 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/08 23:29:00 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,25 @@ void intersect_circle(double *ray, t_pt_info *pt_i, t_cy *cy, double *cam_o_v)
 
 	local.pt[Z] = pt_i->pt[Z];
 	if (dot_product(cy->o_vect, cam_o_v) > 0)
-		fill_vect(pl.center, cy->center[X], cy->center[Y], cy->center[Z]);
+		vect_copy(pl.center, cy->center);
 	else
 		fill_vect(pl.center, cy->center[X] + cy->o_vect[X] * cy->height
 		, cy->center[Y] + cy->o_vect[Y] * cy->height
 		, cy->center[Z] + cy->o_vect[X] * cy->height);
 	if (dot_product(cy->o_vect, cam_o_v) > 0)
-		fill_vect(pl.o_vect, cy->o_vect[X], cy->o_vect[Y], cy->o_vect[Z]);
+		vect_copy(pl.o_vect, cy->o_vect);
 	else
-		fill_vect(pl.o_vect, -1 * cy->o_vect[X], -1 * cy->o_vect[Y]
-			, -1 * cy->o_vect[Z]);
-
+		fill_vect(pl.o_vect, -1 * cy->o_vect[X],
+			-1 * cy->o_vect[Y], -1 * cy->o_vect[Z]);
 	intersect_pl(ray, &local, &pl);
 	if (local.pt[Z] == 1 || local.pt[Z] == pt_i->pt[Z])
 		return ;
 	sub_vect(diff, pl.center, local.pt);
 	if (vect_size(diff) > cy->radius)
 		return ;
-	fill_vect(pt_i->pt, local.pt[X], local.pt[Y], local.pt[Z]);
+	vect_copy(pt_i->pt, local.pt);
 	pt_i->type = CY_CIRCLE;
-	fill_vect(pt_i->c_o_vect, pl.o_vect[X], pl.o_vect[Y], pl.o_vect[Z]);
+	vect_copy(pt_i->c_o_vect, pl.o_vect);
 }
 
 static double	get_pt_on_cy(double *r, double *o, double *n, double rad)
@@ -70,10 +69,8 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy)
 {
 	double	t;
 	double	pt[3];
-	double	origin[3];
 	double	diff[3];
 
-	fill_vect(origin, 0, 0, 0);
 	t = get_pt_on_cy(ray, cy->center, cy->o_vect, cy->radius);
 	if (t < 0.1 || (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t))
 		return (0);
@@ -86,7 +83,7 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy)
 	if (pow(vect_size(diff), 2) - (pow(dot_product(diff, cy->o_vect), 2))
 		> pow(cy->radius, 2) + 0.5)
 		return (0);
-	fill_vect(pt_info->pt, pt[X], pt[Y], pt[Z]);
+	vect_copy(pt_info->pt, pt);
 	pt_info->type = CYLINDER;
 	pt_info->obj.cy = cy;
 	return (1);

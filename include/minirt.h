@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/08 17:46:06 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/08 23:17:08 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,9 @@ void		get_pt_on_line(double *dst, double *pt, double *dir, double t);
 void		multiply_vect(double *transf, double *dst, int which);
 void		normalize_vect(double *vect);
 void		sub_vect(double *vect, double *dst, double *src);
+void		scale_vect(double *vect, double scale);
 void		update_vect(double *dst, double *src, int xyz, int size);
+void		vect_copy(double *dst, double *src);
 double		vect_size(double *vect);
 
 #endif

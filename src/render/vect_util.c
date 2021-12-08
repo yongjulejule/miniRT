@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect_util.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:54:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/06 11:30:07 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/08 23:12:43 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ void	fill_vect(double *vect, double x, double y, double z)
 	vect[X] = x;
 	vect[Y] = y;
 	vect[Z] = z;
+}
+
+void	vect_copy(double *dst, double *src)
+{
+	dst[X] = src[X];
+	dst[Y] = src[Y];
+	dst[Z] = src[Z];
 }
 
 double	vect_size(double *vect)
