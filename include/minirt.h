@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/12/09 18:26:45 by yongjule         ###   ########.fr       */
+=======
+/*   Updated: 2021/12/09 19:31:58 by ghan             ###   ########.fr       */
+>>>>>>> f7463a75ac959e96f56f710efa9285a1e2f6cc3c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +84,7 @@ void		conf_lst_addback(t_conf **hd, t_conf *new);
 t_conf		*conf_lst_last(t_conf *elem);
 t_conf		*conf_lst_new(char *elem, char **info);
 void		free_config(t_conf *hd);
+void		free_obj_lst(t_obj_lst *hd);
 int			get_next_line(int fd, char **line);
 void		obj_lst_addback(t_obj_lst **hd, t_obj_lst *new);
 t_obj_lst	*obj_lst_last(t_obj_lst *obj);
@@ -95,7 +100,7 @@ void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 
 /* Render */
-void		draw(t_rt *rt);
+void		draw(t_rt *rt, t_rt *c_rt);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
 int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
@@ -105,7 +110,8 @@ int			get_phong_g(t_rt *rt, t_pt_info *pt_info, double *o_ray,
 				double *n_vect);
 int			get_phong_b(t_rt *rt, t_pt_info *pt_info, double *o_ray,
 				double *n_vect);
-void		init_rt_struct(t_rt *rt, t_spec *spec);
+void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
+				t_spec *o_spec, t_spec *c_spec);
 int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
 void		intersect_circle(double *ray, t_pt_info *pt_i,
@@ -122,6 +128,7 @@ int			pl_shadow(double *o_vect, t_pt_info *pt_info,
 
 /* Hook */
 void		hook_minirt(t_rt *rt);
+void		clone_rt(t_rt o_rt, t_rt *c_rt, t_spec *o_spec, t_spec *c_spec);
 
 /* 3D Vect Util */
 void		cross_product(double *ret, double *vect_1, double *vect_2);

@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 18:23:24 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:49:42 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,16 @@ typedef struct s_img
 	void	*img_ptr;
 }	t_img;
 
+typedef struct s_rt
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_spec		*spec;
+	t_img		obj_img;
+	double		c_to_s;
+	struct s_rt	*c_rt;
+}	t_rt;
+
 typedef struct s_pt_info
 {
 	int			type;
@@ -104,14 +114,5 @@ typedef struct s_pt_info
 	t_obj		obj;
 	double		c_o_vect[3];
 }	t_pt_info;
-
-typedef struct s_rt
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_spec	*spec;
-	t_img	obj_img;
-	double	c_to_s;
-}	t_rt;
 
 #endif

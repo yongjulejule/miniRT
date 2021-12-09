@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 15:09:35 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:31:17 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,18 @@ static double	get_cy_b(double *r, t_cy *cy, double *o)
 			- r[X] * pow(cy->o_vect[X], 2) * o[X]
 			- r[X] * cy->o_vect[X] * cy->o_vect[Y] * o[Y]
 			- r[X] * cy->o_vect[X] * cy->o_vect[Z] * o[Z]
-			+ r[X] * o[X] + r[Y] * cy->center[X] * cy->o_vect[X] * cy->o_vect[Y]
-			+ r[Y] * cy->center[Y] * pow(cy->o_vect[Y], 2) - r[Y] * cy->center[Y]
+			+ r[X] * o[X] + r[Y] * cy->center[X]
+			* cy->o_vect[X] * cy->o_vect[Y]
+			+ r[Y] * cy->center[Y]
+			* pow(cy->o_vect[Y], 2) - r[Y] * cy->center[Y]
 			+ r[Y] * cy->center[Z] * cy->o_vect[Y] * cy->o_vect[Z]
 			- r[Y] * cy->o_vect[X] * cy->o_vect[Y] * o[X]
 			- r[Y] * pow(cy->o_vect[Y], 2) * o[Y]
 			- r[Y] * cy->o_vect[Y] * cy->o_vect[Z] * o[Z] + r[Y] * o[Y]
 			+ r[Z] * cy->center[X] * cy->o_vect[X] * cy->o_vect[Z]
 			+ r[Z] * cy->center[Y] * cy->o_vect[Y] * cy->o_vect[Z]
-			+ r[Z] * cy->center[Z] * pow(cy->o_vect[Z], 2) - r[Z] * cy->center[Z]
+			+ r[Z] * cy->center[Z]
+			* pow(cy->o_vect[Z], 2) - r[Z] * cy->center[Z]
 			- r[Z] * cy->o_vect[X] * cy->o_vect[Z] * o[X]
 			- r[Z] * cy->o_vect[Y] * cy->o_vect[Z] * o[Y]
 			- r[Z] * pow(cy->o_vect[Z], 2) * o[Z] + r[Z] * o[Z]));
@@ -79,7 +82,8 @@ static double	get_cy_c(t_cy *cy, double *o, double rad)
 			- cy->center[Y] * o[Y]
 			+ cy->center[Z] * cy->o_vect[X] * cy->o_vect[Z] * o[X]
 			+ cy->center[Z] * cy->o_vect[Y] * cy->o_vect[Z] * o[Y]
-			+ cy->center[Z] *pow(cy->o_vect[Z], 2) * o[Z] - cy->center[Z] * o[Z]
+			+ cy->center[Z] * pow(cy->o_vect[Z], 2) * o[Z]
+			- cy->center[Z] * o[Z]
 			- cy->o_vect[X] * cy->o_vect[Y] * o[X] * o[Y]
 			- cy->o_vect[X] * cy->o_vect[Z] * o[X] * o[Z]
 			- cy->o_vect[Y] * cy->o_vect[Z] * o[Y] * o[Z])
