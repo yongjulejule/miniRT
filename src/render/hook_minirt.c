@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:47:35 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/09 15:11:10 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:51:03 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,20 @@ static	int	move_cam(int keycode, t_rt *rt)
 		rt->spec->cam.vp[Z] -= 10;
 	else if (keycode == KEY_F)
 	{
-		rt->spec->cam.fov = ((rt->spec->cam.fov + 0.1));
-		if (rt->spec->cam.fov > M_PI)
-			rt->spec->cam.fov -= M_PI;
+		if (rt->spec->cam.fov < M_PI)
+			rt->spec->cam.fov = (rt->spec->cam.fov + (M_PI / 36));
+		else
+			return (0);
+	}
+	else if (keycode == KEY_G)
+	{
+		if (rt->spec->cam.fov > 0)
+			rt->spec->cam.fov = (rt->spec->cam.fov - (M_PI / 36));
+		else
+			return (0);
 	}
 	else
 		return (0);
-	printf("current cam is <%d, %d, %d>, fov is %2f\n", (int)rt->spec->cam.vp[X],
-		(int)rt->spec->cam.vp[Y], (int)rt->spec->cam.vp[Z], rt->spec->cam.fov);
 	return (1);
 }
 
@@ -56,18 +62,47 @@ static int	key_press(int keycode, void *param)
 	flag = 0;
 	if (keycode == KEY_ESC)
 		exit(EXIT_SUCCESS);
-	// flag += move_light(keycode, rt);
-	flag += move_cam(keycode, rt);
+	flag = move_cam(keycode, rt);
 	if (flag)
 	{
+		printf("cam position : <%.2f, %.2f, %.2f>, fov : %.2f\n",
+			rt->spec->cam.vp[X], rt->spec->cam.vp[Y], rt->spec->cam.vp[Z],
+			rt->spec->cam.fov);
 		mlx_clear_window(rt->mlx_ptr, rt->win_ptr);
 		draw(rt);
 	}
 	return (EXIT_SUCCESS);
 }
 
+static int	mouse_press(int button, int x, int y, void *param)
+{
+	t_rt		*rt;
+	int			flag;
+
+	rt = (t_rt *)param;
+	flag = 1;
+	if (button == SCR_UP)
+		get_pt_on_line(rt->spec->cam.vp, rt->spec->cam.vp,
+			rt->spec->cam.o_vect, 5);
+	else if (button == SCR_DOWN)
+		get_pt_on_line(rt->spec->cam.vp, rt->spec->cam.vp,
+			rt->spec->cam.o_vect, -5);
+	else
+		flag = 0;
+	if (flag)
+	{
+		printf("cam position : <%.2f, %.2f, %.2f>, fov : %.2f\n",
+			rt->spec->cam.vp[X], rt->spec->cam.vp[Y], rt->spec->cam.vp[Z],
+			rt->spec->cam.fov);
+		mlx_clear_window(rt->mlx_ptr, rt->win_ptr);
+		draw(rt);
+	}
+	return (x + y);
+}
+
 void	hook_minirt(t_rt *rt)
 {
 	mlx_hook(rt->win_ptr, KEY_PRESS, 0, key_press, rt);
+	mlx_hook(rt->win_ptr, MOUSE_PRESS, 0, mouse_press, rt);
 	mlx_hook(rt->win_ptr, RED_DOT, 0, close_window, rt);
 }

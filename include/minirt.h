@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 14:10:57 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:49:57 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@
 # define KEY_X 7
 # define KEY_C 8
 # define KEY_F 3
-# define KEY_SHFT 257
+# define KEY_G 5
+# define MOUSE_PRESS 4
+# define SCR_UP 4
+# define SCR_DOWN 5
 
 # define POINT 0
 # define VECTOR 1
