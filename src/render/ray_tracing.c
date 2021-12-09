@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 00:18:38 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/09 11:48:13 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 		else if (cur->type == PLANE)
 			intersect_pl(ray, &pt_info, cur->obj.pl);
 		else if (cur->type == CYLINDER)
-			if (!intersect_cy(ray, &pt_info, cur->obj.cy))
+			if (!intersect_cy(ray, &pt_info, cur->obj.cy, NULL))
 				intersect_circle(ray, &pt_info, cur->obj.cy,
 					rt->spec->cam.o_vect);
 		cur = cur->next;

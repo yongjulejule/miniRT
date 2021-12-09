@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:36:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/08 09:28:45 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:13:21 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ double	get_shadow(t_rt *rt, t_pt_info *pt_info)
 			shaded = (meet_sph(ray, pt_info->pt, cur->obj.sph, r_size) >= 0);
 		else if (cur->type == PLANE && cur->obj.pl != pt_info->obj.pl)
 			shaded = pl_shadow(ray, pt_info, cur->obj.pl, r_size);
-		// TODO - SHADOW WHEN CYLINDER IS MET
-		// else if (cur->type == CYLINDER)
-		// 	intersect_cy(ray, &pt_info, cur->obj.cy);
+		else if (cur->type == CYLINDER && cur->obj.cy != pt_info->obj.cy)
+			shaded = intersect_cy(ray, pt_info, cur->obj.cy, pt_info->pt);
 		if (shaded == 1)
 			return (SHADED);
 		cur = cur->next;
