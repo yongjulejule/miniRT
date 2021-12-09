@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/09 15:08:59 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 22:07:55 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	get_coord_system(t_spec *spec, double *transf)
 	cross_product(x_axis, ref, z_axis);
 	normalize_vect(x_axis);
 	update_vect(transf, x_axis, X, 4);
-	cross_product(y_axis, x_axis, z_axis);
+	cross_product(y_axis, z_axis, x_axis);
 	normalize_vect(y_axis);
 	update_vect(transf, y_axis, Y, 4);
 }
