@@ -6,13 +6,13 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:36:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 12:13:21 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/09 12:26:08 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	get_shadow(t_rt *rt, t_pt_info *pt_info)
+int	get_shadow(t_rt *rt, t_pt_info *pt_info)
 {
 	int			shaded;
 	double		ray[3];
