@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 10:41:50 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:26:11 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
 void		intersect_circle(double *ray, t_pt_info *pt_i,
 				t_cy *cy, double *cam_o_v);
-int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
+int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy,
+				double *shadow);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
 double		meet_pl(double *o_vect, t_pl *pl);
