@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 12:26:11 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/09 14:10:57 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@
 # define KEY_PRESS 2
 # define KEY_ESC 53
 # define RED_DOT 17
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_Z 6
+# define KEY_X 7
+# define KEY_C 8
+# define KEY_F 3
+# define KEY_SHFT 257
 
 # define POINT 0
 # define VECTOR 1
@@ -78,6 +86,7 @@ void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 
 /* Render */
+void		draw(t_rt *rt);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
 int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
