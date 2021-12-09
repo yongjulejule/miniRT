@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:47:35 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/09 14:24:23 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:11:10 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,6 @@ static int	close_window(void *param)
 	rt = (t_rt *)param;
 	exit(EXIT_SUCCESS);
 }
-
-// static	int	move_light(int keycode, t_rt *rt)
-// {
-// 	if (keycode == KEY_SHFT && keycode == KEY_A)
-// 		rt->spec->light.lp[X] += 10;
-// 	else if (keycode == KEY_SHFT && keycode == KEY_S)
-// 		rt->spec->light.lp[Y] += 10;
-// 	else if (keycode == KEY_SHFT && keycode == KEY_D)
-// 		rt->spec->light.lp[Z] += 10;
-// 	else if (keycode == KEY_SHFT && keycode == KEY_Z)
-// 		rt->spec->light.lp[X] -= 10;
-// 	else if (keycode == KEY_SHFT && keycode == KEY_X)
-// 		rt->spec->light.lp[Y] -= 10;
-// 	else if (keycode == KEY_SHFT && keycode == KEY_C)
-// 		rt->spec->light.lp[Z] -= 10;
-// 	else
-// 		return (0);
-// 	printf("current light is <%d, %d, %d>\n", (int)rt->spec->light.lp[X],
-// 		(int)rt->spec->light.lp[Y], (int)rt->spec->light.lp[Z]);
-// 	return (1);
-// }
 
 static	int	move_cam(int keycode, t_rt *rt)
 {
