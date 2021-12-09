@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 00:27:58 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/09 10:41:50 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,12 @@ void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
 int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
+int			get_phong_r(t_rt *rt, t_pt_info *pt_info, double *o_ray,
+				double *n_vect);
+int			get_phong_g(t_rt *rt, t_pt_info *pt_info, double *o_ray,
+				double *n_vect);
+int			get_phong_b(t_rt *rt, t_pt_info *pt_info, double *o_ray,
+				double *n_vect);
 void		init_rt_struct(t_rt *rt, t_spec *spec);
 int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
@@ -91,7 +97,7 @@ void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
 double		meet_pl(double *o_vect, t_pl *pl);
 double		meet_sph(double *o_vect, double *origin, t_sph *sph, double r_size);
-double		get_shadow(t_rt *rt, t_pt_info *pt_info);
+int			get_shadow(t_rt *rt, t_pt_info *pt_info);
 int			pl_shadow(double *o_vect, t_pt_info *pt_info,
 				t_pl *pl, double r_size);
 

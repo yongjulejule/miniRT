@@ -6,13 +6,13 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:36:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/08 09:28:45 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:21:03 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	get_shadow(t_rt *rt, t_pt_info *pt_info)
+int	get_shadow(t_rt *rt, t_pt_info *pt_info)
 {
 	int			shaded;
 	double		ray[3];
@@ -31,9 +31,8 @@ double	get_shadow(t_rt *rt, t_pt_info *pt_info)
 			shaded = (meet_sph(ray, pt_info->pt, cur->obj.sph, r_size) >= 0);
 		else if (cur->type == PLANE && cur->obj.pl != pt_info->obj.pl)
 			shaded = pl_shadow(ray, pt_info, cur->obj.pl, r_size);
-		// TODO - SHADOW WHEN CYLINDER IS MET
-		// else if (cur->type == CYLINDER)
-		// 	intersect_cy(ray, &pt_info, cur->obj.cy);
+		else if (cur->type == CYLINDER)
+			intersect_cy(ray, &pt_info, cur->obj.cy);
 		if (shaded == 1)
 			return (SHADED);
 		cur = cur->next;
