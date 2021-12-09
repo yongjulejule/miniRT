@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 12:19:02 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/09 15:09:35 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,6 @@ void	intersect_circle(double *ray, t_pt_info *pt_i,
 	vect_copy(pt_i->c_o_vect, pl.o_vect);
 	pt_i->obj.cy = cy;
 }
-
-// static double	get_pt_on_cy(double *r, double *o, double *n, double rad)
-// {
-// 	double	a;
-// 	double	b;
-// 	double	c;
-
-// 	a = pow(vect_size(r), 2) - pow(r[X] * n[X], 2)
-// 		- pow(r[Y] * n[Y], 2) - pow(r[Z] * n[Z], 2)
-// 		- 2 * (r[X] * r[Y] * n[X] * n[Y] + r[X] * r[Z] * n[X] * n[Z]
-// 			+ r[Y] * r[Z] * n[Y] * n[Z]);
-// 	b = -2 * (dot_product(r, o) - r[X] * o[X] * pow(n[X], 2)
-// 			- r[X] * o[Y] * n[X] * n[Y] - r[X] * o[Z] * n[X] * n[Z]
-// 			- r[Y] * o[X] * n[X] * n[Y] - r[Y] * o[Y] * pow(n[Y], 2)
-// 			- r[Y] * o[Z] * n[Y] * n[Z] - r[Z] * o[X] * n[X] * n[Z]
-// 			- r[Z] * o[Y] * n[Y] * n[Z] - r[Z] * o[Z] * pow(n[Z], 2));
-// 	c = pow(vect_size(o), 2) - pow(rad, 2) - pow(o[X] * n[X], 2)
-// 		- pow(o[Y] * n[Y], 2) - pow(o[Z] * n[Z], 2)
-// 		-2 * (o[X] * o[Y] * n[X] * n[Y] + o[X] * o[Z] * n[X] * n[Z]
-// 			+ o[Y] * o[Z] * n[Y] * n[Z]);
-// 	if (pow(b, 2) - 4 * a * c < 0)
-// 		return (0);
-// 	return ((-1 * b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a));
-// }
 
 static double	get_cy_b(double *r, t_cy *cy, double *o)
 {
