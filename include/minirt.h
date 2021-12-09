@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 16:49:57 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:26:45 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 
 # define TRANSPARENT 0xff000000
 
+/* Key maps */
 # define KEY_PRESS 2
 # define KEY_ESC 53
 # define RED_DOT 17
@@ -59,6 +60,11 @@
 # define MOUSE_PRESS 4
 # define SCR_UP 4
 # define SCR_DOWN 5
+
+/* Spherical coordinate */
+# define RAD 0
+# define THETA 1
+# define PHI 2
 
 # define POINT 0
 # define VECTOR 1
