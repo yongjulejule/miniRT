@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_minirt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:47:35 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/09 16:51:03 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:56:29 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	key_press(int keycode, void *param)
 			rt->spec->cam.vp[X], rt->spec->cam.vp[Y], rt->spec->cam.vp[Z],
 			rt->spec->cam.fov);
 		mlx_clear_window(rt->mlx_ptr, rt->win_ptr);
-		draw(rt);
+		draw(rt, rt->c_rt);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -95,7 +95,7 @@ static int	mouse_press(int button, int x, int y, void *param)
 			rt->spec->cam.vp[X], rt->spec->cam.vp[Y], rt->spec->cam.vp[Z],
 			rt->spec->cam.fov);
 		mlx_clear_window(rt->mlx_ptr, rt->win_ptr);
-		draw(rt);
+		draw(rt, rt->c_rt);
 	}
 	return (x + y);
 }

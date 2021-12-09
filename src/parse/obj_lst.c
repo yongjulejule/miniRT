@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:51:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/05 00:29:44 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/09 18:38:12 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,25 @@ void	obj_lst_addback(t_obj_lst **hd, t_obj_lst *new)
 		return ;
 	last = obj_lst_last(*hd);
 	last->next = new;
+}
+
+void	free_obj_lst(t_obj_lst *hd)
+{
+	t_obj_lst	*cur;
+	t_obj_lst	*to_free;
+
+	cur = hd->next;
+	while (cur)
+	{
+		to_free = cur;
+		if (cur->type == SPHERE)
+			free(cur->obj.sph);
+		else if (cur->type == PLANE)
+			free(cur->obj.pl);
+		else if (cur->type == CYLINDER)
+			free(cur->obj.cy);
+		cur = cur->next;
+		free(to_free);
+	}
+	free(hd);
 }

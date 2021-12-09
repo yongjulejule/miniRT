@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:30:06 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/04 16:12:48 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:21:47 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	init_rt_struct(t_rt *rt, t_spec *spec)
+void	init_rt_struct(t_rt *o_rt, t_rt *c_rt, t_spec *o_spec, t_spec *c_spec)
 {
-	rt->spec = spec;
-	rt->mlx_ptr = mlx_init();
-	if (!rt->mlx_ptr)
+	o_rt->spec = o_spec;
+	o_rt->mlx_ptr = mlx_init();
+	if (!o_rt->mlx_ptr)
 		is_error("Mlx pointer init failed", NULL, EXIT_FAILURE);
-	rt->win_ptr = mlx_new_window(rt->mlx_ptr, WIN_W, WIN_H, "bigrt");
-	if (!rt->win_ptr)
+	o_rt->win_ptr = mlx_new_window(o_rt->mlx_ptr, WIN_W, WIN_H, "bigrt");
+	if (!o_rt->win_ptr)
 		is_error("Window pointer init failed", NULL, EXIT_FAILURE);
-	rt->c_to_s = WIN_W / (2 * tan(rt->spec->cam.fov / 2));
+	o_rt->c_rt = c_rt;
+	c_rt->spec = c_spec;
 }
