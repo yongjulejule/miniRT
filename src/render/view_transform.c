@@ -3,16 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/08 23:23:36 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/09 15:08:59 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /* FIXME : Need to handle when camera orientation vector is <0, 1, 0> */
+
+static void	get_vert_coord(t_spec *spec, double *transf)
+{
+	double	x_axis[4];
+	double	y_axis[4];
+	double	z_axis[4];
+
+	fill_vect(x_axis, 1, 0, 0);
+	if (spec->cam.o_vect[Y] < 0)
+		fill_vect(y_axis, 0, 0, 1);
+	else
+		fill_vect(y_axis, 0, 0, -1);
+	fill_vect(z_axis, 0, 1, 0);
+	update_vect(transf, x_axis, X, 4);
+	update_vect(transf, y_axis, Y, 4);
+	update_vect(transf, z_axis, Z, 4);
+}
+
+/* FIXME : swap coordinate when cam o_vect is oriented to y-axis */
+
 static void	get_coord_system(t_spec *spec, double *transf)
 {
 	double	ref[4];
@@ -21,6 +41,11 @@ static void	get_coord_system(t_spec *spec, double *transf)
 	double	z_axis[4];
 
 	ft_bzero(transf, sizeof(double) * 16);
+	if (!spec->cam.o_vect[X] && spec->cam.o_vect[Y] && !spec->cam.o_vect[Z])
+	{
+		get_vert_coord(spec, transf);
+		return ;
+	}
 	fill_vect(z_axis, -1 * spec->cam.o_vect[X],
 		-1 * spec->cam.o_vect[Y], -1 * spec->cam.o_vect[Z]);
 	update_vect(transf, z_axis, Z, 4);
@@ -28,7 +53,7 @@ static void	get_coord_system(t_spec *spec, double *transf)
 	cross_product(x_axis, ref, z_axis);
 	normalize_vect(x_axis);
 	update_vect(transf, x_axis, X, 4);
-	cross_product(y_axis, z_axis, x_axis);
+	cross_product(y_axis, x_axis, z_axis);
 	normalize_vect(y_axis);
 	update_vect(transf, y_axis, Y, 4);
 }
