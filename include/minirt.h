@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 18:06:07 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/10 19:15:40 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void		view_transform(t_rt *rt);
 /* Intersection & Shadow */
 int			circle_shadow(double *ray, t_pt_info *pt_i,
 				t_cy *cy, double r_size);
+int			cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size);
 int			intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph);
 void		intersect_circle(double *ray, t_pt_info *pt_i, t_cy *cy);
