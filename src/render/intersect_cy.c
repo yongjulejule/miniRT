@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 19:14:25 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/10 19:22:13 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
 	return (0);
 }
 
-int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy, double *shadow)
+int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy)
 {
 	double	t;
 	double	pt[3];
@@ -108,8 +108,6 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy, double *shadow)
 	double	origin[3];
 
 	ft_bzero(origin, sizeof(double) * 3);
-	if (shadow)
-		vect_copy(origin, shadow);
 	t = get_pt_on_cy(ray, cy, origin, cy->radius);
 	if (t < 0.1 || (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t))
 		return (0);
@@ -119,8 +117,6 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy, double *shadow)
 		|| pow(vect_size(diff), 2) - pow(cy->radius, 2)
 		> pow(cy->height, 2) - 0.5)
 		return (0);
-	if (shadow)
-		return (1);
 	vect_copy(pt_info->pt, pt);
 	pt_info->type = CYLINDER;
 	pt_info->obj.cy = cy;
