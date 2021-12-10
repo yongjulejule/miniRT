@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/09 12:12:31 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 14:20:22 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ int	get_phong_r(t_rt *rt, t_pt_info *pt_info, double *o_ray, double *n_vect)
 	amb = (rt->spec->amb.ratio * ((double)rt->spec->amb.color[R] / 255));
 	if (pt_info->type == SPHERE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.sph->color[R] / 255)
-				 * ((double)rt->spec->light.color[R] / 255));
+				* ((double)pt_info->obj.sph->color[R] / 255)
+				* ((double)rt->spec->light.color[R] / 255));
 	else if (pt_info->type == PLANE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.pl->color[R] / 255)
-				 * ((double)rt->spec->light.color[R] / 255));
+				* ((double)pt_info->obj.pl->color[R] / 255)
+				* ((double)rt->spec->light.color[R] / 255));
 	else if (pt_info->type == CYLINDER || pt_info->type == CY_CIRCLE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.cy->color[R] / 255)
-				 * ((double)rt->spec->light.color[R] / 255));
+				* ((double)pt_info->obj.cy->color[R] / 255)
+				* ((double)rt->spec->light.color[R] / 255));
 	color = color * rt->spec->light.bright + amb;
 	return ((int)(color * 255));
 }
@@ -80,16 +80,16 @@ int	get_phong_g(t_rt *rt, t_pt_info *pt_info, double *o_ray, double *n_vect)
 	amb = (rt->spec->amb.ratio * ((double)rt->spec->amb.color[G] / 255));
 	if (pt_info->type == SPHERE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.sph->color[G] / 255)
-				 * ((double)rt->spec->light.color[G] / 255));
+				* ((double)pt_info->obj.sph->color[G] / 255)
+				* ((double)rt->spec->light.color[G] / 255));
 	else if (pt_info->type == PLANE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.pl->color[G] / 255)
-				 * ((double)rt->spec->light.color[G] / 255));
+				* ((double)pt_info->obj.pl->color[G] / 255)
+				* ((double)rt->spec->light.color[G] / 255));
 	else if (pt_info->type == CYLINDER || pt_info->type == CY_CIRCLE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.cy->color[G] / 255)
-				 * ((double)rt->spec->light.color[G] / 255));
+				* ((double)pt_info->obj.cy->color[G] / 255)
+				* ((double)rt->spec->light.color[G] / 255));
 	color = color * rt->spec->light.bright + amb;
 	return ((int)(color * 255));
 }
@@ -109,16 +109,16 @@ int	get_phong_b(t_rt *rt, t_pt_info *pt_info, double *o_ray, double *n_vect)
 	amb = (rt->spec->amb.ratio * ((double)rt->spec->amb.color[B] / 255));
 	if (pt_info->type == SPHERE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.sph->color[B] / 255)
-				 * ((double)rt->spec->light.color[B] / 255));
+				* ((double)pt_info->obj.sph->color[B] / 255)
+				* ((double)rt->spec->light.color[B] / 255));
 	else if (pt_info->type == PLANE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.pl->color[B] / 255)
-				 * ((double)rt->spec->light.color[B] / 255));
+				* ((double)pt_info->obj.pl->color[B] / 255)
+				* ((double)rt->spec->light.color[B] / 255));
 	else if (pt_info->type == CYLINDER || pt_info->type == CY_CIRCLE)
 		color = ((reflect + diffuse)
-				 * ((double)pt_info->obj.cy->color[B] / 255)
-				 * ((double)rt->spec->light.color[B] / 255));
+				* ((double)pt_info->obj.cy->color[B] / 255)
+				* ((double)rt->spec->light.color[B] / 255));
 	color = color * rt->spec->light.bright + amb;
 	return ((int)(color * 255));
 }
