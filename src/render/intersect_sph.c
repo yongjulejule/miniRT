@@ -47,6 +47,8 @@ void	intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph)
 	if (d < 0)
 		return ;
 	t = dot_product(ray, sph->center) - sqrt(d);
+	if (t < 0.1)
+		return ;
 	if (pt_info->pt[Z] != 1 && pt_info->pt[Z] >= ray[Z] * t)
 		return ;
 	get_pt_on_line(pt_info->pt, NULL, ray, t);
