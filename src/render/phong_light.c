@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/09 12:23:03 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 14:22:20 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	check_rgb_range(int *color)
 
 static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 {
-	int		shadow;
 	double	n_vect[3];
 	double	o_ray[3];
 
@@ -48,8 +47,7 @@ static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 	else if (pt_info->type == CY_CIRCLE)
 		vect_copy(n_vect, pt_info->c_o_vect);
 	normalize_vect(n_vect);
-	shadow = get_shadow(rt, pt_info);
-	if (shadow == SHADED)
+	if (get_shadow(rt, pt_info) == SHADED)
 		return (SHADED);
 	color[R] = get_phong_r(rt, pt_info, o_ray, n_vect);
 	color[G] = get_phong_g(rt, pt_info, o_ray, n_vect);
