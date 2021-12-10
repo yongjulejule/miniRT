@@ -6,13 +6,11 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/09 22:07:55 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 13:59:30 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-/* FIXME : Need to handle when camera orientation vector is <0, 1, 0> */
 
 static void	get_vert_coord(t_spec *spec, double *transf)
 {

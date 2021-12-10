@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 19:57:06 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 10:05:53 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ int			pl_shadow(double *o_vect, t_pt_info *pt_info,
 /* Hook */
 void		hook_minirt(t_rt *rt);
 void		clone_rt(t_rt o_rt, t_rt *c_rt, t_spec *o_spec, t_spec *c_spec);
+int			change_fov(int keycode, t_rt *rt);
+int			move_cam_pos(int keycode, t_rt *rt);
 
 /* 3D Vect Util */
 void		cross_product(double *ret, double *vect_1, double *vect_2);

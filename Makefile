@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/09 19:02:10 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/10 13:56:40 by yongjule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS_PARSE		= $(addprefix $(SRCS_PARSE_DIR), \
 
 SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
 				clone_rt.c\
+				cam_hook.c\
 				hook_minirt.c\
 				img_util.c\
 				init_struct.c\
