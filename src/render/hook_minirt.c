@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:47:35 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/09 22:32:12 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 14:07:23 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,56 +20,15 @@ static int	close_window(void *param)
 	exit(EXIT_SUCCESS);
 }
 
-static	int	move_cam_pos(int keycode, t_rt *rt)
+static void	get_sph_coord(t_spec *spec)
 {
-	double	r;
-	double	theta;
-	double	phi;
-
-	if (keycode == KEY_A)
-		rt->spec->cam.sph_coord[RAD] += 1;
-	else if (keycode == KEY_S)
-		rt->spec->cam.sph_coord[THETA] += M_PI / 30;
-	else if (keycode == KEY_D)
-		rt->spec->cam.sph_coord[PHI] += M_PI / 30;
-	else if (keycode == KEY_Z)
-		rt->spec->cam.sph_coord[RAD] -= 1;
-	else if (keycode == KEY_X)
-		rt->spec->cam.sph_coord[THETA] -= M_PI / 30;
-	else if (keycode == KEY_C)
-		rt->spec->cam.sph_coord[PHI] -= M_PI / 30;
+	spec->cam.sph_coord[RAD] = vect_size(spec->cam.vp);
+	if (!spec->cam.sph_coord[RAD])
+		spec->cam.sph_coord[THETA] = 0;
 	else
-		return (0);
-	r = rt->spec->cam.sph_coord[RAD];
-	theta = rt->spec->cam.sph_coord[THETA];
-	phi = rt->spec->cam.sph_coord[PHI];
-	rt->spec->cam.vp[X] = r * sin(theta) * cos(phi);
-	rt->spec->cam.vp[Y] = r * sin(theta) * sin(phi);
-	rt->spec->cam.vp[Z] = r * cos(theta);
-	rt->spec->cam.o_vect[X] = -1 * sin(theta) * cos(phi);
-	rt->spec->cam.o_vect[Y] = -1 * sin(theta) * sin(phi);
-	rt->spec->cam.o_vect[Z] = -1 * cos(theta);
-	normalize_vect(rt->spec->cam.o_vect);
-	return (1);
-}
-
-static int	change_fov(int keycode, t_rt *rt)
-{
-	if (keycode == KEY_F)
-	{
-		if (rt->spec->cam.fov < M_PI)
-			rt->spec->cam.fov = (rt->spec->cam.fov + (M_PI / 36));
-		else
-			return (0);
-	}
-	else if (keycode == KEY_G)
-	{
-		if (rt->spec->cam.fov > 0)
-			rt->spec->cam.fov = (rt->spec->cam.fov - (M_PI / 36));
-		else
-			return (0);
-	}
-	return (1);
+		spec->cam.sph_coord[THETA] = acos(spec->cam.vp[Z]
+				/ spec->cam.sph_coord[RAD]);
+	spec->cam.sph_coord[PHI] = atan2(spec->cam.vp[Y], spec->cam.vp[X]);
 }
 
 static int	key_press(int keycode, void *param)
@@ -81,8 +40,9 @@ static int	key_press(int keycode, void *param)
 	flag = 0;
 	if (keycode == KEY_ESC)
 		exit(EXIT_SUCCESS);
-	flag += move_cam_pos(keycode, rt);
 	flag += change_fov(keycode, rt);
+	get_sph_coord(rt->spec);
+	flag += move_cam_pos(keycode, rt);
 	if (flag)
 	{
 		printf("cam position : <%.2f, %.2f, %.2f>, fov : %.2f\
@@ -113,9 +73,11 @@ static int	mouse_press(int button, int x, int y, void *param)
 		flag = 0;
 	if (flag)
 	{
-		printf("cam position : <%.2f, %.2f, %.2f>, fov : %.2f\n",
+		printf("cam position : <%.2f, %.2f, %.2f>, fov : %.2f\
+, orientation : <%.2f, %.2f, %.2f>\n",
 			rt->spec->cam.vp[X], rt->spec->cam.vp[Y], rt->spec->cam.vp[Z],
-			rt->spec->cam.fov);
+			rt->spec->cam.fov, rt->spec->cam.o_vect[X],
+			rt->spec->cam.o_vect[Y], rt->spec->cam.o_vect[Z]);
 		mlx_clear_window(rt->mlx_ptr, rt->win_ptr);
 		draw(rt, rt->c_rt);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect_util.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:54:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/08 23:12:43 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/10 13:08:44 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	vect_copy(double *dst, double *src)
 
 double	vect_size(double *vect)
 {
-	return (sqrt(pow(vect[X], 2) + pow(vect[Y], 2) + pow(vect[Z], 2)));
+	return (hypot(hypot(vect[X], vect[Y]), vect[Z]));
 }
 
 void	get_pt_on_line(double *dst, double *pt, double *dir, double t)
@@ -53,8 +53,8 @@ void	get_pt_on_line(double *dst, double *pt, double *dir, double t)
 	}
 	else
 	{
-		dst[X] = pt[X] + dir[X] * t;
-		dst[Y] = pt[Y] + dir[Y] * t;
-		dst[Z] = pt[Z] + dir[Z] * t;
+		dst[X] = fma(dir[X], t, pt[X]);
+		dst[Y] = fma(dir[Y], t, pt[Y]);
+		dst[Z] = fma(dir[Z], t, pt[Z]);
 	}
 }
