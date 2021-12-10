@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 17:50:47 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/10 19:22:13 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,29 @@ static double	get_pt_on_cy(double *r, t_cy *cy, double *o, double rad)
 	return ((-1 * b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a));
 }
 
-int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy, double *shadow)
+int	cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
+{
+	double	t;
+	double	pt_on_cir[3];
+	double	cir_to_cent[3];
+	double	cur_to_cir[3];
+
+	t = get_pt_on_cy(ray, cy, pt_i->pt, cy->radius);
+	if (t < 0.1 || (pt_i->pt[Z] != 1 && pt_i->pt[Z] > ray[Z] * t))
+		return (0);
+	get_pt_on_line(pt_on_cir, pt_i->pt, ray, t);
+	sub_vect(cir_to_cent, pt_on_cir, cy->center);
+	if (dot_product(cir_to_cent, cy->o_vect) < 0
+		|| pow(vect_size(cir_to_cent), 2) - pow(cy->radius, 2)
+		> pow(cy->height, 2) - 0.5)
+		return (0);
+	sub_vect(cur_to_cir, pt_on_cir, pt_i->pt);
+	if (vect_size(cur_to_cir) < r_size - 0.5)
+		return (1);
+	return (0);
+}
+
+int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy)
 {
 	double	t;
 	double	pt[3];
@@ -86,8 +108,6 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy, double *shadow)
 	double	origin[3];
 
 	ft_bzero(origin, sizeof(double) * 3);
-	if (shadow)
-		vect_copy(origin, shadow);
 	t = get_pt_on_cy(ray, cy, origin, cy->radius);
 	if (t < 0.1 || (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t))
 		return (0);
@@ -97,8 +117,6 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy, double *shadow)
 		|| pow(vect_size(diff), 2) - pow(cy->radius, 2)
 		> pow(cy->height, 2) - 0.5)
 		return (0);
-	if (shadow)
-		return (1);
 	vect_copy(pt_info->pt, pt);
 	pt_info->type = CYLINDER;
 	pt_info->obj.cy = cy;

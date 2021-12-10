@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:36:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 18:06:47 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/10 19:15:51 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_obj_to_ray(t_obj_lst *cur, t_pt_info *pt_i,
 		else if ((cur->type == CYLINDER || cur->type == CY_CIRCLE)
 			&& cur->obj.cy != pt_i->obj.cy)
 		{
-			shaded = intersect_cy(ray, pt_i, cur->obj.cy, pt_i->pt);
+			shaded = cy_shadow(ray, pt_i, cur->obj.cy, r_size);
 			if (!shaded)
 				shaded = circle_shadow(ray, pt_i, cur->obj.cy, r_size);
 		}
