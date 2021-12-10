@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/10 13:59:30 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:00:45 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,13 @@ static void	get_transf_matrix(double *vp, double *transf)
 	transf[15] = 1;
 }
 
-void	transf_obj_light(t_spec *spec, double *transf)
+static void	transf_obj_light(t_spec *spec, double *transf)
 {
 	t_obj_lst	*cur;
 
+	multiply_vect(transf, spec->light.lp, POINT);
+	multiply_vect(transf, spec->cam.o_vect, VECTOR);
+	normalize_vect(spec->cam.o_vect);
 	cur = spec->obj_lst->next;
 	while (cur)
 	{
@@ -91,12 +94,10 @@ void	transf_obj_light(t_spec *spec, double *transf)
 			multiply_vect(transf, cur->obj.cy->center, POINT);
 			multiply_vect(transf, cur->obj.cy->o_vect, VECTOR);
 			normalize_vect(cur->obj.cy->o_vect);
+			fill_cy_circle(cur->obj.cy, spec->cam.o_vect);
 		}
 		cur = cur->next;
 	}
-	multiply_vect(transf, spec->light.lp, POINT);
-	multiply_vect(transf, spec->cam.o_vect, VECTOR);
-	normalize_vect(spec->cam.o_vect);
 }
 
 void	view_transform(t_rt *rt)

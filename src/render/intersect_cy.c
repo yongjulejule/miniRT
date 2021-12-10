@@ -6,39 +6,11 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 14:13:08 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/10 17:50:47 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-void	intersect_circle(double *ray, t_pt_info *pt_i,
-			t_cy *cy, double *cam_o_v)
-{
-	double		center_to_cir[3];
-	t_pl		pl;
-	t_pt_info	pt_on_pl;
-
-	pt_on_pl.pt[Z] = pt_i->pt[Z];
-	if (dot_product(cy->o_vect, cam_o_v) > 0)
-		vect_copy(pl.center, cy->center);
-	else
-		get_pt_on_line(pl.center, cy->center, cy->o_vect, cy->height);
-	if (dot_product(cy->o_vect, cam_o_v) < 0)
-		vect_copy(pl.o_vect, cy->o_vect);
-	else
-		fill_vect(pl.o_vect, -1 * cy->o_vect[X],
-			-1 * cy->o_vect[Y], -1 * cy->o_vect[Z]);
-	if (!intersect_pl(ray, &pt_on_pl, &pl))
-		return ;
-	sub_vect(center_to_cir, pt_on_pl.pt, pl.center);
-	if (vect_size(center_to_cir) > cy->radius)
-		return ;
-	vect_copy(pt_i->pt, pt_on_pl.pt);
-	pt_i->type = CY_CIRCLE;
-	vect_copy(pt_i->c_o_vect, pl.o_vect);
-	pt_i->obj.cy = cy;
-}
 
 static double	get_cy_b(double *r, double *c, double *n, double *o)
 {

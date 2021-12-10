@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/10 13:56:40 by yongjule         ###   ########.fr        #
+#    Updated: 2021/12/10 14:41:02 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
 				img_util.c\
 				init_struct.c\
 				intersect_cy.c\
+				intersect_cy_circle.c\
 				intersect_pl.c\
 				intersect_sph.c\
 				math_util.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/10 14:29:49 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:03:15 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 		sub_vect(n_vect, n_vect, pt_info->obj.cy->o_vect);
 	}
 	else if (pt_info->type == CY_CIRCLE)
-		vect_copy(n_vect, pt_info->c_o_vect);
+		vect_copy(n_vect, pt_info->obj.cy->circle_o_v);
 	normalize_vect(n_vect);
 	if (get_shadow(rt, pt_info) == SHADED)
 		return (SHADED);

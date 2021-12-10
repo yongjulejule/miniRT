@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 19:49:42 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:13:57 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_cy
 	double	radius;
 	double	height;
 	int		color[3];
+	double	circle_center[3];
+	double	circle_o_v[3];
 }	t_cy;
 
 typedef union u_obj
@@ -112,7 +114,6 @@ typedef struct s_pt_info
 	int			type;
 	double		pt[3];
 	t_obj		obj;
-	double		c_o_vect[3];
 }	t_pt_info;
 
 #endif

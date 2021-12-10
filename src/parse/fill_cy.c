@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:04:41 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/08 17:20:34 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/10 18:20:06 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	fill_cy_circle(t_cy	*cy, double *cam_o_v)
+{
+	if (dot_product(cy->o_vect, cam_o_v) > 0)
+		vect_copy(cy->circle_center, cy->center);
+	else
+		get_pt_on_line(cy->circle_center, cy->center,
+			cy->o_vect, cy->height);
+	if (dot_product(cy->o_vect, cam_o_v) < 0)
+		vect_copy(cy->circle_o_v, cy->o_vect);
+	else
+		get_pt_on_line(cy->circle_o_v, NULL, cy->o_vect, -1);
+}
 
 static void	fill_cy_center(t_cy *new_cy, char **info, int cv_flag)
 {
@@ -37,7 +50,7 @@ static void	fill_cy_o_vect(t_cy *new_cy, char **info, int cv_flag)
 
 	o_vect_arr = check_commas_split(info[1]);
 	if (ft_strsetlen(o_vect_arr) != 3)
-		is_error("Invalid configuration (CY O_VECT", NULL, EXIT_FAILURE);
+		is_error("Invalid configuration (CY O_VECT)", NULL, EXIT_FAILURE);
 	i = -1;
 	while (o_vect_arr[++i])
 	{
