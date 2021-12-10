@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/07 14:57:36 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/10 16:09:49 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	config_to_spec(t_conf *cur, t_spec *spec)
 {
-	int	cap_flag[3];
+	int		cap_flag[3];
 
 	ft_bzero(cap_flag, 3 * sizeof(int));
 	spec->obj_lst = obj_lst_new(NULL, 0);

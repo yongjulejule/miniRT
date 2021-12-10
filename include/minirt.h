@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 10:05:53 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:06:07 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void		parse_config(int argc, char **argv, t_spec *spec);
 void		fill_amb(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_cam(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
+void		fill_cy_circle(t_cy *cy, double *cam_o_v);
 void		fill_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
@@ -108,18 +109,21 @@ int			get_phong_b(t_rt *rt, t_pt_info *pt_info, double *o_ray,
 				double *n_vect);
 void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
-int			intersect_pl(double *o_vect, t_pt_info *pt_info, t_pl *pl);
-void		intersect_sph(double *o_vect, t_pt_info *pt_info, t_sph *sph);
-void		intersect_circle(double *ray, t_pt_info *pt_i,
-				t_cy *cy, double *cam_o_v);
-int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy,
-				double *shadow);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
-double		meet_pl(double *o_vect, t_pl *pl);
-double		meet_sph(double *o_vect, double *origin, t_sph *sph, double r_size);
+
+/* Intersection & Shadow */
+int			circle_shadow(double *ray, t_pt_info *pt_i,
+				t_cy *cy, double r_size);
+int			intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl);
+void		intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph);
+void		intersect_circle(double *ray, t_pt_info *pt_i, t_cy *cy);
+int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy,
+				double *shadow);
+double		meet_pl(double *ray, double *o_vect);
+double		meet_sph(double *ray, double *origin, t_sph *sph, double r_size);
 int			get_shadow(t_rt *rt, t_pt_info *pt_info);
-int			pl_shadow(double *o_vect, t_pt_info *pt_info,
+int			pl_shadow(double *ray, t_pt_info *pt_info,
 				t_pl *pl, double r_size);
 
 /* Hook */

@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_pl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:08:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 14:22:41 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:46:14 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	meet_pl(double *ray, t_pl *pl)
+double	meet_pl(double *ray, double *o_vect)
 {
-	return (dot_product(ray, pl->o_vect));
+	return (dot_product(ray, o_vect));
 }
 
 int	intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl)
 {
 	double	t;
 
-	if (!meet_pl(ray, pl))
+	if (!meet_pl(ray, pl->o_vect))
 		return (0);
 	t = (dot_product(pl->center, pl->o_vect)) / dot_product(ray, pl->o_vect);
 	if (t <= 0)
@@ -41,7 +41,7 @@ int	pl_shadow(double *ray, t_pt_info *pt_info, t_pl *pl, double r_size)
 	double	pt[3];
 	double	int_pt[3];
 
-	if (!meet_pl(ray, pl))
+	if (!meet_pl(ray, pl->o_vect))
 		return (0);
 	t = (dot_product(pl->center, pl->o_vect) - dot_product(pt_info->pt,
 				pl->o_vect)) / dot_product(ray, pl->o_vect);
