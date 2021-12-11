@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 19:22:22 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 12:08:11 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 
 /* Include Headers */
 
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
+# include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include "get_next_line.h"
+# include "get_next_line_bonus.h"
 # include "libft.h"
 # include "mlx.h"
-# include "structs.h"
+# include "structs_bonus.h"
 
 /* User Defines */
 
@@ -72,6 +73,8 @@
 # define SHADED 0
 # define NOT_SHADED 1
 
+# define NBR_OF_THREAD 100
+
 /* Functions */
 
 /* Parse */
@@ -111,6 +114,7 @@ void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
+void		init_obj_img(t_rt *rt);
 
 /* Intersection & Shadow */
 int			circle_shadow(double *ray, t_pt_info *pt_i,
@@ -136,7 +140,6 @@ int			move_cam_pos(int keycode, t_rt *rt);
 void		cross_product(double *ret, double *vect_1, double *vect_2);
 double		dot_product(double *vect_1, double *vect_2);
 void		fill_vect(double *vect, double x, double y, double z);
-double		get_distance(double x, double y);
 void		get_pt_on_line(double *dst, double *pt, double *dir, double t);
 void		multiply_vect(double *transf, double *dst, int which);
 void		normalize_vect(double *vect);
