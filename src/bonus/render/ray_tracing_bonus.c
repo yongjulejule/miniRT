@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:32:08 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 12:05:37 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,56 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 	return (TRANSPARENT);
 }
 
+static void	*ray_tracing_multi(void *arg)
+{
+	static int	seek = 0;
+	t_rt		*rt;
+	int			w;
+	int			h;
+	int			max;
+
+	rt = (t_rt *)arg;
+	pthread_mutex_lock(&rt->mutex);
+	seek++;
+	max = seek * WIN_H / NBR_OF_THREAD;
+	h = (seek - 1) * WIN_H / NBR_OF_THREAD - 1;
+	if (seek > NBR_OF_THREAD - 1)
+		seek = 0;
+	pthread_mutex_unlock(&rt->mutex);
+	while (++h < max)
+	{
+		w = -1;
+		while (++w < WIN_W)
+			rt->obj_img.data[cur_pixel(rt, w, h)]
+				= shoot_ray(rt, w - WIN_W / 2, h - WIN_H / 2);
+	}
+	return (arg);
+}
+
 void	ray_tracing(t_rt *rt)
 {
-	int	w;
-	int	h;
-	int	vs_x;
-	int	vs_y;
+	int			err;
+	int			idx;
+	pthread_t	tid[NBR_OF_THREAD];
 
-	init_obj_img(rt);
-	h = 0;
-	while (h < WIN_H)
+	if (NBR_OF_THREAD > WIN_W || NBR_OF_THREAD > WIN_H)
+		is_error("Too many thread", NULL, EXIT_FAILURE);
+	err = pthread_mutex_init(&rt->mutex, NULL);
+	if (err)
+		is_error(NULL, strerror(err), EXIT_FAILURE);
+	idx = -1;
+	while (++idx < NBR_OF_THREAD)
 	{
-		w = 0;
-		vs_y = h - WIN_H / 2;
-		while (w < WIN_W)
-		{
-			vs_x = w - WIN_W / 2;
-			rt->obj_img.data[cur_pixel(rt, w, h)] = shoot_ray(rt, vs_x, vs_y);
-			w++;
-		}
-		h++;
+		err = pthread_create(&tid[idx], NULL, ray_tracing_multi, rt);
+		if (err)
+			is_error(NULL, strerror(err), EXIT_FAILURE);
 	}
+	idx = -1;
+	while (++idx < NBR_OF_THREAD)
+	{
+		err = pthread_join(tid[idx], NULL);
+		if (err)
+			is_error(NULL, strerror(err), EXIT_FAILURE);
+	}
+	pthread_mutex_destroy(&rt->mutex);
 }

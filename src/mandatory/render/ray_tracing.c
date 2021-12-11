@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 19:22:02 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 12:06:47 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_obj_img(t_rt *rt)
 		is_error("Getting objects image data failed", NULL, EXIT_FAILURE);
 }
 
-int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
+static int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 {
 	double		ray[3];
 	t_obj_lst	*cur;

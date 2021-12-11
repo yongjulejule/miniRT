@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:48:45 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:31:53 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 12:04:08 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	draw(t_rt *o_rt, t_rt *c_rt)
 {
 	clone_rt(*o_rt, c_rt, o_rt->spec, c_rt->spec);
 	view_transform(c_rt);
+	init_obj_img(c_rt);
 	ray_tracing(c_rt);
 	mlx_put_image_to_window(c_rt->mlx_ptr, c_rt->win_ptr,
 		c_rt->obj_img.img_ptr, 0, 0);

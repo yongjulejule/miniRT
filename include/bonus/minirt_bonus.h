@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 12:08:34 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 12:15:31 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
+# include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -72,6 +73,8 @@
 # define SHADED 0
 # define NOT_SHADED 1
 
+# define NBR_OF_THREAD 100
+
 /* Functions */
 
 /* Parse */
@@ -111,6 +114,7 @@ void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
+void		init_obj_img(t_rt *rt);
 
 /* Intersection & Shadow */
 int			circle_shadow(double *ray, t_pt_info *pt_i,
