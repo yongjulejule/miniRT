@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/11 11:50:12 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/11 12:23:50 by yongjule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,9 +113,11 @@ OBJS_BONUS				= ${SRCS_BONUS:%.c=%.o}
 ifdef WITH_BONUS
 	OBJ_FILES	= $(OBJS_BONUS)
 	INC_DIR		= $(INC_DIR_BONUS)
+	COMPILE_MSG = @echo $(CUT)$(UP)$(BOLD)$(L_RED) 🌌 BONUS 🌠$(RESET)
 else
 	OBJ_FILES	= $(OBJS_MAN)
 	INC_DIR		= $(INC_DIR_MAN)
+	COMPILE_MSG = @echo $(CUT)$(UP)$(BOLD)$(L_PUPLE) 🌏 miniRT Compiled 🥳$(RESET)
 endif
 
 INC_DIR_LIBFT			= ./lib/libft/
@@ -149,12 +151,11 @@ all				:	$(LIBFT_FILE) $(OBJ_FILES) $(NAME)
 $(NAME)			: 	$(LIBFT_FILE) $(MLX_FILE) $(OBJ_FILES)
 					@$(CC) $(CFLAGS) $(OBJ_FILES) $(RDLN_LFLAGS) $(RDLN_INC) $(LIBFT_FLAGS) $(MLX_FLAGS) -I$(INC_DIR) -o $@ 
 					@printf $(CUT)$(DOWN)$(CUT)
-					@echo $(CUT)$(UP)$(BOLD)$(L_PUPLE) 🌏 miniRT Compiled 🥳$(RESET)
+					$(COMPILE_MSG)
 
 .PHONY			:	bonus
 bonus			:
 					@make WITH_BONUS=1 all
-					@echo $(CUT)$(BOLD)$(L_RED) 🌌 BONUS 🌠$(RESET)
 
 %.o				: 	%.c
 					@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(INC_DIR_LIBFT) -I$(INC_DIR_MLX) -c $< -o $@
