@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 12:15:27 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:33:20 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ typedef struct s_cam
 	double	sph_coord[3];
 }	t_cam;
 
-typedef struct s_light
+typedef struct s_l_lst
 {
-	double	lp[3];
-	double	bright;
-	int		color[3];
-}	t_light;
+	double			lp[3];
+	double			bright;
+	int				color[3];
+	struct s_l_lst	*next;
+}	t_l_lst;
 
 typedef struct s_sph
 {
@@ -68,11 +69,25 @@ typedef struct s_cy
 	double	circle_o_v[3];
 }	t_cy;
 
+typedef struct s_hy
+{
+	double	center[3];
+	double	o_vect[3];
+	double	a;
+	double	b;	
+	double	diameter;
+	double	radius;
+	double	height;
+	int		color[3];
+}	t_hy;
+
+
 typedef union u_obj
 {
 	t_sph	*sph;
 	t_pl	*pl;
 	t_cy	*cy;
+	t_hy	*hy;
 }	t_obj;
 
 typedef struct s_obj_lst
@@ -86,7 +101,7 @@ typedef struct s_spec
 {
 	t_amb		amb;
 	t_cam		cam;
-	t_light		light;
+	t_l_lst		*l_lst;
 	t_obj_lst	*obj_lst;
 }	t_spec;
 

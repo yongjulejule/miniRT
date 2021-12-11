@@ -6,55 +6,11 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/11 11:31:56 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 16:11:47 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
-
-static void	get_vert_coord(t_spec *spec, double *transf)
-{
-	double	x_axis[4];
-	double	y_axis[4];
-	double	z_axis[4];
-
-	fill_vect(x_axis, 1, 0, 0);
-	if (spec->cam.o_vect[Y] < 0)
-		fill_vect(y_axis, 0, 0, 1);
-	else
-		fill_vect(y_axis, 0, 0, -1);
-	fill_vect(z_axis, 0, 1, 0);
-	update_vect(transf, x_axis, X, 4);
-	update_vect(transf, y_axis, Y, 4);
-	update_vect(transf, z_axis, Z, 4);
-}
-
-/* FIXME : swap coordinate when cam o_vect is oriented to y-axis */
-
-static void	get_coord_system(t_spec *spec, double *transf)
-{
-	double	ref[4];
-	double	x_axis[4];
-	double	y_axis[4];
-	double	z_axis[4];
-
-	ft_bzero(transf, sizeof(double) * 16);
-	if (!spec->cam.o_vect[X] && spec->cam.o_vect[Y] && !spec->cam.o_vect[Z])
-	{
-		get_vert_coord(spec, transf);
-		return ;
-	}
-	fill_vect(z_axis, -1 * spec->cam.o_vect[X],
-		-1 * spec->cam.o_vect[Y], -1 * spec->cam.o_vect[Z]);
-	update_vect(transf, z_axis, Z, 4);
-	fill_vect(ref, 0, 1, 0);
-	cross_product(x_axis, ref, z_axis);
-	normalize_vect(x_axis);
-	update_vect(transf, x_axis, X, 4);
-	cross_product(y_axis, z_axis, x_axis);
-	normalize_vect(y_axis);
-	update_vect(transf, y_axis, Y, 4);
-}
 
 static void	get_transf_matrix(double *vp, double *transf)
 {
@@ -71,14 +27,22 @@ static void	get_transf_matrix(double *vp, double *transf)
 	transf[15] = 1;
 }
 
-static void	transf_obj_light(t_spec *spec, double *transf)
+static void	transf_cam_lights(t_spec *spec, double *transf)
 {
-	t_obj_lst	*cur;
+	t_l_lst	*cur;
 
-	multiply_vect(transf, spec->light.lp, POINT);
+	cur = spec->l_lst->next;
+	while (cur)
+	{
+		multiply_vect(transf, cur->lp, POINT);
+		cur = cur->next;
+	}
 	multiply_vect(transf, spec->cam.o_vect, VECTOR);
 	normalize_vect(spec->cam.o_vect);
-	cur = spec->obj_lst->next;
+}
+
+static void	transf_objs(t_spec *spec, t_obj_lst *cur, double *transf)
+{
 	while (cur)
 	{
 		if (cur->type == SPHERE)
@@ -96,6 +60,12 @@ static void	transf_obj_light(t_spec *spec, double *transf)
 			normalize_vect(cur->obj.cy->o_vect);
 			fill_cy_circle(cur->obj.cy, spec->cam.o_vect);
 		}
+		else if (cur->type == HYPERBOLOID)
+		{
+			multiply_vect(transf, cur->obj.hy->center, POINT);
+			multiply_vect(transf, cur->obj.hy->o_vect, VECTOR);
+			normalize_vect(cur->obj.hy->o_vect);
+		}
 		cur = cur->next;
 	}
 }
@@ -106,5 +76,6 @@ void	view_transform(t_rt *rt)
 
 	get_coord_system(rt->spec, transf);
 	get_transf_matrix(rt->spec->cam.vp, transf);
-	transf_obj_light(rt->spec, transf);
+	transf_cam_lights(rt->spec, transf);
+	transf_objs(rt->spec, rt->spec->obj_lst->next, transf);
 }
