@@ -6,18 +6,25 @@
 #    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/11 12:23:50 by yongjule         ###   ########.fr        #
+#    Updated: 2021/12/11 12:35:13 by yongjule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC						= gcc
 
 ifdef DEBUG
-	CFLAGS 	= -g3 -fsanitize=address -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
+	CFLAGS 	= -g3 -fsanitize=address -D BUFFER_SIZE=64 -D WIN_W=$(WIN_W) -D WIN_H=$(WIN_H)
 else ifdef LEAKS
-	CFLAGS 	= -g -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
+	CFLAGS 	= -g -D BUFFER_SIZE=64 -D WIN_W=$(WIN_W) -D WIN_H=$(WIN_H)
 else 
-	CFLAGS 	= -Wall -Wextra -Werror -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
+	CFLAGS 	= -Wall -Wextra -Werror -D BUFFER_SIZE=64 -D WIN_W=$(WIN_W) -D WIN_H=$(WIN_H)
+endif
+
+ifndef WIN_W
+	WIN_W = 1920
+endif
+ifndef WIN_H
+	WIN_H = 1080
 endif
 
 NAME					= miniRT
