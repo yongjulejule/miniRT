@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_util.c                                        :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:18:53 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/24 16:36:52 by ghan             ###   ########.fr       */
+/*   Created: 2021/05/17 09:46:25 by ghan              #+#    #+#             */
+/*   Updated: 2021/12/11 11:15:24 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-double	get_distance(double x, double y)
+# include <stdlib.h>
+# include <unistd.h>
+# include "libft.h"
+
+# define HEAD_ELEM -2
+
+typedef struct s_gnl_lst
 {
-	return (sqrt(fabs(pow(x, 2) - pow(y, 2))));
-}
+	int					fd;
+	char				*backup;
+	struct s_gnl_lst	*next;
+}				t_gnl_lst;
+
+void			gnl_lstadd_back(t_gnl_lst **lst, t_gnl_lst *new);
+t_gnl_lst		*gnl_lstnew(void *content, int fd);
+void			clear_lst(t_gnl_lst **fd_lst, t_gnl_lst *cur_fd);
+
+#endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 19:22:22 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 11:33:20 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include "get_next_line.h"
+# include "get_next_line_bonus.h"
 # include "libft.h"
 # include "mlx.h"
-# include "structs.h"
+# include "structs_bonus.h"
 
 /* User Defines */
 
@@ -136,7 +136,6 @@ int			move_cam_pos(int keycode, t_rt *rt);
 void		cross_product(double *ret, double *vect_1, double *vect_2);
 double		dot_product(double *vect_1, double *vect_2);
 void		fill_vect(double *vect, double x, double y, double z);
-double		get_distance(double x, double y);
 void		get_pt_on_line(double *dst, double *pt, double *dir, double t);
 void		multiply_vect(double *transf, double *dst, int which);
 void		normalize_vect(double *vect);
