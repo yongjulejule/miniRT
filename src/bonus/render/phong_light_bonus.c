@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/11 11:32:11 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 17:58:58 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,44 +27,66 @@ static void	check_rgb_range(int *color)
 	}
 }
 
-static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
+static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
+{
+	if (pt_i->type == SPHERE)
+		sub_vect(n_vect, pt_i->pt, pt_i->obj.sph->center);
+	else if (pt_i->type == PLANE)
+		vect_copy(n_vect, pt_i->obj.pl->o_vect);
+	else if (pt_i->type == CYLINDER)
+	{
+		sub_vect(n_vect, pt_i->pt, pt_i->obj.cy->center);
+		normalize_vect(n_vect);
+		sub_vect(n_vect, n_vect, pt_i->obj.cy->o_vect);
+	}
+	else if (pt_i->type == CY_CIRCLE)
+		vect_copy(n_vect, pt_i->obj.cy->circle_o_v);
+	// TODO - HY SURFACE NORMAL
+	// else if (pt_i->type == HYPERBOLOID)
+	// {
+	// 	sub_vect(n_vect, pt_i->pt, pt_i->obj.hy->center);
+	// 	normalize_vect(n_vect);
+	// 	sub_vect(n_vect, n_vect, pt_i->obj.hy->o_vect);
+	// }
+	normalize_vect(n_vect);
+}
+
+static void	multi_phong_rgb(t_rt *rt, t_pt_info *pt_info, double *d_color)
 {
 	double	n_vect[3];
 	double	o_ray[3];
+	t_l_lst	*cur;
 
-	sub_vect(o_ray, rt->spec->light.lp, pt_info->pt);
-	normalize_vect(o_ray);
-	if (pt_info->type == SPHERE)
-		sub_vect(n_vect, pt_info->pt, pt_info->obj.sph->center);
-	else if (pt_info->type == PLANE)
-		vect_copy(n_vect, pt_info->obj.pl->o_vect);
-	else if (pt_info->type == CYLINDER)
+	cur = rt->spec->l_lst->next;
+	while (cur)
 	{
-		sub_vect(n_vect, pt_info->pt, pt_info->obj.cy->center);
-		normalize_vect(n_vect);
-		sub_vect(n_vect, n_vect, pt_info->obj.cy->o_vect);
+		sub_vect(o_ray, cur->lp, pt_info->pt);
+		normalize_vect(o_ray);
+		get_surface_n_vect(n_vect, pt_info);
+		if (get_shadow(cur, rt->spec->obj_lst, pt_info) == SHADED)
+		{
+			cur = cur->next;
+			continue ;
+		}
+		d_color[R] += get_phong_r(cur, pt_info, o_ray, n_vect);
+		d_color[G] += get_phong_g(cur, pt_info, o_ray, n_vect);
+		d_color[B] += get_phong_b(cur, pt_info, o_ray, n_vect);
+		cur = cur->next;
 	}
-	else if (pt_info->type == CY_CIRCLE)
-		vect_copy(n_vect, pt_info->obj.cy->circle_o_v);
-	normalize_vect(n_vect);
-	if (get_shadow(rt, pt_info) == SHADED)
-		return (SHADED);
-	color[R] = get_phong_r(rt, pt_info, o_ray, n_vect);
-	color[G] = get_phong_g(rt, pt_info, o_ray, n_vect);
-	color[B] = get_phong_b(rt, pt_info, o_ray, n_vect);
-	return (NOT_SHADED);
 }
 
 int	get_phong_light(t_rt *rt, t_pt_info *pt_info)
 {
+	double	d_color[3];
 	int		color[3];
 
-	if (phong_rgb(rt, pt_info, color) == SHADED)
-	{
-		color[R] = rt->spec->amb.ratio * (double)rt->spec->amb.color[R];
-		color[G] = rt->spec->amb.ratio * (double)rt->spec->amb.color[G];
-		color[B] = rt->spec->amb.ratio * (double)rt->spec->amb.color[B];
-	}
+	d_color[R] = rt->spec->amb.ratio * (double)rt->spec->amb.color[R] / 255;
+	d_color[G] = rt->spec->amb.ratio * (double)rt->spec->amb.color[G] / 255;
+	d_color[B] = rt->spec->amb.ratio * (double)rt->spec->amb.color[B] / 255;
+	multi_phong_rgb(rt, pt_info, d_color);
+	color[R] = d_color[R] * 255;
+	color[G] = d_color[G] * 255;
+	color[B] = d_color[B] * 255;
 	check_rgb_range(color);
 	return (get_color(color, 1));
 }

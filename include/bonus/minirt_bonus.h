@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 12:15:31 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:30:32 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 # define SPHERE 0
 # define PLANE 1
 # define CYLINDER 2
-# define CY_CIRCLE 3
+# define HYPERBOLOID 3
+# define CY_CIRCLE 4
 
 # define X 0
 # define Y 1
@@ -85,6 +86,10 @@ t_conf		*conf_lst_new(char *elem, char **info);
 void		free_config(t_conf *hd);
 void		free_obj_lst(t_obj_lst *hd);
 int			get_next_line(int fd, char **line);
+t_l_lst		*l_lst_new(void);
+t_l_lst		*l_lst_last(t_l_lst *obj_elem);
+void		l_lst_addback(t_l_lst **hd, t_l_lst *new);
+void		free_l_lst(t_l_lst *hd);
 void		obj_lst_addback(t_obj_lst **hd, t_obj_lst *new);
 t_obj_lst	*obj_lst_last(t_obj_lst *obj);
 t_obj_lst	*obj_lst_new(void *object, int which);
@@ -95,7 +100,8 @@ void		fill_amb(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_cam(t_spec *spec, char **info, int *cap_flag, int cv_flag);
 void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_cy_circle(t_cy *cy, double *cam_o_v);
-void		fill_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_hyperboloid(t_obj_lst **hd, char **info, int cv_flag);
+void		fill_light(t_l_lst **hd, char **info, int cv_flag);
 void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 
@@ -103,12 +109,13 @@ void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 void		draw(t_rt *rt, t_rt *c_rt);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
+void		get_coord_system(t_spec *spec, double *transf);
 int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
-int			get_phong_r(t_rt *rt, t_pt_info *pt_info, double *o_ray,
+double		get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
 				double *n_vect);
-int			get_phong_g(t_rt *rt, t_pt_info *pt_info, double *o_ray,
+double		get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
 				double *n_vect);
-int			get_phong_b(t_rt *rt, t_pt_info *pt_info, double *o_ray,
+double		get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
 				double *n_vect);
 void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
@@ -126,13 +133,15 @@ void		intersect_circle(double *ray, t_pt_info *pt_i, t_cy *cy);
 int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
 double		meet_pl(double *ray, double *o_vect);
 double		meet_sph(double *ray, double *origin, t_sph *sph, double r_size);
-int			get_shadow(t_rt *rt, t_pt_info *pt_info);
+int			get_shadow(t_l_lst *cur_lp, t_obj_lst *hd, t_pt_info *pt_info);
 int			pl_shadow(double *ray, t_pt_info *pt_info,
 				t_pl *pl, double r_size);
 
 /* Hook */
 void		hook_minirt(t_rt *rt);
+void		clone_obj_lst(t_obj_lst *o_lst, t_obj_lst **c_lst);
 void		clone_rt(t_rt o_rt, t_rt *c_rt, t_spec *o_spec, t_spec *c_spec);
+void		copy_color(int *dst, int *src);
 int			change_fov(int keycode, t_rt *rt);
 int			move_cam_pos(int keycode, t_rt *rt);
 

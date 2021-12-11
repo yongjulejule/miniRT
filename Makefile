@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/11 12:35:13 by yongjule         ###   ########.fr        #
+#    Updated: 2021/12/11 16:06:26 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,17 +85,22 @@ SRCS_BONUS_PARSE		= $(addprefix $(SRCS_BONUS_PARSE_DIR), \
 				conf_lst_bonus.c\
 				check_commas_bonus.c\
 				fill_cy_bonus.c\
+				fill_hyperboloid_bonus.c\
+				fill_light_bonus.c\
 				fill_setting_bonus.c\
 				fill_sph_pl_bonus.c\
 				get_next_line_bonus.c\
 				get_next_line_utils_bonus.c\
+				l_lst_bonus.c\
 				obj_lst_bonus.c\
 				parse_main_bonus.c\
 				)
 
 SRCS_BONUS_RENDER		= $(addprefix $(SRCS_BONUS_RENDER_DIR), \
+				clone_obj_lst_bonus.c\
 				clone_rt_bonus.c\
 				cam_hook_bonus.c\
+				get_coord_sys_bonus.c\
 				hook_minirt_bonus.c\
 				img_util_bonus.c\
 				init_struct_bonus.c\

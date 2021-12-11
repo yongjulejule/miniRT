@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clone_rt.c                                         :+:      :+:    :+:   */
+/*   clone_obj_lst_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/09 17:52:13 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 15:47:16 by ghan             ###   ########.fr       */
+/*   Created: 2021/12/11 15:48:06 by ghan              #+#    #+#             */
+/*   Updated: 2021/12/11 16:00:51 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static void	clone_sph(t_obj_lst **c_lst, t_sph *o_sph)
 {
@@ -49,7 +49,23 @@ static void	clone_cy(t_obj_lst **c_lst, t_cy *o_cy)
 	copy_color(n_cy->color, o_cy->color);
 }
 
-static void	clone_obj_lst(t_obj_lst *o_lst, t_obj_lst **c_lst)
+static void	clone_hy(t_obj_lst **c_lst, t_hy *o_hy)
+{
+	t_hy	*n_hy;
+
+	n_hy = (t_hy *)ft_calloc(sizeof(t_hy), 1);
+	obj_lst_addback(c_lst, obj_lst_new((void *)n_hy, HYPERBOLOID));
+	n_hy->a = o_hy->a;
+	n_hy->b = o_hy->b;
+	n_hy->diameter = o_hy->diameter;
+	n_hy->radius = o_hy->radius;
+	n_hy->height = o_hy->height;
+	vect_copy(n_hy->center, o_hy->center);
+	vect_copy(n_hy->o_vect, o_hy->o_vect);
+	copy_color(n_hy->color, o_hy->color);
+}
+
+void	clone_obj_lst(t_obj_lst *o_lst, t_obj_lst **c_lst)
 {
 	t_obj_lst	*cur;
 
@@ -63,26 +79,8 @@ static void	clone_obj_lst(t_obj_lst *o_lst, t_obj_lst **c_lst)
 			clone_pl(c_lst, cur->obj.pl);
 		else if (cur->type == CYLINDER)
 			clone_cy(c_lst, cur->obj.cy);
+		else if (cur->type == HYPERBOLOID)
+			clone_hy(c_lst, cur->obj.hy);
 		cur = cur->next;
 	}
-}
-
-void	clone_rt(t_rt o_rt, t_rt *c_rt, t_spec *o_spec, t_spec *c_spec)
-{
-	t_obj_lst	*c_lst;
-
-	c_rt->mlx_ptr = o_rt.mlx_ptr;
-	c_rt->win_ptr = o_rt.win_ptr;
-	copy_color(c_spec->amb.color, o_spec->amb.color);
-	c_spec->amb.ratio = o_spec->amb.ratio;
-	c_spec->cam.fov = o_spec->cam.fov;
-	vect_copy(c_spec->cam.vp, o_spec->cam.vp);
-	vect_copy(c_spec->cam.o_vect, o_spec->cam.o_vect);
-	c_spec->light.bright = o_spec->light.bright;
-	vect_copy(c_spec->light.lp, o_spec->light.lp);
-	copy_color(c_spec->light.color, o_spec->light.color);
-	clone_obj_lst(o_spec->obj_lst, &c_lst);
-	c_spec->obj_lst = c_lst;
-	c_rt->spec = c_spec;
-	c_rt->c_to_s = WIN_W / (2 * tan(c_rt->spec->cam.fov / 2));
 }

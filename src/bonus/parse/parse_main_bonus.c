@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:28:46 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 15:27:39 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,31 @@
 
 static void	config_to_spec(t_conf *cur, t_spec *spec)
 {
-	int		cap_flag[3];
+	int	cap_flag[2];
 
-	ft_bzero(cap_flag, 3 * sizeof(int));
-	spec->obj_lst = obj_lst_new(NULL, 0);
+	ft_bzero(cap_flag, 2 * sizeof(int));
 	while (cur)
 	{
 		if (!ft_strcmp(cur->elem, "A") && !cap_flag[0])
 			fill_amb(spec, cur->info, cap_flag, 0);
 		else if (!ft_strcmp(cur->elem, "C") && !cap_flag[1])
 			fill_cam(spec, cur->info, cap_flag, 0);
-		else if (!ft_strcmp(cur->elem, "L") && !cap_flag[2])
-			fill_light(spec, cur->info, cap_flag, 0);
+		else if (!ft_strcmp(cur->elem, "L"))
+			fill_light(&(spec->l_lst), cur->info, 0);
 		else if (!ft_strcmp(cur->elem, "sp"))
 			fill_sphere(&(spec->obj_lst), cur->info, 0);
 		else if (!ft_strcmp(cur->elem, "pl"))
 			fill_plane(&(spec->obj_lst), cur->info, 0);
 		else if (!ft_strcmp(cur->elem, "cy"))
 			fill_cylinder(&(spec->obj_lst), cur->info, 0);
+		else if (!ft_strcmp(cur->elem, "hy"))
+			fill_hyperboloid(&(spec->obj_lst), cur->info, 0);
 		else
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
 		cur = cur->next;
 	}
+	if (spec->l_lst->next == NULL)
+		is_error("Invalid configuration (NO LIGHT)", NULL, EXIT_FAILURE);
 }
 
 static void	str_to_conf_elem(t_conf **hd, char *line)
@@ -99,6 +102,8 @@ void	parse_config(int argc, char **argv, t_spec *spec)
 	head = conf_lst_new(NULL, NULL);
 	read_config(fd, &head);
 	close(fd);
+	spec->obj_lst = obj_lst_new(NULL, 0);
+	spec->l_lst = l_lst_new();
 	config_to_spec(head->next, spec);
 	decide_pl_orientation(spec);
 	free_config(head);

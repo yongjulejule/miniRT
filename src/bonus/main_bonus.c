@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:48:45 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 12:04:08 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:54:52 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	draw(t_rt *o_rt, t_rt *c_rt)
 	mlx_put_image_to_window(c_rt->mlx_ptr, c_rt->win_ptr,
 		c_rt->obj_img.img_ptr, 0, 0);
 	mlx_destroy_image(c_rt->mlx_ptr, c_rt->obj_img.img_ptr);
+	free_l_lst(c_rt->spec->l_lst);
 	free_obj_lst(c_rt->spec->obj_lst);
 }
 

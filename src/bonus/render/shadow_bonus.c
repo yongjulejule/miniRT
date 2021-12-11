@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:36:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:32:03 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 17:28:08 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static int	check_obj_to_ray(t_obj_lst *cur, t_pt_info *pt_i,
 			if (!shaded)
 				shaded = circle_shadow(ray, pt_i, cur->obj.cy, r_size);
 		}
+		// TODO - HY SHADOW
+		// else if (cur->type == HYPERBOLOID && cur->obj.hy != pt_i->obj.hy)
+		// 	shaded = hy_shadow(ray, pt_i, cur->obj.hy, r_size);
 		if (shaded == 1)
 			return (SHADED);
 		cur = cur->next;
@@ -39,13 +42,13 @@ static int	check_obj_to_ray(t_obj_lst *cur, t_pt_info *pt_i,
 	return (NOT_SHADED);
 }
 
-int	get_shadow(t_rt *rt, t_pt_info *pt_info)
+int	get_shadow(t_l_lst *cur_lp, t_obj_lst *hd, t_pt_info *pt_info)
 {
 	double		ray[3];
 	double		r_size;
 
-	sub_vect(ray, rt->spec->light.lp, pt_info->pt);
+	sub_vect(ray, cur_lp->lp, pt_info->pt);
 	r_size = vect_size(ray);
 	normalize_vect(ray);
-	return (check_obj_to_ray(rt->spec->obj_lst->next, pt_info, ray, r_size));
+	return (check_obj_to_ray(hd->next, pt_info, ray, r_size));
 }
