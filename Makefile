@@ -6,39 +6,38 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/10 14:41:02 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/11 11:50:12 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC				= gcc
+CC						= gcc
 
 ifdef DEBUG
-	CFLAGS = -g3 -fsanitize=address -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
+	CFLAGS 	= -g3 -fsanitize=address -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
 else ifdef LEAKS
-	CFLAGS = -g -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
+	CFLAGS 	= -g -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
 else 
-	CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
+	CFLAGS 	= -Wall -Wextra -Werror -D BUFFER_SIZE=64 -D WIN_W=1920 -D WIN_H=1080
 endif
 
-NAME			= miniRT
+NAME					= miniRT
 
-SRCS_DIR		= ./src/
-SRCS_PARSE_DIR	= ./src/parse/
-SRCS_RENDER_DIR	= ./src/render/
+LIBFT_DIR				= ./lib/libft/
+LIBFT_FLAGS				= -L./$(LIBFT_DIR) -lft
+LIBFT_FILE				= $(LIBFT_DIR)libft.a
 
-# TODO - Select a version of minilibx and declare LFAGS & INC
+MLX_DIR					= ./lib/libmlx/
+MLX_FLAGS				= -L./$(MLX_DIR) -lmlx -framework OpenGl -framework Appkit
+MLX_FILE				= $(MLX_DIR)libmlx.a
 
-LIBFT_DIR		= ./lib/libft/
-LIBFT_FLAGS		= -L./$(LIBFT_DIR) -lft
-LIBFT_FILE		= $(LIBFT_DIR)libft.a
+INC_DIR_MAN				= ./include/mandatory
+INC_DIR_BONUS			= ./include/bonus
 
-MLX_DIR			= ./lib/libmlx/
-MLX_FLAGS		= -L./$(MLX_DIR) -lmlx -framework OpenGl -framework Appkit
-MLX_FILE		= $(MLX_DIR)libmlx.a
+SRCS_MAN_DIR			= ./src/mandatory/
+SRCS_MAN_PARSE_DIR		= $(SRCS_MAN_DIR)parse/
+SRCS_MAN_RENDER_DIR		= $(SRCS_MAN_DIR)render/
 
-INC_DIR_MAN		= ./include/
-
-SRCS_PARSE		= $(addprefix $(SRCS_PARSE_DIR), \
+SRCS_MAN_PARSE			= $(addprefix $(SRCS_MAN_PARSE_DIR), \
 				conf_lst.c\
 				check_commas.c\
 				fill_cy.c\
@@ -50,7 +49,7 @@ SRCS_PARSE		= $(addprefix $(SRCS_PARSE_DIR), \
 				parse_main.c\
 				)
 
-SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
+SRCS_MAN_RENDER			= $(addprefix $(SRCS_MAN_RENDER_DIR), \
 				clone_rt.c\
 				cam_hook.c\
 				hook_minirt.c\
@@ -60,7 +59,6 @@ SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
 				intersect_cy_circle.c\
 				intersect_pl.c\
 				intersect_sph.c\
-				math_util.c\
 				phong_light.c\
 				phong_util.c\
 				ray_tracing.c\
@@ -70,22 +68,58 @@ SRCS_RENDER		= $(addprefix $(SRCS_RENDER_DIR), \
 				view_transform.c\
 				)
 
-SRCS_MAN		= $(addprefix $(SRCS_DIR), \
-				main.c\
+SRCS_MAN				= $(SRCS_MAN_DIR)main.c $(SRCS_MAN_PARSE) $(SRCS_MAN_RENDER)
+
+SRCS_BONUS_DIR			= ./src/bonus/
+SRCS_BONUS_PARSE_DIR	= $(SRCS_BONUS_DIR)parse/
+SRCS_BONUS_RENDER_DIR	= $(SRCS_BONUS_DIR)render/
+
+SRCS_BONUS_PARSE		= $(addprefix $(SRCS_BONUS_PARSE_DIR), \
+				conf_lst_bonus.c\
+				check_commas_bonus.c\
+				fill_cy_bonus.c\
+				fill_setting_bonus.c\
+				fill_sph_pl_bonus.c\
+				get_next_line_bonus.c\
+				get_next_line_utils_bonus.c\
+				obj_lst_bonus.c\
+				parse_main_bonus.c\
 				)
 
-SRCS_MAN		+= $(SRCS_PARSE) $(SRCS_RENDER)
-
-SRCS_BONUS		= $(addprefix $(SRCS_DIR_BONUS), \
+SRCS_BONUS_RENDER		= $(addprefix $(SRCS_BONUS_RENDER_DIR), \
+				clone_rt_bonus.c\
+				cam_hook_bonus.c\
+				hook_minirt_bonus.c\
+				img_util_bonus.c\
+				init_struct_bonus.c\
+				intersect_cy_bonus.c\
+				intersect_cy_circle_bonus.c\
+				intersect_pl_bonus.c\
+				intersect_sph_bonus.c\
+				phong_light_bonus.c\
+				phong_util_bonus.c\
+				ray_tracing_bonus.c\
+				shadow_bonus.c\
+				vect_ops_bonus.c\
+				vect_util_bonus.c\
+				view_transform_bonus.c\
 				)
 
-OBJS_MAN		= ${SRCS_MAN:%.c=%.o}
-OBJS_BONUS		= ${SRCS_BONUS:%.c=%.o}
-OBJ_FILES		= $(OBJS_MAN)
+SRCS_BONUS				= $(SRCS_BONUS_DIR)main_bonus.c $(SRCS_BONUS_PARSE) $(SRCS_BONUS_RENDER)
 
-INC_DIR			= $(INC_DIR_MAN)
-INC_DIR_LIBFT	= ./lib/libft/
-INC_DIR_MLX		= ./lib/libmlx/
+OBJS_MAN				= ${SRCS_MAN:%.c=%.o}
+OBJS_BONUS				= ${SRCS_BONUS:%.c=%.o}
+
+ifdef WITH_BONUS
+	OBJ_FILES	= $(OBJS_BONUS)
+	INC_DIR		= $(INC_DIR_BONUS)
+else
+	OBJ_FILES	= $(OBJS_MAN)
+	INC_DIR		= $(INC_DIR_MAN)
+endif
+
+INC_DIR_LIBFT			= ./lib/libft/
+INC_DIR_MLX				= ./lib/libmlx/
 
 ######################### Color #########################
 GREEN="\033[32m"
@@ -116,6 +150,11 @@ $(NAME)			: 	$(LIBFT_FILE) $(MLX_FILE) $(OBJ_FILES)
 					@$(CC) $(CFLAGS) $(OBJ_FILES) $(RDLN_LFLAGS) $(RDLN_INC) $(LIBFT_FLAGS) $(MLX_FLAGS) -I$(INC_DIR) -o $@ 
 					@printf $(CUT)$(DOWN)$(CUT)
 					@echo $(CUT)$(UP)$(BOLD)$(L_PUPLE) 🌏 miniRT Compiled 🥳$(RESET)
+
+.PHONY			:	bonus
+bonus			:
+					@make WITH_BONUS=1 all
+					@echo $(CUT)$(BOLD)$(L_RED) 🌌 BONUS 🌠$(RESET)
 
 %.o				: 	%.c
 					@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(INC_DIR_LIBFT) -I$(INC_DIR_MLX) -c $< -o $@
