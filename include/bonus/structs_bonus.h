@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 15:33:20 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/11 18:00:34 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ typedef struct s_hy
 	double	height;
 	int		color[3];
 }	t_hy;
-
 
 typedef union u_obj
 {
