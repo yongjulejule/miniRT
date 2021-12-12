@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:36:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 17:28:08 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/12 19:40:27 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	check_obj_to_ray(t_obj_lst *cur, t_pt_info *pt_i,
 				shaded = circle_shadow(ray, pt_i, cur->obj.cy, r_size);
 		}
 		// TODO - HY SHADOW
-		// else if (cur->type == HYPERBOLOID && cur->obj.hy != pt_i->obj.hy)
-		// 	shaded = hy_shadow(ray, pt_i, cur->obj.hy, r_size);
+		else if (cur->type == HYPERBOLOID && cur->obj.hy != pt_i->obj.hy)
+			shaded = hy_shadow(ray, pt_i, cur->obj.hy, r_size);
 		if (shaded == 1)
 			return (SHADED);
 		cur = cur->next;

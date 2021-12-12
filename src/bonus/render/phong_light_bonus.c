@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/11 17:58:58 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/12 21:37:20 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@ static void	check_rgb_range(int *color)
 	}
 }
 
+/* FIXME : find inner vector and find sign... x, y by circle and z is 2*t */
+static void	get_surface_n_hy(double *n_vect, t_pt_info *pt_i)
+{
+	double	t;
+	double	start[3];
+	double	diff[3];
+
+	sub_vect(diff, pt_i->pt, pt_i->obj.hy->center);
+	t = pt_i->obj.hy->height;
+	if (dot_product(pt_i->obj.hy->o_vect, diff) <= 0)
+		t *= -1;
+	get_pt_on_line(start, pt_i->obj.hy->center, pt_i->obj.hy->o_vect, t);
+	if (t > 0)
+		sub_vect(n_vect, start, pt_i->pt);
+	else
+		sub_vect(n_vect, pt_i->pt, start);
+}
+
 static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
 {
 	if (pt_i->type == SPHERE)
@@ -42,12 +60,8 @@ static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
 	else if (pt_i->type == CY_CIRCLE)
 		vect_copy(n_vect, pt_i->obj.cy->circle_o_v);
 	// TODO - HY SURFACE NORMAL
-	// else if (pt_i->type == HYPERBOLOID)
-	// {
-	// 	sub_vect(n_vect, pt_i->pt, pt_i->obj.hy->center);
-	// 	normalize_vect(n_vect);
-	// 	sub_vect(n_vect, n_vect, pt_i->obj.hy->o_vect);
-	// }
+	else if (pt_i->type == HYPERBOLOID)
+		get_surface_n_hy(n_vect, pt_i);
 	normalize_vect(n_vect);
 }
 

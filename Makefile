@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/11 16:06:26 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/12 16:56:11 by yongjule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ SRCS_BONUS_RENDER		= $(addprefix $(SRCS_BONUS_RENDER_DIR), \
 				init_struct_bonus.c\
 				intersect_cy_bonus.c\
 				intersect_cy_circle_bonus.c\
+				intersect_hy_bonus.c\
 				intersect_pl_bonus.c\
 				intersect_sph_bonus.c\
 				phong_light_bonus.c\
