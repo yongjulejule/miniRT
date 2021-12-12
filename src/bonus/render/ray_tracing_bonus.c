@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 17:28:25 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/12 18:50:49 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 		else if (cur->type == PLANE)
 			intersect_pl(ray, &pt_info, cur->obj.pl);
 		else if (cur->type == CYLINDER)
+		{
 			if (!intersect_cy(ray, &pt_info, cur->obj.cy))
 				intersect_circle(ray, &pt_info, cur->obj.cy);
-		// TODO - HY INTERSECT
-		// else if (cur->type == HYPERBOLOID)
-		// 	intersect_hyperboloid(ray, &pt_info, cur->obj.hy);
+		}
+		else if (cur->type == HYPERBOLOID)
+			intersect_hy(ray, &pt_info, cur->obj.hy);
 		cur = cur->next;
 	}
 	if (pt_info.pt[Z] < 1)

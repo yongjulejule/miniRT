@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 17:30:32 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/12 19:39:01 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,12 @@ void		init_obj_img(t_rt *rt);
 int			circle_shadow(double *ray, t_pt_info *pt_i,
 				t_cy *cy, double r_size);
 int			cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size);
+int			hy_shadow(double *ray, t_pt_info *pt_info, t_hy *hy, double r_size);
 int			intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl);
 void		intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph);
 void		intersect_circle(double *ray, t_pt_info *pt_i, t_cy *cy);
 int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
+void		intersect_hy(double *ray, t_pt_info *pt_info, t_hy *hy);
 double		meet_pl(double *ray, double *o_vect);
 double		meet_sph(double *ray, double *origin, t_sph *sph, double r_size);
 int			get_shadow(t_l_lst *cur_lp, t_obj_lst *hd, t_pt_info *pt_info);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/11 17:58:58 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/12 18:51:18 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
 	else if (pt_i->type == CY_CIRCLE)
 		vect_copy(n_vect, pt_i->obj.cy->circle_o_v);
 	// TODO - HY SURFACE NORMAL
-	// else if (pt_i->type == HYPERBOLOID)
-	// {
-	// 	sub_vect(n_vect, pt_i->pt, pt_i->obj.hy->center);
-	// 	normalize_vect(n_vect);
-	// 	sub_vect(n_vect, n_vect, pt_i->obj.hy->o_vect);
-	// }
+	else if (pt_i->type == HYPERBOLOID)
+	{
+		sub_vect(n_vect, pt_i->pt, pt_i->obj.hy->center);
+		normalize_vect(n_vect);
+		sub_vect(n_vect, n_vect, pt_i->obj.hy->o_vect);
+	}
 	normalize_vect(n_vect);
 }
 
