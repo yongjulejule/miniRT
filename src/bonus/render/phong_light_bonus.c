@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/13 12:28:18 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 20:20:11 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,17 @@ static void	check_rgb_range(int *color)
 /* FIXME : find inner vector and find sign... x, y by circle and z is 2*t */
 static void	get_surface_n_cn(double *n_vect, t_pt_info *pt_i)
 {
-	double	t;
-	double	start[3];
-	double	diff[3];
+	double	vert[3];
+	double	hori[3];
 
-	sub_vect(diff, pt_i->pt, pt_i->obj.cn->center);
-	t = pt_i->obj.cn->height;
-	if (dot_product(pt_i->obj.cn->o_vect, diff) <= 0)
-		t *= -1;
-	get_pt_on_line(start, pt_i->obj.cn->center, pt_i->obj.cn->o_vect, t);
-	if (t > 0)
-		sub_vect(n_vect, start, pt_i->pt);
-	else
-		sub_vect(n_vect, pt_i->pt, start);
+	sub_vect(vert, pt_i->pt, pt_i->obj.cn->center);
+	normalize_vect(vert);
+	sub_vect(vert, vert, pt_i->obj.cn->o_vect);
+	get_pt_on_line(vert, NULL, vert, -1 * pt_i->obj.cn->height);
+	get_pt_on_line(hori, NULL, pt_i->obj.cn->o_vect, pt_i->obj.cn->radius);
+	n_vect[X] = vert[X] + hori[X];
+	n_vect[Y] = vert[Y] + hori[Y];
+	n_vect[Z] = vert[Z] + hori[Z];
 }
 
 static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
