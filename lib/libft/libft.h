@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 11:11:45 by yongjule          #+#    #+#             */
-/*   Updated: 2021/11/16 20:54:04 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:52:47 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char			*strchrset_skip_bs(const char *s, char *charset);
 void			free_double_ptr(void **ptr);
 double			ft_atod(char *str, int *flag);
 int				ft_isint(char *str);
+int				ft_pos_atoi(const char *str);
 
 /*
 ** To handle List

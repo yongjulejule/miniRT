@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 15:45:01 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:21:44 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ t_obj_lst	*obj_lst_new(void *object, int which);
 void		parse_config(int argc, char **argv, t_spec *spec);
 
 /* Fill Elements */
-void		fill_amb(t_spec *spec, char **info, int *cap_flag, int cv_flag);
-void		fill_cam(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_amb(t_spec *spec, char **info, int *unique, int cv_flag);
+void		fill_cam(t_spec *spec, char **info, int *unique, int cv_flag);
 void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_cy_circle(t_cy *cy, double *cam_o_v);
-void		fill_light(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_light(t_spec *spec, char **info, int *unique, int cv_flag);
 void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 

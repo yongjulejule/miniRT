@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cone_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:24:38 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:13:27 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 01:34:50 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	fill_cn_center(t_cn *new_cn, char **info, int cv_flag)
 	char	**center_arr;
 	int		i;
 
-	center_arr = check_commas_split(info[0]);
+	center_arr = trail_n_cons_del_split(info[0], ',');
 	if (ft_strsetlen(center_arr) != 3)
 		is_error("Invalid configuration (CN CENTER)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -35,7 +35,7 @@ static void	fill_cn_o_vect(t_cn *new_cn, char **info, int cv_flag)
 	char	**o_vect_arr;
 	int		i;
 
-	o_vect_arr = check_commas_split(info[1]);
+	o_vect_arr = trail_n_cons_del_split(info[1], ',');
 	if (ft_strsetlen(o_vect_arr) != 3)
 		is_error("Invalid configuration (CN O_VECT)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -54,15 +54,13 @@ static void	fill_cn_color(t_cn *new_cn, char **info)
 	char	**color_arr;
 	int		i;
 
-	color_arr = check_commas_split(info[4]);
+	color_arr = trail_n_cons_del_split(info[4], ',');
 	if (ft_strsetlen(color_arr) != 3)
 		is_error("Invalid configuration (CN COLOR)", NULL, EXIT_FAILURE);
 	i = -1;
 	while (color_arr[++i])
 	{
-		if (!ft_isint(color_arr[i]))
-			is_error("Invalid configuration (CN COLOR)", NULL, EXIT_FAILURE);
-		new_cn->color[i] = ft_atoi(color_arr[i]);
+		new_cn->color[i] = ft_pos_atoi(color_arr[i]);
 		if ((new_cn->color[i] == 0 && color_arr[i][0] != '0')
 			|| new_cn->color[i] < 0 || new_cn->color[i] > 255)
 			is_error("Invalid configuration (CN COLOR)", NULL, EXIT_FAILURE);

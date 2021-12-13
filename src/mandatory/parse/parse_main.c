@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 16:09:49 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:21:44 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 static void	config_to_spec(t_conf *cur, t_spec *spec)
 {
-	int		cap_flag[3];
+	int		unique[3];
 
-	ft_bzero(cap_flag, 3 * sizeof(int));
+	ft_bzero(unique, 3 * sizeof(int));
 	spec->obj_lst = obj_lst_new(NULL, 0);
 	while (cur)
 	{
-		if (!ft_strcmp(cur->elem, "A") && !cap_flag[0])
-			fill_amb(spec, cur->info, cap_flag, 0);
-		else if (!ft_strcmp(cur->elem, "C") && !cap_flag[1])
-			fill_cam(spec, cur->info, cap_flag, 0);
-		else if (!ft_strcmp(cur->elem, "L") && !cap_flag[2])
-			fill_light(spec, cur->info, cap_flag, 0);
+		if (!ft_strcmp(cur->elem, "A") && !unique[0])
+			fill_amb(spec, cur->info, unique, 0);
+		else if (!ft_strcmp(cur->elem, "C") && !unique[1])
+			fill_cam(spec, cur->info, unique, 0);
+		else if (!ft_strcmp(cur->elem, "L") && !unique[2])
+			fill_light(spec, cur->info, unique, 0);
 		else if (!ft_strcmp(cur->elem, "sp"))
 			fill_sphere(&(spec->obj_lst), cur->info, 0);
 		else if (!ft_strcmp(cur->elem, "pl"))
