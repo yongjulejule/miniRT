@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_sph_pl_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:15:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:28:39 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:56:52 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ static void	fill_sphere_two(t_sph *new_sph, char **info)
 	i = -1;
 	while (color_arr[++i])
 	{
-		if (!ft_isint(color_arr[i]))
-			is_error("Invalid configuration (SPH COLOR)", NULL, EXIT_FAILURE);
-		new_sph->color[i] = ft_atoi(color_arr[i]);
+		new_sph->color[i] = ft_pos_atoi(color_arr[i]);
 		if ((new_sph->color[i] == 0 && color_arr[i][0] != '0')
 			|| new_sph->color[i] < 0 || new_sph->color[i] > 255)
 			is_error("Invalid configuration (SPH COLOR)", NULL, EXIT_FAILURE);
@@ -91,9 +89,7 @@ static void	fill_plane_three(t_pl *new_pl, char **info)
 	i = -1;
 	while (color_arr[++i])
 	{
-		if (!ft_isint(color_arr[i]))
-			is_error("Invalid configuration (PL COLOR)", NULL, EXIT_FAILURE);
-		new_pl->color[i] = ft_atoi(color_arr[i]);
+		new_pl->color[i] = ft_pos_atoi(color_arr[i]);
 		if ((new_pl->color[i] == 0 && color_arr[i][0] != '0')
 			|| new_pl->color[i] < 0 || new_pl->color[i] > 255)
 			is_error("Invalid configuration (PL COLOR)", NULL, EXIT_FAILURE);

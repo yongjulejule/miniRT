@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/11 16:52:24 by yongjule          #+#    #+#              #
-#    Updated: 2021/11/16 20:54:11 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/13 15:52:15 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SRCS = ft_memset.c\
 	   strchrset_skip_bs.c\
 	   free_double_ptr.c\
 	   ft_atod.c\
-	   ft_isint.c
+	   ft_isint.c\
+	   ft_pos_atoi.c
 
 
 OBJS = ${SRCS:.c=.o}

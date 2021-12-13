@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_light_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 14:59:43 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 15:23:35 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:57:10 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ static void	fill_light_two(t_l_lst *n_light, char **info)
 	i = -1;
 	while (color_arr[++i])
 	{
-		if (!ft_isint(color_arr[i]))
-			is_error("Invalid configuration (L COLOR)", NULL, EXIT_FAILURE);
-		n_light->color[i] = ft_atoi(color_arr[i]);
+		n_light->color[i] = ft_pos_atoi(color_arr[i]);
 		if ((n_light->color[i] == 0 && color_arr[i][0] != '0')
 			|| n_light->color[i] > 255 || n_light->color[i] < 0)
 			is_error("Invalid configuration (L COLOR)", NULL, EXIT_FAILURE);

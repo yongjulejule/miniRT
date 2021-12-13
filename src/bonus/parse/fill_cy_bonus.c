@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cy_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:04:41 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:28:36 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:57:16 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ static void	fill_cy_color(t_cy *new_cy, char **info)
 	i = -1;
 	while (color_arr[++i])
 	{
-		if (!ft_isint(color_arr[i]))
-			is_error("Invalid configuration (CY COLOR)", NULL, EXIT_FAILURE);
-		new_cy->color[i] = ft_atoi(color_arr[i]);
+		new_cy->color[i] = ft_pos_atoi(color_arr[i]);
 		if ((new_cy->color[i] == 0 && color_arr[i][0] != '0')
 			|| new_cy->color[i] < 0 || new_cy->color[i] > 255)
 			is_error("Invalid configuration (CY COLOR)", NULL, EXIT_FAILURE);

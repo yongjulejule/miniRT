@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 13:33:59 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:23:18 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@
 # define G 1
 # define B 2
 
+# define POINT 0
+# define VECTOR 1
+
+# define SHADED 0
+# define NOT_SHADED 1
+
+# define NO_TXT 0
+# define CHECKERED 1
+# define CUSTOM_TXT 2
+
+# define NBR_OF_THREAD 100
+
 # define TRANSPARENT 0xff000000
 
 /* Key maps */
@@ -68,14 +80,6 @@
 # define THETA 1
 # define PHI 2
 
-# define POINT 0
-# define VECTOR 1
-
-# define SHADED 0
-# define NOT_SHADED 1
-
-# define NBR_OF_THREAD 100
-
 /* Functions */
 
 /* Parse */
@@ -83,6 +87,7 @@ char		**check_commas_split(char *vect);
 void		conf_lst_addback(t_conf **hd, t_conf *new);
 t_conf		*conf_lst_last(t_conf *elem);
 t_conf		*conf_lst_new(char *elem, char **info);
+void		config_to_spec(t_conf *cur, t_spec *spec, unsigned int n_obj);
 void		free_config(t_conf *hd);
 void		free_obj_lst(t_obj_lst *hd);
 int			get_next_line(int fd, char **line);
@@ -94,10 +99,14 @@ void		obj_lst_addback(t_obj_lst **hd, t_obj_lst *new);
 t_obj_lst	*obj_lst_last(t_obj_lst *obj);
 t_obj_lst	*obj_lst_new(void *object, int which);
 void		parse_config(int argc, char **argv, t_spec *spec);
+t_txt_lst	*txt_lst_new(int type, int *obj_flag);
+t_txt_lst	*txt_lst_last(t_txt_lst *txt_elem);
+void		txt_lst_addback(t_txt_lst **hd, t_txt_lst *new);
+void		free_txt_lst(t_txt_lst *hd);
 
 /* Fill Elements */
-void		fill_amb(t_spec *spec, char **info, int *cap_flag, int cv_flag);
-void		fill_cam(t_spec *spec, char **info, int *cap_flag, int cv_flag);
+void		fill_amb(t_spec *spec, char **info, int *unique, int cv_flag);
+void		fill_cam(t_spec *spec, char **info, int *unique, int cv_flag);
 void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_cy_circle(t_cy *cy, double *cam_o_v);
 void		fill_cone(t_obj_lst **hd, char **info, int cv_flag);

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 13:33:59 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:04:44 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,35 @@ typedef union u_obj
 	t_cn	*cn;
 }	t_obj;
 
+typedef struct s_ppm
+{
+	int		size[2];
+	int		*color_arr;
+}	t_ppm;
+
 typedef struct s_obj_lst
 {
 	int					type;
+	int					is_txt;
 	t_obj				obj;
+	t_ppm				ppm;
 	struct s_obj_lst	*next;
 }	t_obj_lst;
+
+typedef struct s_txt_lst
+{
+	int					type;
+	int					*obj_flag;
+	char				*f_name;
+	t_ppm				ppm;
+	struct s_txt_lst	*next;
+}	t_txt_lst;
+
+typedef struct s_txt
+{
+	int			*obj_txt_flag;
+	t_txt_lst	*txt_lst;
+} t_txt;
 
 typedef struct s_spec
 {
@@ -100,6 +123,7 @@ typedef struct s_spec
 	t_cam		cam;
 	t_l_lst		*l_lst;
 	t_obj_lst	*obj_lst;
+	t_txt		txt;
 }	t_spec;
 
 typedef struct s_img

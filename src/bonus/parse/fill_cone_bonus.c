@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:24:38 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 13:42:19 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 15:57:20 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ static void	fill_cn_color(t_cn *new_cn, char **info)
 	i = -1;
 	while (color_arr[++i])
 	{
-		if (!ft_isint(color_arr[i]))
-			is_error("Invalid configuration (CN COLOR)", NULL, EXIT_FAILURE);
-		new_cn->color[i] = ft_atoi(color_arr[i]);
+		new_cn->color[i] = ft_pos_atoi(color_arr[i]);
 		if ((new_cn->color[i] == 0 && color_arr[i][0] != '0')
 			|| new_cn->color[i] < 0 || new_cn->color[i] > 255)
 			is_error("Invalid configuration (CN COLOR)", NULL, EXIT_FAILURE);
