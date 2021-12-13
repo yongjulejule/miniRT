@@ -3,17 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-<<<<<<< HEAD
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/13 22:38:01 by ghan             ###   ########.fr        #
-=======
-#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/13 22:05:18 by yongjule         ###   ########.fr        #
->>>>>>> 93fac884351b7c2c58e229ebaabd27f8c4ee2c3f
+#    Updated: 2021/12/14 01:32:32 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +95,8 @@ SRCS_BONUS_PARSE		= $(addprefix $(SRCS_BONUS_PARSE_DIR), \
 				l_lst_bonus.c\
 				obj_lst_bonus.c\
 				parse_main_bonus.c\
-				trail_cons_split.c\
+				read_fill_ppm_bonus.c\
+				trail_cons_split_bonus.c\
 				txt_lst_bonus.c\
 				txt_to_objs_bonus.c\
 				)

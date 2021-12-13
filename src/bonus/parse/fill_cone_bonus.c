@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cone_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:24:38 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:39:48 by ghan             ###   ########.fr       */
-=======
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 15:24:38 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:13:27 by yongjule         ###   ########.fr       */
->>>>>>> 93fac884351b7c2c58e229ebaabd27f8c4ee2c3f
+/*   Updated: 2021/12/14 01:34:50 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +17,7 @@ static void	fill_cn_center(t_cn *new_cn, char **info, int cv_flag)
 	char	**center_arr;
 	int		i;
 
-	center_arr = trail_n_cons_del_split_split(info[0], ',');
+	center_arr = trail_n_cons_del_split(info[0], ',');
 	if (ft_strsetlen(center_arr) != 3)
 		is_error("Invalid configuration (CN CENTER)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -42,7 +35,7 @@ static void	fill_cn_o_vect(t_cn *new_cn, char **info, int cv_flag)
 	char	**o_vect_arr;
 	int		i;
 
-	o_vect_arr = trail_n_cons_del_split_split(info[1], ',');
+	o_vect_arr = trail_n_cons_del_split(info[1], ',');
 	if (ft_strsetlen(o_vect_arr) != 3)
 		is_error("Invalid configuration (CN O_VECT)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -61,7 +54,7 @@ static void	fill_cn_color(t_cn *new_cn, char **info)
 	char	**color_arr;
 	int		i;
 
-	color_arr = trail_n_cons_del_split_split(info[4], ',');
+	color_arr = trail_n_cons_del_split(info[4], ',');
 	if (ft_strsetlen(color_arr) != 3)
 		is_error("Invalid configuration (CN COLOR)", NULL, EXIT_FAILURE);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:15:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:40:44 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/14 01:34:50 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	fill_sphere_two(t_sph *new_sph, char **info)
 	char	**color_arr;
 	int		i;
 
-	color_arr = trail_n_cons_del_split_split(info[2], ',');
+	color_arr = trail_n_cons_del_split(info[2], ',');
 	if (ft_strsetlen(color_arr) != 3)
 		is_error("Invalid configuration (SPH COLOR)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -41,7 +41,7 @@ void	fill_sphere(t_obj_lst **hd, char **info, int cv_flag)
 		is_error("Invalid configuration (SPH ARGC)", NULL, EXIT_FAILURE);
 	new_sph = (t_sph *)ft_calloc(1, sizeof(t_sph));
 	obj_lst_addback(hd, obj_lst_new((void *)new_sph, SPHERE));
-	center_arr = trail_n_cons_del_split_split(info[0], ',');
+	center_arr = trail_n_cons_del_split(info[0], ',');
 	if (ft_strsetlen(center_arr) != 3)
 		is_error("Invalid configuration (SPH CENTER)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -64,7 +64,7 @@ static void	fill_plane_two(t_pl *new_pl, char **info, int cv_flag)
 	char	**o_vect_arr;
 	int		i;
 
-	o_vect_arr = trail_n_cons_del_split_split(info[1], ',');
+	o_vect_arr = trail_n_cons_del_split(info[1], ',');
 	if (ft_strsetlen(o_vect_arr) != 3)
 		is_error("Invalid configuration (PL O_VECT)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -83,7 +83,7 @@ static void	fill_plane_three(t_pl *new_pl, char **info)
 	char	**color_arr;
 	int		i;
 
-	color_arr = trail_n_cons_del_split_split(info[2], ',');
+	color_arr = trail_n_cons_del_split(info[2], ',');
 	if (ft_strsetlen(color_arr) != 3)
 		is_error("Invalid configuration (PL COLOR)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -107,7 +107,7 @@ void	fill_plane(t_obj_lst **hd, char **info, int cv_flag)
 		is_error("Invalid configuration (PL ARGC)", NULL, EXIT_FAILURE);
 	new_pl = (t_pl *)ft_calloc(1, sizeof(t_pl));
 	obj_lst_addback(hd, obj_lst_new((void *)new_pl, PLANE));
-	center_arr = trail_n_cons_del_split_split(info[0], ',');
+	center_arr = trail_n_cons_del_split(info[0], ',');
 	if (ft_strsetlen(center_arr) != 3)
 		is_error("Invalid configuration (PL CENTER)", NULL, EXIT_FAILURE);
 	i = -1;

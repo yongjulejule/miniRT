@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clone_obj_lst_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:48:06 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 14:48:18 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/14 01:31:31 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,29 @@ static void	clone_cn(t_obj_lst **c_lst, t_cn *o_cn)
 
 void	clone_obj_lst(t_obj_lst *o_lst, t_obj_lst **c_lst)
 {
-	t_obj_lst	*cur;
+	t_obj_lst	*o_cur;
+	t_obj_lst	*c_cur;
 
 	*c_lst = obj_lst_new(NULL, 0);
-	cur = o_lst->next;
-	while (cur)
+	o_cur = o_lst->next;
+	while (o_cur)
 	{
-		if (cur->type == SPHERE)
-			clone_sph(c_lst, cur->obj.sph);
-		else if (cur->type == PLANE)
-			clone_pl(c_lst, cur->obj.pl);
-		else if (cur->type == CYLINDER)
-			clone_cy(c_lst, cur->obj.cy);
-		else if (cur->type == CONE)
-			clone_cn(c_lst, cur->obj.cn);
-		cur = cur->next;
+		if (o_cur->type == SPHERE)
+			clone_sph(c_lst, o_cur->obj.sph);
+		else if (o_cur->type == PLANE)
+			clone_pl(c_lst, o_cur->obj.pl);
+		else if (o_cur->type == CYLINDER)
+			clone_cy(c_lst, o_cur->obj.cy);
+		else if (o_cur->type == CONE)
+			clone_cn(c_lst, o_cur->obj.cn);
+		if (o_cur->is_txt)
+		{
+			c_cur = obj_lst_last(*c_lst);
+			c_cur->is_txt = o_cur->is_txt;
+			c_cur->ppm.size[X] = o_cur->ppm.size[X];
+			c_cur->ppm.size[Y] = o_cur->ppm.size[Y];
+			c_cur->ppm.color_arr = o_cur->ppm.color_arr;
+		}
+		o_cur = o_cur->next;
 	}
 }

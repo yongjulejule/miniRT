@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:23:37 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:40:22 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/14 01:34:50 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	fill_amb(t_spec *spec, char **info, int *unique, int cv_flag)
 	spec->amb.ratio = ft_atod(info[0], &cv_flag);
 	if (cv_flag || (spec->amb.ratio > 1 || spec->amb.ratio < 0))
 		is_error("Invalid configuration (A RATIO)", NULL, EXIT_FAILURE);
-	color_arr = trail_n_cons_del_split_split(info[1], ',');
+	color_arr = trail_n_cons_del_split(info[1], ',');
 	if (ft_strsetlen(color_arr) != 3)
 		is_error("Invalid configuration (A COLOR)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -42,7 +42,7 @@ static void	fill_cam_two(t_spec *spec, char **info, int cv_flag)
 	char	**o_vect_arr;
 	int		i;
 
-	o_vect_arr = trail_n_cons_del_split_split(info[1], ',');
+	o_vect_arr = trail_n_cons_del_split(info[1], ',');
 	if (ft_strsetlen(o_vect_arr) != 3)
 		is_error("Invalid configuration (C O_VECT)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -64,7 +64,7 @@ void	fill_cam(t_spec *spec, char **info, int *unique, int cv_flag)
 	if (ft_strsetlen(info) != 3)
 		is_error("Invalid configuration (C ARGC)", NULL, EXIT_FAILURE);
 	unique[1]++;
-	coord_arr = trail_n_cons_del_split_split(info[0], ',');
+	coord_arr = trail_n_cons_del_split(info[0], ',');
 	if (ft_strsetlen(coord_arr) != 3)
 		is_error("Invalid configuration (C VP)", NULL, EXIT_FAILURE);
 	i = -1;
