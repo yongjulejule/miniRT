@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 13:33:59 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:11:56 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 		else if (cur->type == CYLINDER)
 		{
 			if (!intersect_cy(ray, &pt_info, cur->obj.cy))
-				intersect_circle(ray, &pt_info, cur->obj.cy);
+				intersect_cy_circle(ray, &pt_info, cur->obj.cy);
 		}
 		else if (cur->type == CONE)
-			intersect_cn(ray, &pt_info, cur->obj.cn);
+		{
+			if (!intersect_cn(ray, &pt_info, cur->obj.cn))
+				intersect_cn_circle(ray, &pt_info, cur->obj.cn);
+		}
 		cur = cur->next;
 	}
 	if (pt_info.pt[Z] < 1)

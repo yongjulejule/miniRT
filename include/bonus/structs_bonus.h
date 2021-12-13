@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 13:33:59 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:17:06 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ typedef struct s_cy
 typedef struct s_cn
 {
 	double	center[3];
-	double	o_vect[3];	
+	double	o_vect[3];
 	double	diameter;
 	double	radius;
 	double	height;
 	int		color[3];
+	double	circle_o_v[3];
 }	t_cn;
 
 typedef union u_obj
