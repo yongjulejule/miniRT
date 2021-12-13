@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_lst_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:51:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 17:54:32 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 12:06:24 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_obj_lst	*obj_lst_new(void *object, int which)
 		new->obj.pl = (t_pl *)object;
 	else if (which == CYLINDER)
 		new->obj.cy = (t_cy *)object;
-	else if (which == HYPERBOLOID)
-		new->obj.hy = (t_hy *)object;
+	else if (which == CONE)
+		new->obj.cn = (t_cn *)object;
 	new->type = which;
 	new->next = NULL;
 	return (new);
@@ -64,6 +64,8 @@ void	free_obj_lst(t_obj_lst *hd)
 			free(cur->obj.pl);
 		else if (cur->type == CYLINDER)
 			free(cur->obj.cy);
+		else if (cur->type == CONE)
+			free(cur->obj.cn);
 		cur = cur->next;
 		free(to_free);
 	}

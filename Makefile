@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/12 16:56:11 by yongjule         ###   ########.fr        #
+#    Updated: 2021/12/13 12:33:07 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ SRCS_BONUS_PARSE		= $(addprefix $(SRCS_BONUS_PARSE_DIR), \
 				conf_lst_bonus.c\
 				check_commas_bonus.c\
 				fill_cy_bonus.c\
-				fill_hyperboloid_bonus.c\
+				fill_cone_bonus.c\
 				fill_light_bonus.c\
 				fill_setting_bonus.c\
 				fill_sph_pl_bonus.c\
@@ -106,7 +106,7 @@ SRCS_BONUS_RENDER		= $(addprefix $(SRCS_BONUS_RENDER_DIR), \
 				init_struct_bonus.c\
 				intersect_cy_bonus.c\
 				intersect_cy_circle_bonus.c\
-				intersect_hy_bonus.c\
+				intersect_cn_bonus.c\
 				intersect_pl_bonus.c\
 				intersect_sph_bonus.c\
 				phong_light_bonus.c\
@@ -214,7 +214,20 @@ debug			:
 					@make DEBUG=1
 					@echo $(CUT)$(RED)$(BOLD) It\'s DEBUG TIME🤪$(RESET)
 
+.PHONY			:	leaks
 leaks			:
 					@make -C $(LIBFT_DIR) LEAKS=1
 					@make LEAKS=1
+					@echo $(CUT)$(RED)$(BOLD) Is there Leaks?🚰$(RESET)
+
+.PHONY			:	b_debug
+b_debug			:
+					@make -C $(LIBFT_DIR) DEBUG=1 WITH_BONUS=1
+					@make DEBUG=1 WITH_BONUS=1
+					@echo $(CUT)$(RED)$(BOLD) It\'s DEBUG TIME🤪$(RESET)
+
+.PHONY			:	b_leaks
+b_leaks			:
+					@make -C $(LIBFT_DIR) LEAKS=1 WITH_BONUS=1
+					@make LEAKS=1 WITH_BONUS=1
 					@echo $(CUT)$(RED)$(BOLD) Is there Leaks?🚰$(RESET)

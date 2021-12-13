@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clone_obj_lst_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:48:06 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 16:00:51 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 11:34:25 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,18 @@ static void	clone_cy(t_obj_lst **c_lst, t_cy *o_cy)
 	copy_color(n_cy->color, o_cy->color);
 }
 
-static void	clone_hy(t_obj_lst **c_lst, t_hy *o_hy)
+static void	clone_cn(t_obj_lst **c_lst, t_cn *o_cn)
 {
-	t_hy	*n_hy;
+	t_cn	*n_cn;
 
-	n_hy = (t_hy *)ft_calloc(sizeof(t_hy), 1);
-	obj_lst_addback(c_lst, obj_lst_new((void *)n_hy, HYPERBOLOID));
-	n_hy->a = o_hy->a;
-	n_hy->b = o_hy->b;
-	n_hy->diameter = o_hy->diameter;
-	n_hy->radius = o_hy->radius;
-	n_hy->height = o_hy->height;
-	vect_copy(n_hy->center, o_hy->center);
-	vect_copy(n_hy->o_vect, o_hy->o_vect);
-	copy_color(n_hy->color, o_hy->color);
+	n_cn = (t_cn *)ft_calloc(sizeof(t_cn), 1);
+	obj_lst_addback(c_lst, obj_lst_new((void *)n_cn, CONE));
+	n_cn->diameter = o_cn->diameter;
+	n_cn->radius = o_cn->radius;
+	n_cn->height = o_cn->height;
+	vect_copy(n_cn->center, o_cn->center);
+	vect_copy(n_cn->o_vect, o_cn->o_vect);
+	copy_color(n_cn->color, o_cn->color);
 }
 
 void	clone_obj_lst(t_obj_lst *o_lst, t_obj_lst **c_lst)
@@ -79,8 +77,8 @@ void	clone_obj_lst(t_obj_lst *o_lst, t_obj_lst **c_lst)
 			clone_pl(c_lst, cur->obj.pl);
 		else if (cur->type == CYLINDER)
 			clone_cy(c_lst, cur->obj.cy);
-		else if (cur->type == HYPERBOLOID)
-			clone_hy(c_lst, cur->obj.hy);
+		else if (cur->type == CONE)
+			clone_cn(c_lst, cur->obj.cn);
 		cur = cur->next;
 	}
 }
