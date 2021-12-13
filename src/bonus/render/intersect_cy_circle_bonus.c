@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy_circle_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 14:40:04 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:32:15 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:24:21 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	which_circle(t_cy *cy, double *origin)
 	return (vect_size(diff_base) < vect_size(diff_top));
 }
 
-int	circle_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
+int	circle_cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
 {
 	double	t;
 	double	pt_on_cir[3];
@@ -49,7 +49,7 @@ int	circle_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
 	return (0);
 }
 
-void	intersect_circle(double *ray, t_pt_info *pt_i, t_cy *cy)
+void	intersect_cy_circle(double *ray, t_pt_info *pt_i, t_cy *cy)
 {
 	double		pt_to_center[3];
 	t_pl		pl;

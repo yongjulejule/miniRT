@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:36:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 12:06:24 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:57:36 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,15 @@ static int	check_obj_to_ray(t_obj_lst *cur, t_pt_info *pt_i,
 		{
 			shaded = cy_shadow(ray, pt_i, cur->obj.cy, r_size);
 			if (!shaded)
-				shaded = circle_shadow(ray, pt_i, cur->obj.cy, r_size);
+				shaded = circle_cy_shadow(ray, pt_i, cur->obj.cy, r_size);
 		}
-		// TODO - HY SHADOW
-		else if (cur->type == CONE && cur->obj.cn != pt_i->obj.cn)
+		else if ((cur->type == CONE || cur->type == CN_CIRCLE)
+			&& cur->obj.cn != pt_i->obj.cn)
+		{
 			shaded = cn_shadow(ray, pt_i, cur->obj.cn, r_size);
+			if (!shaded)
+				shaded = circle_cn_shadow(ray, pt_i, cur->obj.cn, r_size);
+		}
 		if (shaded == 1)
 			return (SHADED);
 		cur = cur->next;
