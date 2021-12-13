@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_to_spec_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 13:52:22 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 15:21:04 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:17:43 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,40 @@ static void	objs_to_spec(t_conf *cur, t_obj_lst **hd, unsigned int *n_obj)
 
 static int	txt_to_spec(t_conf *cur, t_txt_lst **hd, int *unique)
 {
-	int	fd;
-
 	if (!ft_strcmp(cur->elem, "ch") && !unique[2])
+	{
 		fill_checkered(hd, cur->info, unique);
+		return (1);
+	}
 	else if (!ft_strcmp(cur->elem, "tx"))
 		fill_txt(hd, cur->info);
+	return (0);
 }
 
 void	config_to_spec(t_conf *cur, t_spec *spec, unsigned int n_obj)
 {
 	int	unique[3];
 
+	spec->txt.is_ch = 0;
 	ft_bzero(unique, 3 * sizeof(int));
 	while (cur)
 	{
 		if ((!ft_strcmp(cur->elem, "A") && !unique[0])
 			|| (!ft_strcmp(cur->elem, "C") && !unique[1])
 			|| !ft_strcmp(cur->elem, "L"))
-			setting_to_spec(cur, spec, unique)
+			setting_to_spec(cur, spec, unique);
 		else if (!ft_strcmp(cur->elem, "sp") || !ft_strcmp(cur->elem, "pl")
 			|| !ft_strcmp(cur->elem, "cy") || !ft_strcmp(cur->elem, "cn"))
-			objs_to_spec(cur->elem, &(spec->obj_lst), cur->info, &n_obj);
+			objs_to_spec(cur, &(spec->obj_lst), &n_obj);
 		else if ((!ft_strcmp(cur->elem, "ch") && !unique[2])
 			|| ft_strcmp(cur->elem, "tx"))
-			txt_to_spec(cur, &(spec->txt.txt_lst), unique);
+			spec->txt.is_ch += txt_to_spec(cur, &(spec->txt.txt_lst), unique);
 		else
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
 		cur = cur->next;
 	}
 	if (spec->l_lst->next == NULL)
 		is_error("Invalid configuration (NO LIGHT)", NULL, EXIT_FAILURE);
-	txt_to_objs(spec);
+	if (spec->txt.txt_lst->next)
+		txt_to_objs(spec);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 15:23:18 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:38:25 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@
 /* Functions */
 
 /* Parse */
-char		**check_commas_split(char *vect);
 void		conf_lst_addback(t_conf **hd, t_conf *new);
 t_conf		*conf_lst_last(t_conf *elem);
 t_conf		*conf_lst_new(char *elem, char **info);
@@ -99,7 +98,8 @@ void		obj_lst_addback(t_obj_lst **hd, t_obj_lst *new);
 t_obj_lst	*obj_lst_last(t_obj_lst *obj);
 t_obj_lst	*obj_lst_new(void *object, int which);
 void		parse_config(int argc, char **argv, t_spec *spec);
-t_txt_lst	*txt_lst_new(int type, int *obj_flag);
+char		**trail_n_cons_del_split(char *str, char delimiter);
+t_txt_lst	*txt_lst_new(int type);
 t_txt_lst	*txt_lst_last(t_txt_lst *txt_elem);
 void		txt_lst_addback(t_txt_lst **hd, t_txt_lst *new);
 void		free_txt_lst(t_txt_lst *hd);
@@ -107,12 +107,14 @@ void		free_txt_lst(t_txt_lst *hd);
 /* Fill Elements */
 void		fill_amb(t_spec *spec, char **info, int *unique, int cv_flag);
 void		fill_cam(t_spec *spec, char **info, int *unique, int cv_flag);
+void		fill_ch(t_txt_lst **hd, char **info, int *unique);
 void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_cy_circle(t_cy *cy, double *cam_o_v);
 void		fill_cone(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_light(t_l_lst **hd, char **info, int cv_flag);
 void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
+void		fill_txt(t_txt_lst **hd, char **info);
 
 /* Render */
 void		draw(t_rt *rt, t_rt *c_rt);

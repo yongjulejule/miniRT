@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cy_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:04:41 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 15:57:16 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:40:01 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	fill_cy_center(t_cy *new_cy, char **info, int cv_flag)
 	char	**center_arr;
 	int		i;
 
-	center_arr = check_commas_split(info[0]);
+	center_arr = trail_n_cons_del_split_split(info[0], ',');
 	if (ft_strsetlen(center_arr) != 3)
 		is_error("Invalid configuration (CY CENTER)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -48,7 +48,7 @@ static void	fill_cy_o_vect(t_cy *new_cy, char **info, int cv_flag)
 	char	**o_vect_arr;
 	int		i;
 
-	o_vect_arr = check_commas_split(info[1]);
+	o_vect_arr = trail_n_cons_del_split_split(info[1], ',');
 	if (ft_strsetlen(o_vect_arr) != 3)
 		is_error("Invalid configuration (CY O_VECT)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -67,7 +67,7 @@ static void	fill_cy_color(t_cy *new_cy, char **info)
 	char	**color_arr;
 	int		i;
 
-	color_arr = check_commas_split(info[4]);
+	color_arr = trail_n_cons_del_split_split(info[4], ',');
 	if (ft_strsetlen(color_arr) != 3)
 		is_error("Invalid configuration (CY COLOR)", NULL, EXIT_FAILURE);
 	i = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_light_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 14:59:43 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 15:57:10 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:40:11 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	fill_light_two(t_l_lst *n_light, char **info)
 	char	**color_arr;
 	int		i;
 
-	color_arr = check_commas_split(info[2]);
+	color_arr = trail_n_cons_del_split_split(info[2], ',');
 	if (ft_strsetlen(color_arr) != 3)
 		is_error("Invalid configuration (L COLOR)", NULL, EXIT_FAILURE);
 	i = -1;
@@ -41,7 +41,7 @@ void	fill_light(t_l_lst **hd, char **info, int cv_flag)
 		is_error("Invalid configuration (L ARGC)", NULL, EXIT_FAILURE);
 	n_light = l_lst_new();
 	l_lst_addback(hd, n_light);
-	coord_arr = check_commas_split(info[0]);
+	coord_arr = trail_n_cons_del_split_split(info[0], ',');
 	if (ft_strsetlen(coord_arr) != 3)
 		is_error("Invalid configuration (L LP)", NULL, EXIT_FAILURE);
 	i = -1;
