@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 15:27:39 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 12:27:15 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	config_to_spec(t_conf *cur, t_spec *spec)
 			fill_plane(&(spec->obj_lst), cur->info, 0);
 		else if (!ft_strcmp(cur->elem, "cy"))
 			fill_cylinder(&(spec->obj_lst), cur->info, 0);
-		else if (!ft_strcmp(cur->elem, "hy"))
-			fill_hyperboloid(&(spec->obj_lst), cur->info, 0);
+		else if (!ft_strcmp(cur->elem, "cn"))
+			fill_cone(&(spec->obj_lst), cur->info, 0);
 		else
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
 		cur = cur->next;

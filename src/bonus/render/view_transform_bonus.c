@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/11 16:11:47 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 12:28:50 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ static void	transf_objs(t_spec *spec, t_obj_lst *cur, double *transf)
 			normalize_vect(cur->obj.cy->o_vect);
 			fill_cy_circle(cur->obj.cy, spec->cam.o_vect);
 		}
-		else if (cur->type == HYPERBOLOID)
+		else if (cur->type == CONE)
 		{
-			multiply_vect(transf, cur->obj.hy->center, POINT);
-			multiply_vect(transf, cur->obj.hy->o_vect, VECTOR);
-			normalize_vect(cur->obj.hy->o_vect);
+			multiply_vect(transf, cur->obj.cn->center, POINT);
+			multiply_vect(transf, cur->obj.cn->o_vect, VECTOR);
+			normalize_vect(cur->obj.cn->o_vect);
 		}
 		cur = cur->next;
 	}
