@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_util_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/13 12:28:35 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:08:00 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static	double	get_reflect_light(t_pt_info *pt_i, double *o_ray,
 		get_pt_on_line(view, NULL, pt_i->obj.pl->center, -1);
 	else if (pt_i->type == CYLINDER || pt_i->type == CY_CIRCLE)
 		get_pt_on_line(view, NULL, pt_i->obj.cy->center, -1);
-	// FIXME : Wrong!
-	else if (pt_i->type == CONE)
+	else if (pt_i->type == CONE || pt_i->type == CN_CIRCLE)
 		get_pt_on_line(view, NULL, pt_i->obj.cn->center, -1);
 	normalize_vect(view);
 	ret = dot_product(reflect, view);
@@ -63,7 +62,7 @@ double	get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
 		color = ((reflect + diffuse)
 				* ((double)pt_i->obj.cy->color[R] / 255)
 				* ((double)cur->color[R] / 255));
-	else if (pt_i->type == CONE)
+	else if (pt_i->type == CONE || pt_i->type == CN_CIRCLE)
 		color = ((reflect + diffuse)
 				* ((double)pt_i->obj.cn->color[R] / 255)
 				* ((double)cur->color[R] / 255));
@@ -94,7 +93,7 @@ double	get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
 		color = ((reflect + diffuse)
 				* ((double)pt_i->obj.cy->color[G] / 255)
 				* ((double)cur->color[G] / 255));
-	else if (pt_i->type == CONE)
+	else if (pt_i->type == CONE || pt_i->type == CN_CIRCLE)
 		color = ((reflect + diffuse)
 				* ((double)pt_i->obj.cn->color[R] / 255)
 				* ((double)cur->color[R] / 255));
@@ -125,7 +124,7 @@ double	get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
 		color = ((reflect + diffuse)
 				* ((double)pt_i->obj.cy->color[B] / 255)
 				* ((double)cur->color[B] / 255));
-	else if (pt_i->type == CONE)
+	else if (pt_i->type == CONE || pt_i->type == CN_CIRCLE)
 		color = ((reflect + diffuse)
 				* ((double)pt_i->obj.cn->color[R] / 255)
 				* ((double)cur->color[R] / 255));

@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/13 20:20:11 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/13 23:07:47 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
 	// TODO - HY SURFACE NORMAL
 	else if (pt_i->type == CONE)
 		get_surface_n_cn(n_vect, pt_i);
+	else if (pt_i->type == CN_CIRCLE)
+		vect_copy(n_vect, pt_i->obj.cn->circle_o_v);
 	normalize_vect(n_vect);
 }
 
