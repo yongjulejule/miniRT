@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 13:14:04 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:31:33 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		obj_lst_addback(t_obj_lst **hd, t_obj_lst *new);
 t_obj_lst	*obj_lst_last(t_obj_lst *obj);
 t_obj_lst	*obj_lst_new(void *object, int which);
 void		parse_config(int argc, char **argv, t_spec *spec);
-void		read_fill_ppm(int fd, t_txt_lst *cur);
+void		read_fill_ppm(int fd, t_txt_lst *cur, int n, int k);
 char		**trail_n_cons_del_split(char *str, char delimiter);
 t_txt_lst	*txt_lst_new(int type);
 t_txt_lst	*txt_lst_nth(t_txt_lst *nth, int n);

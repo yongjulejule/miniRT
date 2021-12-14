@@ -3,31 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   txt_to_objs_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:52 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 01:50:26 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/14 18:02:47 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static void	ppm_to_struct(t_txt_lst *cur, int type)
+static void	ppm_to_struct(t_txt_lst *cur)
 {
 	int		fd;
 	char	*tmp;
 
-	if (type == CHECKERED)
-		fd = open("./etc/texture/check.ppm", O_RDONLY);
-	else
-	{
-		tmp = ft_strjoin("./etc/texture/", cur->f_name);
-		fd = open(tmp, O_RDONLY);
-		free(tmp);
-	}
+	tmp = ft_strjoin("./etc/texture/", cur->f_name);
+	fd = open(tmp, O_RDONLY);
+	free(tmp);
 	if (fd < 0)
 		is_error("ppm file open failed: ", strerror(errno), EXIT_FAILURE);
-	read_fill_ppm(fd, cur);
+	read_fill_ppm(fd, cur, 0, 0);
 	close(fd);
 }
 
@@ -46,6 +41,7 @@ static void	check_obj_txt_flag(t_txt_lst *cur, int *o_t_flag,
 		o_t_flag[cur->obj_flag[i]] = o_idx;
 		i++;
 	}
+	cur->obj_txt_flag = o_t_flag;
 }
 
 static void	parse_ppm(t_txt_lst *cur, int *o_t_flag, int n_obj)
@@ -56,10 +52,8 @@ static void	parse_ppm(t_txt_lst *cur, int *o_t_flag, int n_obj)
 	while (cur)
 	{
 		check_obj_txt_flag(cur, o_t_flag, n_obj, o_idx);
-		if (cur->type == CHECKERED)
-			ppm_to_struct(cur, CHECKERED);
-		else
-			ppm_to_struct(cur, CUSTOM_TXT);
+		if (cur->type == CUSTOM_TXT)
+			ppm_to_struct(cur);
 		cur = cur->next;
 		o_idx++;
 	}
@@ -68,9 +62,12 @@ static void	parse_ppm(t_txt_lst *cur, int *o_t_flag, int n_obj)
 static void	fill_obj_txt_info(t_obj_lst *cur_obj, t_txt_lst *nth_txt)
 {
 	cur_obj->is_txt = nth_txt->type;
-	cur_obj->ppm.size[X] = nth_txt->ppm.size[X];
-	cur_obj->ppm.size[Y] = nth_txt->ppm.size[Y];
-	cur_obj->ppm.color_arr = nth_txt->ppm.color_arr;
+	if (cur_obj->is_txt == CUSTOM_TXT)
+	{
+		cur_obj->ppm.size[X] = nth_txt->ppm.size[X];
+		cur_obj->ppm.size[Y] = nth_txt->ppm.size[Y];
+		cur_obj->ppm.color_arr = nth_txt->ppm.color_arr;
+	}
 }
 
 void	txt_to_objs(t_spec *spec, t_obj_lst *cur_obj, int n_obj)
@@ -78,15 +75,15 @@ void	txt_to_objs(t_spec *spec, t_obj_lst *cur_obj, int n_obj)
 	int			i;
 	t_txt_lst	*nth_txt;
 
-	spec->txt.obj_txt_flag = (int *)ft_calloc(n_obj, sizeof(int));
-	parse_ppm(spec->txt.txt_lst->next, spec->txt.obj_txt_flag, n_obj);
+	spec->txt_lst->obj_txt_flag = (int *)ft_calloc(n_obj, sizeof(int));
+	parse_ppm(spec->txt_lst->next, spec->txt_lst->obj_txt_flag, n_obj);
 	i = 0;
 	while (cur_obj)
 	{
-		if (spec->txt.obj_txt_flag[i] > 0)
+		if (spec->txt_lst->obj_txt_flag[i] > 0)
 		{
-			nth_txt = txt_lst_nth(spec->txt.txt_lst->next,
-					spec->txt.obj_txt_flag[i]);
+			nth_txt = txt_lst_nth(spec->txt_lst->next,
+					spec->txt_lst->obj_txt_flag[i]);
 			if (!nth_txt)
 				is_error("Invalid configuration (PPM TO OBJ)",
 					NULL, EXIT_FAILURE);
@@ -97,6 +94,6 @@ void	txt_to_objs(t_spec *spec, t_obj_lst *cur_obj, int n_obj)
 		cur_obj = cur_obj->next;
 		i++;
 	}
-	free(spec->txt.obj_txt_flag);
-	free_txt_lst(spec->txt.txt_lst);
+	free(spec->txt_lst->obj_txt_flag);
+	free_txt_lst(spec->txt_lst);
 }
