@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 01:40:49 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/14 09:34:33 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define CYLINDER 2
 # define CONE 3
 # define CY_CIRCLE 4
-# define CN_CIRCLE 4
+# define CN_CIRCLE 5
 
 # define X 0
 # define Y 1
@@ -114,6 +114,7 @@ void		fill_cam(t_spec *spec, char **info, int *unique, int cv_flag);
 void		fill_ch(t_txt_lst **hd, char **info, int *unique);
 void		fill_cylinder(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_cy_circle(t_cy *cy, double *cam_o_v);
+void		fill_cn_circle(t_cn	*cn, double *cam_o_v);
 void		fill_cone(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_light(t_l_lst **hd, char **info, int cv_flag);
 void		fill_plane(t_obj_lst **hd, char **info, int cv_flag);
