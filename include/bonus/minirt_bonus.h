@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 13:14:04 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:05:27 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define CHECKERED 1
 # define CUSTOM_TXT 2
 
-# define NBR_OF_THREAD 100
+# define NBR_OF_THREAD 10
 
 # define TRANSPARENT 0xff000000
 
