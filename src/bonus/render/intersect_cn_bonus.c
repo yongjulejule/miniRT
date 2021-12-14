@@ -92,13 +92,12 @@ int	intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn)
 
 	ft_bzero(origin, sizeof(double) * 3);
 	get_pt_on_line(bottom, cn->center, cn->o_vect, cn->height);
-	/* 여기까지 멀쩡함 */
 	t = get_pt_on_cn(ray, cn, origin, bottom);
 	if (t < 0.1 || (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t))
 		return (0);
 	get_pt_on_line(pt, origin, ray, t);
-	sub_vect(diff, bottom, pt);
-	if (dot_product(diff, cn->o_vect) < 0
+	sub_vect(diff, pt, bottom);
+	if (dot_product(diff, cn->o_vect) > 0
 		|| pow(vect_size(diff), 2) - pow(cn->radius, 2)
 		> pow(cn->height, 2) + 0.5)
 		return (0);
