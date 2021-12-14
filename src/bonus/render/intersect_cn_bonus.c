@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 16:19:16 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/14 09:46:53 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 09:46:53ongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ int	intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn)
 	if (t < 0.1 || (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t))
 		return (0);
 	get_pt_on_line(pt, origin, ray, t);
-	sub_vect(diff, bottom, pt);
-	if (dot_product(diff, cn->o_vect) < 0
+	sub_vect(diff, pt, bottom);
+	if (dot_product(diff, cn->o_vect) > 0
 		|| pow(vect_size(diff), 2) - pow(cn->radius, 2)
 		> pow(cn->height, 2) + 0.5)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:55:54 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/14 09:55:15 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 13:13:51y yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	circle_cn_shadow(double *ray, t_pt_info *pt_i, t_cn *cn, double r_size)
 	return (0);
 }
 
-void	intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn)
+int	intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn)
 {
 	double		pt_to_center[3];
 	t_pl		pl;
@@ -44,12 +44,13 @@ void	intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn)
 	vect_copy(pl.center, cn->center);
 	vect_copy(pl.o_vect, cn->circle_o_v);
 	if (!intersect_pl(ray, &pt_on_pl, &pl))
-		return ;
+		return (0);
 	sub_vect(pt_to_center, pt_on_pl.pt, pl.center);
 	if (vect_size(pt_to_center) > cn->radius + 0.1)
-		return ;
+		return (0);
 	vect_copy(pt_i->pt, pt_on_pl.pt);
 	pt_i->type = CN_CIRCLE;
 	pt_i->obj.cn = cn;
 	vect_copy(pt_i->obj.cn->circle_o_v, pl.o_vect);
+	return (1);
 }

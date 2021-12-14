@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 09:34:33 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 13:14:04 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void		intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph);
 int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
 void		intersect_cy_circle(double *ray, t_pt_info *pt_i, t_cy *cy);
 int			intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn);
-void		intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn);
+int			intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn);
 double		meet_pl(double *ray, double *o_vect);
 double		meet_sph(double *ray, double *origin, t_sph *sph, double r_size);
 int			get_shadow(t_l_lst *cur_lp, t_obj_lst *hd, t_pt_info *pt_info);
