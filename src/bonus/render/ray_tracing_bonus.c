@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 08:40:26 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:19:45 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 		}
 		else if (cur->type == CONE)
 		{
-			if (!intersect_cn(ray, &pt_info, cur->obj.cn))
-				intersect_cn_circle(ray, &pt_info, cur->obj.cn);
+			intersect_cn(ray, &pt_info, cur->obj.cn);
+			intersect_cn_circle(ray, &pt_info, cur->obj.cn);
 		}
 		cur = cur->next;
 	}
