@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 16:19:16 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/14 09:46:53 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 09:46:53ongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn)
 
 	ft_bzero(origin, sizeof(double) * 3);
 	get_pt_on_line(bottom, cn->center, cn->o_vect, cn->height);
+	/* 여기까지 멀쩡함 */
 	t = get_pt_on_cn(ray, cn, origin, bottom);
 	if (t < 0.1 || (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t))
 		return (0);
