@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:55:54 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/13 22:38:56 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 09:55:15 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	circle_cn_shadow(double *ray, t_pt_info *pt_i, t_cn *cn, double r_size)
 	double	cur_to_cir[3];
 
 	vect_copy(center, cn->center);
-	if (!meet_pl(ray, cn->o_vect))
+	if (!meet_pl(ray, cn->circle_o_v))
 		return (0);
-	t = (dot_product(center, cn->o_vect) - dot_product(pt_i->pt,
-				cn->o_vect)) / dot_product(ray, cn->o_vect);
+	t = (dot_product(center, cn->circle_o_v) - dot_product(pt_i->pt,
+				cn->circle_o_v)) / dot_product(ray, cn->circle_o_v);
 	get_pt_on_line(pt_on_cir, pt_i->pt, ray, t);
 	sub_vect(cur_to_cir, pt_on_cir, pt_i->pt);
 	sub_vect(cir_to_cent, pt_on_cir, center);
@@ -42,7 +42,7 @@ void	intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn)
 
 	pt_on_pl.pt[Z] = pt_i->pt[Z];
 	vect_copy(pl.center, cn->center);
-	get_pt_on_line(pl.o_vect, NULL, cn->o_vect, -1);
+	vect_copy(pl.o_vect, cn->circle_o_v);
 	if (!intersect_pl(ray, &pt_on_pl, &pl))
 		return ;
 	sub_vect(pt_to_center, pt_on_pl.pt, pl.center);

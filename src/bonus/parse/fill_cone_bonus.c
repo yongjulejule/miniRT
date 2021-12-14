@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cone_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:24:38 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 01:34:50 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/14 08:38:53 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+void	fill_cn_circle(t_cn	*cn, double *cam_o_v)
+{
+	if (dot_product(cn->o_vect, cam_o_v) < 0)
+		vect_copy(cn->circle_o_v, cn->o_vect);
+	else
+		get_pt_on_line(cn->circle_o_v, NULL, cn->o_vect, -1);
+}
 
 static void	fill_cn_center(t_cn *new_cn, char **info, int cv_flag)
 {
