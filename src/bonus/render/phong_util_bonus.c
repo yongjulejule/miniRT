@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/14 09:56:26 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:23:49 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ static	double	get_reflect_light(t_pt_info *pt_i, double *o_ray,
 	get_pt_on_line(proj, NULL, n_vect, 2 * dot_product(o_ray, n_vect));
 	sub_vect(reflect, proj, o_ray);
 	normalize_vect(reflect);
-	// if (pt_i->type == SPHERE)
-	// 	get_pt_on_line(view, NULL, pt_i->pt, -1);
-	// else if (pt_i->type == PLANE)
-	// 	get_pt_on_line(view, NULL, pt_i->pt, -1);
-	// else if (pt_i->type == CYLINDER || pt_i->type == CY_CIRCLE)
-	// 	get_pt_on_line(view, NULL, pt_i->pt, -1);
-	// else if (pt_i->type == CONE || pt_i->type == CN_CIRCLE)
 	get_pt_on_line(view, NULL, pt_i->pt, -1);
 	normalize_vect(view);
 	ret = dot_product(reflect, view);
