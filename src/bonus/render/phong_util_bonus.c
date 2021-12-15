@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   phong_util_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/14 10:23:49 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:02:41 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static	double	get_reflect_light(t_pt_info *pt_i, double *o_ray,
-				double *n_vect)
+double	get_reflect_light(t_pt_info *pt_i, double *o_ray, double *n_vect)
 {
 	double	ret;
 	double	reflect[3];
@@ -31,95 +30,44 @@ static	double	get_reflect_light(t_pt_info *pt_i, double *o_ray,
 	return (ret);
 }
 
-double	get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-			double *n_vect)
+double	get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+			double reflect)
 {
 	double	color;
-	double	reflect;
-	double	diffuse;
 
 	color = 0;
-	reflect = get_reflect_light(pt_i, o_ray, n_vect);
-	diffuse = dot_product(o_ray, n_vect);
 	if (diffuse < 0)
 		diffuse = 0;
-	if (pt_i->type == SPHERE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.sph->color[R] / 255)
-				* ((double)cur->color[R] / 255));
-	else if (pt_i->type == PLANE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.pl->color[R] / 255)
-				* ((double)cur->color[R] / 255));
-	else if (pt_i->type == CYLINDER || pt_i->type == CY_CIRCLE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.cy->color[R] / 255)
-				* ((double)cur->color[R] / 255));
-	else if (pt_i->type == CONE || pt_i->type == CN_CIRCLE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.cn->color[R] / 255)
-				* ((double)cur->color[R] / 255));
+	color = ((reflect + diffuse)
+			* ((double)pt_i->color[R] / 255)
+			* ((double)cur->color[R] / 255));
 	return (color * cur->bright);
 }
 
-double	get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-			double *n_vect)
+double	get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+			double reflect)
 {
 	double	color;
-	double	reflect;
-	double	diffuse;
 
 	color = 0;
-	reflect = get_reflect_light(pt_i, o_ray, n_vect);
-	diffuse = dot_product(o_ray, n_vect);
 	if (diffuse < 0)
 		diffuse = 0;
-	if (pt_i->type == SPHERE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.sph->color[G] / 255)
-				* ((double)cur->color[G] / 255));
-	else if (pt_i->type == PLANE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.pl->color[G] / 255)
-				* ((double)cur->color[G] / 255));
-	else if (pt_i->type == CYLINDER || pt_i->type == CY_CIRCLE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.cy->color[G] / 255)
-				* ((double)cur->color[G] / 255));
-	else if (pt_i->type == CONE || pt_i->type == CN_CIRCLE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.cn->color[R] / 255)
-				* ((double)cur->color[R] / 255));
+	color = ((reflect + diffuse)
+			* ((double)pt_i->color[G] / 255)
+			* ((double)cur->color[G] / 255));
 	return (color * cur->bright);
 }
 
-double	get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-			double *n_vect)
+double	get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+			double reflect)
 {
 	double	color;
-	double	reflect;
-	double	diffuse;
 
 	color = 0;
-	reflect = get_reflect_light(pt_i, o_ray, n_vect);
-	diffuse = dot_product(o_ray, n_vect);
 	if (diffuse < 0)
 		diffuse = 0;
-	if (pt_i->type == SPHERE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.sph->color[B] / 255)
-				* ((double)cur->color[B] / 255));
-	else if (pt_i->type == PLANE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.pl->color[B] / 255)
-				* ((double)cur->color[B] / 255));
-	else if (pt_i->type == CYLINDER || pt_i->type == CY_CIRCLE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.cy->color[B] / 255)
-				* ((double)cur->color[B] / 255));
-	else if (pt_i->type == CONE || pt_i->type == CN_CIRCLE)
-		color = ((reflect + diffuse)
-				* ((double)pt_i->obj.cn->color[R] / 255)
-				* ((double)cur->color[R] / 255));
+	color = ((reflect + diffuse)
+			* ((double)pt_i->color[B] / 255)
+			* ((double)cur->color[B] / 255));
 	return (color * cur->bright);
 }

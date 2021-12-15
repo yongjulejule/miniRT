@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 13:14:24 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:26:42 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,46 @@ void	init_obj_img(t_rt *rt)
 		is_error("Getting objects image data failed", NULL, EXIT_FAILURE);
 }
 
+static int	ray_obj_intersect(t_rt *rt, double *ray,
+				t_pt_info *pt_info, t_obj_lst *cur)
+{
+	int	meet;
+
+	meet = 0;
+	if (cur->type == SPHERE)
+		meet = intersect_sph(ray, pt_info, cur->obj.sph);
+	else if (cur->type == PLANE)
+		meet = intersect_pl(ray, pt_info, cur->obj.pl);
+	else if (cur->type == CYLINDER)
+	{
+		meet = intersect_cy(ray, pt_info, cur->obj.cy);
+		if (!meet)
+			meet = intersect_cy_circle(ray, pt_info, cur->obj.cy);
+	}
+	else if (cur->type == CONE)
+	{
+		if (dot_product(rt->spec->cam.o_vect, cur->obj.cn->o_vect) > 0)
+		{
+			meet = intersect_cn_circle(ray, pt_info, cur->obj.cn);
+			if (!meet)
+				meet = intersect_cn(ray, pt_info, cur->obj.cn);
+		}
+		else
+		{
+			meet = intersect_cn(ray, pt_info, cur->obj.cn);
+			if (!meet)
+				meet = intersect_cn_circle(ray, pt_info, cur->obj.cn);
+		}
+	}
+	return (meet);
+}
+
 int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 {
 	double		ray[3];
 	t_obj_lst	*cur;
 	t_pt_info	pt_info;
+	int			meet;
 
 	pt_info.pt[Z] = 1;
 	fill_vect(ray, vs_x, vs_y, -1 * rt->c_to_s);
@@ -35,27 +70,13 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 	cur = rt->spec->obj_lst->next;
 	while (cur)
 	{
-		if (cur->type == SPHERE)
-			intersect_sph(ray, &pt_info, cur->obj.sph);
-		else if (cur->type == PLANE)
-			intersect_pl(ray, &pt_info, cur->obj.pl);
-		else if (cur->type == CYLINDER)
+		meet = ray_obj_intersect(rt, ray, &pt_info, cur);
+		if (meet && cur->is_txt)
 		{
-			if (!intersect_cy(ray, &pt_info, cur->obj.cy))
-				intersect_cy_circle(ray, &pt_info, cur->obj.cy);
-		}
-		else if (cur->type == CONE)
-		{
-			if (dot_product(rt->spec->cam.o_vect, cur->obj.cn->o_vect) > 0)
-			{
-				if (!intersect_cn_circle(ray, &pt_info, cur->obj.cn))
-					intersect_cn(ray, &pt_info, cur->obj.cn);
-			}
-			else
-			{
-				if (!intersect_cn(ray, &pt_info, cur->obj.cn))
-					intersect_cn_circle(ray, &pt_info, cur->obj.cn);
-			}
+			pt_info.is_txt = cur->is_txt;
+			pt_info.ppm.size[X] = cur->ppm.size[X];
+			pt_info.ppm.size[Y] = cur->ppm.size[Y];
+			pt_info.ppm.color_arr = cur->ppm.color_arr;
 		}
 		cur = cur->next;
 	}

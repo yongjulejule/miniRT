@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sph_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:07:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:32:21 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:21:45 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,22 @@ double	meet_sph(double *ray, double *origin, t_sph *sph, double r_size)
 	return (-1);
 }
 
-void	intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph)
+int	intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph)
 {
 	double	d;
 	double	t;
 
 	d = meet_sph(ray, NULL, sph, 0);
 	if (d < 0)
-		return ;
+		return (0);
 	t = dot_product(ray, sph->center) - sqrt(d);
 	if (t < 0.1)
-		return ;
+		return (0);
 	if (pt_info->pt[Z] != 1 && pt_info->pt[Z] >= ray[Z] * t)
-		return ;
+		return (0);
 	get_pt_on_line(pt_info->pt, NULL, ray, t);
 	pt_info->type = SPHERE;
 	pt_info->obj.sph = sph;
+	copy_color(pt_info->color, sph->color);
+	return (1);
 }

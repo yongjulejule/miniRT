@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_pl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:08:20 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 16:46:14 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 15:40:05 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl)
 	get_pt_on_line(pt_info->pt, NULL, ray, t);
 	pt_info->type = PLANE;
 	pt_info->obj.pl = pl;
+	copy_color(pt_info->color, pl->color);
 	return (1);
 }
 

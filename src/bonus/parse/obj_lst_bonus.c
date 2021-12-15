@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:51:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 12:30:25 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 14:36:46 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_obj_lst	*obj_lst_new(void *object, int which)
 	else if (which == CONE)
 		new->obj.cn = (t_cn *)object;
 	new->type = which;
+	new->is_txt = NO_TXT;
 	new->next = NULL;
 	return (new);
 }
