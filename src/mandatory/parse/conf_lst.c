@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conf_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 12:16:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/11/17 20:22:48 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 12:32:16 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	free_config(t_conf *hd)
 		free_double_ptr((void **)to_fr->info);
 		cur = cur->next;
 		free(to_fr);
+		to_fr = NULL;
 	}
 	free(hd);
+	hd = NULL;
 }
