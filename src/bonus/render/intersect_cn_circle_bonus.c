@@ -51,6 +51,7 @@ int	intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn)
 	vect_copy(pt_i->pt, pt_on_pl.pt);
 	pt_i->type = CN_CIRCLE;
 	pt_i->obj.cn = cn;
+	copy_color(pt_i->color, cn->color);
 	vect_copy(pt_i->obj.cn->circle_o_v, pl.o_vect);
 	return (1);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/14 01:32:32 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/15 15:18:54 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,7 @@ SRCS_BONUS_PARSE		= $(addprefix $(SRCS_BONUS_PARSE_DIR), \
 				)
 
 SRCS_BONUS_RENDER		= $(addprefix $(SRCS_BONUS_RENDER_DIR), \
+				apply_texture_bonus.c\
 				clone_obj_lst_bonus.c\
 				clone_rt_bonus.c\
 				cam_hook_bonus.c\

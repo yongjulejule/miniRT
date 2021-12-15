@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 13:14:24 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/15 15:11:51 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 				if (!intersect_cn(ray, &pt_info, cur->obj.cn))
 					intersect_cn_circle(ray, &pt_info, cur->obj.cn);
 			}
+		}
+		pt_info.is_txt = cur->is_txt;
+		if (pt_info.is_txt)
+		{
+			pt_info.ppm.size[X] = cur->ppm.size[X];
+			pt_info.ppm.size[Y] = cur->ppm.size[Y];
+			pt_info.ppm.color_arr = cur->ppm.color_arr;
 		}
 		cur = cur->next;
 	}

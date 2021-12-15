@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy_circle_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 14:40:04 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:24:21 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/15 15:37:21 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void	intersect_cy_circle(double *ray, t_pt_info *pt_i, t_cy *cy)
 	vect_copy(pt_i->pt, pt_on_pl.pt);
 	pt_i->type = CY_CIRCLE;
 	pt_i->obj.cy = cy;
+	copy_color(pt_i->color, cy->color);
 	vect_copy(pt_i->obj.cy->circle_o_v, pl.o_vect);
 }

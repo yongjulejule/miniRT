@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/14 08:53:31 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/15 15:31:42 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ int	get_phong_light(t_rt *rt, t_pt_info *pt_info)
 	d_color[R] = rt->spec->amb.ratio * (double)rt->spec->amb.color[R] / 255;
 	d_color[G] = rt->spec->amb.ratio * (double)rt->spec->amb.color[G] / 255;
 	d_color[B] = rt->spec->amb.ratio * (double)rt->spec->amb.color[B] / 255;
+	// if (pt_info->is_txt == CHECKERED)
+	// 	apply_checker(pt_info);
+	// else if (pt_info->is_txt == CUSTOM_TXT)
+	// 	apply_texture(pt_info);
 	multi_phong_rgb(rt, pt_info, d_color);
 	color[R] = d_color[R] * 255;
 	color[G] = d_color[G] * 255;

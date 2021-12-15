@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 17:31:33 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 14:41:04 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 void		fill_txt(t_txt_lst **hd, char **info);
 
 /* Render */
+void		apply_checker(t_pt_info *pt_info);
+void		apply_texture(t_pt_info *pt_info);
 void		draw(t_rt *rt, t_rt *c_rt);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);

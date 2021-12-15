@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 11:32:26 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 15:28:27 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy)
 	vect_copy(pt_info->pt, pt);
 	pt_info->type = CYLINDER;
 	pt_info->obj.cy = cy;
+	copy_color(pt_info->color, cy->color);
 	return (1);
 }

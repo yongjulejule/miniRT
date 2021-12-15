@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sph.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:07:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/10 14:22:31 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/15 15:39:41 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph)
 	get_pt_on_line(pt_info->pt, NULL, ray, t);
 	pt_info->type = SPHERE;
 	pt_info->obj.sph = sph;
+	copy_color(pt_info->color, sph->color);
 }

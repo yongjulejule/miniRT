@@ -104,5 +104,6 @@ int	intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn)
 	vect_copy(pt_info->pt, pt);
 	pt_info->type = CONE;
 	pt_info->obj.cn = cn;
+	copy_color(pt_info->color, cn->color);
 	return (1);
 }
