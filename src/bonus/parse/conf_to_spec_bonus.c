@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conf_to_spec_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 13:52:22 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 01:48:37 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/14 17:23:57 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	config_to_spec(t_conf *cur, t_spec *spec, int n_obj)
 			objs_to_spec(cur, &(spec->obj_lst), &n_obj);
 		else if ((!ft_strcmp(cur->elem, "ch") && !unique[2])
 			|| !ft_strcmp(cur->elem, "tx"))
-			txt_to_spec(cur, &(spec->txt.txt_lst), unique);
+			txt_to_spec(cur, &(spec->txt_lst), unique);
 		else
 			is_error("Invalid configuration", NULL, EXIT_FAILURE);
 		cur = cur->next;
 	}
 	if (spec->l_lst->next == NULL)
 		is_error("Invalid configuration (NO LIGHT)", NULL, EXIT_FAILURE);
-	if (spec->txt.txt_lst->next)
+	if (spec->txt_lst->next)
 		txt_to_objs(spec, spec->obj_lst->next, n_obj);
 }

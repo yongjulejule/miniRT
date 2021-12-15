@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_ch_txt_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:44:05 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 02:02:21 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 12:23:39 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static void	fill_txt_obj_flag(t_txt_lst *n_txt, char **info, int index)
 			sizeof(int));
 	n_txt->obj_flag[0] = ft_strsetlen(objs_no);
 	i = 0;
-	while (objs_no[++i])
+	while (i < n_txt->obj_flag[0])
 	{
-		n_txt->obj_flag[i] = ft_pos_atoi(objs_no[i]);
+		n_txt->obj_flag[i + 1] = ft_pos_atoi(objs_no[i]);
 		if (n_txt->obj_flag[i] < 0)
 			is_error("Invalid configuration (TXT OBJ_NO)", NULL, EXIT_FAILURE);
+		i++;
 	}
 	free_double_ptr((void **)objs_no);
 }
