@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:52 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 18:02:47 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 12:15:26 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static void	check_obj_txt_flag(t_txt_lst *cur, int *o_t_flag,
 
 	if (cur->obj_flag[0] > n_obj)
 		is_error("Invalid configuration (OBJ IDX)", NULL, EXIT_FAILURE);
-	i = 1;
-	while (i <= cur->obj_flag[0])
+	i = 0;
+	while (i < cur->obj_flag[0])
 	{
-		if (cur->obj_flag[i] >= n_obj)
+		if (cur->obj_flag[i + 1] >= n_obj)
 			is_error("Invalid configuration (OBJ IDX)", NULL, EXIT_FAILURE);
-		o_t_flag[cur->obj_flag[i]] = o_idx;
+		o_t_flag[cur->obj_flag[i + 1]] = o_idx;
 		i++;
 	}
 	cur->obj_txt_flag = o_t_flag;
