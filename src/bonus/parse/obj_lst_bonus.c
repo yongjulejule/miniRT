@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:51:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 12:06:24 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 12:30:25 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	free_obj_lst(t_obj_lst *hd)
 			free(cur->obj.cn);
 		cur = cur->next;
 		free(to_free);
+		to_free = NULL;
 	}
 	free(hd);
+	hd = NULL;
 }

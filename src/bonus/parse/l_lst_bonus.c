@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   l_lst_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:51:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 15:07:22 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 12:30:36 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	free_l_lst(t_l_lst *hd)
 		to_free = cur;
 		cur = cur->next;
 		free(to_free);
+		to_free = NULL;
 	}
 	free(hd);
+	hd = NULL;
 }

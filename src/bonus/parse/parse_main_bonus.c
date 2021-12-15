@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:06:40 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/14 17:23:33 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	parse_config(int argc, char **argv, t_spec *spec)
 	close(fd);
 	spec->obj_lst = obj_lst_new(NULL, 0);
 	spec->l_lst = l_lst_new();
-	spec->txt.txt_lst = txt_lst_new(NO_TXT);
+	spec->txt_lst = txt_lst_new(NO_TXT);
 	config_to_spec(head->next, spec, 0);
 	decide_pl_orientation(spec);
 	free_config(head);

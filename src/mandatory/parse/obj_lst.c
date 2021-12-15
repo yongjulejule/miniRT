@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:51:28 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/09 18:38:12 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 12:32:35 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	free_obj_lst(t_obj_lst *hd)
 			free(cur->obj.cy);
 		cur = cur->next;
 		free(to_free);
+		to_free = NULL;
 	}
 	free(hd);
+	hd = NULL;
 }
