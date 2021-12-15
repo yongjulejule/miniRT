@@ -6,14 +6,13 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/15 15:32:18 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:02:41 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static	double	get_reflect_light(t_pt_info *pt_i, double *o_ray,
-				double *n_vect)
+double	get_reflect_light(t_pt_info *pt_i, double *o_ray, double *n_vect)
 {
 	double	ret;
 	double	reflect[3];
@@ -31,16 +30,12 @@ static	double	get_reflect_light(t_pt_info *pt_i, double *o_ray,
 	return (ret);
 }
 
-double	get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-			double *n_vect)
+double	get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+			double reflect)
 {
 	double	color;
-	double	reflect;
-	double	diffuse;
 
 	color = 0;
-	reflect = get_reflect_light(pt_i, o_ray, n_vect);
-	diffuse = dot_product(o_ray, n_vect);
 	if (diffuse < 0)
 		diffuse = 0;
 	color = ((reflect + diffuse)
@@ -49,16 +44,12 @@ double	get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
 	return (color * cur->bright);
 }
 
-double	get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-			double *n_vect)
+double	get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+			double reflect)
 {
 	double	color;
-	double	reflect;
-	double	diffuse;
 
 	color = 0;
-	reflect = get_reflect_light(pt_i, o_ray, n_vect);
-	diffuse = dot_product(o_ray, n_vect);
 	if (diffuse < 0)
 		diffuse = 0;
 	color = ((reflect + diffuse)
@@ -67,16 +58,12 @@ double	get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
 	return (color * cur->bright);
 }
 
-double	get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-			double *n_vect)
+double	get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+			double reflect)
 {
 	double	color;
-	double	reflect;
-	double	diffuse;
 
 	color = 0;
-	reflect = get_reflect_light(pt_i, o_ray, n_vect);
-	diffuse = dot_product(o_ray, n_vect);
 	if (diffuse < 0)
 		diffuse = 0;
 	color = ((reflect + diffuse)

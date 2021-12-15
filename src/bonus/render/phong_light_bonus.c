@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/15 15:31:42 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:00:07 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
 
 static void	multi_phong_rgb(t_rt *rt, t_pt_info *pt_info, double *d_color)
 {
+	double	diffuse;
+	double	reflect;
 	double	n_vect[3];
 	double	o_ray[3];
 	t_l_lst	*cur;
@@ -80,9 +82,11 @@ static void	multi_phong_rgb(t_rt *rt, t_pt_info *pt_info, double *d_color)
 			cur = cur->next;
 			continue ;
 		}
-		d_color[R] += get_phong_r(cur, pt_info, o_ray, n_vect);
-		d_color[G] += get_phong_g(cur, pt_info, o_ray, n_vect);
-		d_color[B] += get_phong_b(cur, pt_info, o_ray, n_vect);
+		diffuse = dot_product(o_ray, n_vect);
+		reflect = get_reflect_light(pt_info, o_ray, n_vect);
+		d_color[R] += get_phong_r(cur, pt_info, diffuse, reflect);
+		d_color[G] += get_phong_g(cur, pt_info, diffuse, reflect);
+		d_color[B] += get_phong_b(cur, pt_info, diffuse, reflect);
 		cur = cur->next;
 	}
 }

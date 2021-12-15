@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 14:41:04 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:03:00 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,13 @@ int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
 void		get_coord_system(t_spec *spec, double *transf);
 int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
-double		get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-				double *n_vect);
-double		get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-				double *n_vect);
-double		get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double *o_ray,
-				double *n_vect);
+double		get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+				double reflect);
+double		get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+				double reflect);
+double		get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
+				double reflect);
+double		get_reflect_light(t_pt_info *pt_i, double *o_ray, double *n_vect);
 void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
 void		ray_tracing(t_rt *rt);
