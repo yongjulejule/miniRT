@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/10 15:03:15 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 15:53:44 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,33 @@ static void	check_rgb_range(int *color)
 	}
 }
 
-static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
+static double	get_reflect_light(t_pt_info *pt_info, double *o_ray,
+				double *n_vect)
 {
-	double	n_vect[3];
-	double	o_ray[3];
+	double	ret;
+	double	reflect[3];
+	double	proj[3];
+	double	view[3];
 
+	get_pt_on_line(proj, NULL, n_vect, 2 * dot_product(o_ray, n_vect));
+	sub_vect(reflect, proj, o_ray);
+	normalize_vect(reflect);
+	if (pt_info->type == SPHERE)
+		get_pt_on_line(view, NULL, pt_info->obj.sph->center, -1);
+	else if (pt_info->type == PLANE)
+		get_pt_on_line(view, NULL, pt_info->obj.pl->center, -1);
+	else if (pt_info->type == CYLINDER || pt_info->type == CY_CIRCLE)
+		get_pt_on_line(view, NULL, pt_info->obj.cy->center, -1);
+	normalize_vect(view);
+	ret = dot_product(reflect, view);
+	if (ret < 0)
+		return (0);
+	return (ret);
+}
+
+static void	get_o_ray_n_vect(t_rt *rt, t_pt_info *pt_info,
+				double *o_ray, double *n_vect)
+{
 	sub_vect(o_ray, rt->spec->light.lp, pt_info->pt);
 	normalize_vect(o_ray);
 	if (pt_info->type == SPHERE)
@@ -47,11 +69,23 @@ static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 	else if (pt_info->type == CY_CIRCLE)
 		vect_copy(n_vect, pt_info->obj.cy->circle_o_v);
 	normalize_vect(n_vect);
+}
+
+static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
+{
+	double	diffuse;
+	double	reflect;
+	double	n_vect[3];
+	double	o_ray[3];
+
+	get_o_ray_n_vect(rt, pt_info, o_ray, n_vect);
 	if (get_shadow(rt, pt_info) == SHADED)
 		return (SHADED);
-	color[R] = get_phong_r(rt, pt_info, o_ray, n_vect);
-	color[G] = get_phong_g(rt, pt_info, o_ray, n_vect);
-	color[B] = get_phong_b(rt, pt_info, o_ray, n_vect);
+	diffuse = dot_product(o_ray, n_vect);
+	reflect = get_reflect_light(pt_info, o_ray, n_vect);
+	color[R] = get_phong_r(rt, pt_info, diffuse, reflect);
+	color[G] = get_phong_g(rt, pt_info, diffuse, reflect);
+	color[B] = get_phong_b(rt, pt_info, diffuse, reflect);
 	return (NOT_SHADED);
 }
 
