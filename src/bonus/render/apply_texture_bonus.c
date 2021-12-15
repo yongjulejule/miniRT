@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:39:27 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 15:30:58 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:29:10 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,10 @@ void    apply_checker(t_pt_info *pt_info)
 {
     double  sines;
 
-    sines = sin(10 * pt_info->pt[X]) * sin(10 * pt_info->pt[Y]) * sin(10 * pt_info->pt[Z]);
+    sines = sin(pt_info->pt[X] / 100) * sin(pt_info->pt[Y] / 100)
+        * sin(pt_info->pt[Z] / 100);
     if (sines > 0)
-    {
-        if (pt_info->type == SPHERE)
-            ft_bzero(pt_info->obj.sph->color, sizeof(int) * 3);
-        else if (pt_info->type == PLANE)
-            ft_bzero(pt_info->obj.pl->color, sizeof(int) * 3);
-        else if (pt_info->type == CYLINDER)
-            ft_bzero(pt_info->obj.cy->color, sizeof(int) * 3);
-        else if (pt_info->type == CONE)
-            ft_bzero(pt_info->obj.cn->color, sizeof(int) * 3);
-    }
+        ft_bzero(pt_info->color, sizeof(int) * 3);
 }
 
 void    apply_texture(t_pt_info *pt_info)

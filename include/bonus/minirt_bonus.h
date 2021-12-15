@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:03:00 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:21:43 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,9 @@ int			circle_cn_shadow(double *ray, t_pt_info *pt_i,
 int			cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size);
 int			cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn, double r_size);
 int			intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl);
-void		intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph);
+int			intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph);
 int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
-void		intersect_cy_circle(double *ray, t_pt_info *pt_i, t_cy *cy);
+int			intersect_cy_circle(double *ray, t_pt_info *pt_i, t_cy *cy);
 int			intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn);
 int			intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn);
 double		meet_pl(double *ray, double *o_vect);

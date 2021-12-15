@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 14:40:04 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 15:37:21 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:22:28 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	circle_cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
 	return (0);
 }
 
-void	intersect_cy_circle(double *ray, t_pt_info *pt_i, t_cy *cy)
+int	intersect_cy_circle(double *ray, t_pt_info *pt_i, t_cy *cy)
 {
 	double		pt_to_center[3];
 	t_pl		pl;
@@ -59,13 +59,14 @@ void	intersect_cy_circle(double *ray, t_pt_info *pt_i, t_cy *cy)
 	vect_copy(pl.center, cy->circle_center);
 	vect_copy(pl.o_vect, cy->circle_o_v);
 	if (!intersect_pl(ray, &pt_on_pl, &pl))
-		return ;
+		return (0);
 	sub_vect(pt_to_center, pt_on_pl.pt, pl.center);
 	if (vect_size(pt_to_center) > cy->radius + 0.1)
-		return ;
+		return (0);
 	vect_copy(pt_i->pt, pt_on_pl.pt);
 	pt_i->type = CY_CIRCLE;
 	pt_i->obj.cy = cy;
 	copy_color(pt_i->color, cy->color);
 	vect_copy(pt_i->obj.cy->circle_o_v, pl.o_vect);
+	return (1);
 }
