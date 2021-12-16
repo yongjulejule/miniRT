@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/15 15:50:22 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/16 11:32:43 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_phong_r(t_rt *rt, t_pt_info *pt_info, double diffuse, double reflect)
 	color = ((reflect + diffuse)
 			* ((double)pt_info->color[R] / 255)
 			* ((double)rt->spec->light.color[R] / 255))
-			* rt->spec->light.bright + amb;
+		* rt->spec->light.bright + amb;
 	return ((int)(color * 255));
 }
 
@@ -37,10 +37,10 @@ int	get_phong_g(t_rt *rt, t_pt_info *pt_info, double diffuse, double reflect)
 	if (diffuse < 0)
 		diffuse = 0;
 	amb = (rt->spec->amb.ratio * ((double)rt->spec->amb.color[G] / 255));
-		color = ((reflect + diffuse)
+	color = ((reflect + diffuse)
 			* ((double)pt_info->color[G] / 255)
 			* ((double)rt->spec->light.color[G] / 255))
-			* rt->spec->light.bright + amb;
+		* rt->spec->light.bright + amb;
 	return ((int)(color * 255));
 }
 
@@ -56,6 +56,6 @@ int	get_phong_b(t_rt *rt, t_pt_info *pt_info, double diffuse, double reflect)
 	color = ((reflect + diffuse)
 			* ((double)pt_info->color[B] / 255)
 			* ((double)rt->spec->light.color[B] / 255))
-			* rt->spec->light.bright + amb;
+		* rt->spec->light.bright + amb;
 	return ((int)(color * 255));
 }
