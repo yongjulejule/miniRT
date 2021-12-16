@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   img_util_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:27:04 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/11 15:42:01 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:56:15 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+void	init_obj_img(t_rt *rt)
+{
+	rt->obj_img.img_ptr = mlx_new_image(rt->mlx_ptr, WIN_W, WIN_H);
+	if (!rt->obj_img.img_ptr)
+		is_error("Objects image init failed", NULL, EXIT_FAILURE);
+	rt->obj_img.data = (int *)mlx_get_data_addr(rt->obj_img.img_ptr,
+			&rt->obj_img.bpp, &rt->obj_img.width, &rt->obj_img.endian);
+	if (!rt->obj_img.data)
+		is_error("Getting objects image data failed", NULL, EXIT_FAILURE);
+}
 
 int	get_color(int *color, double ratio)
 {

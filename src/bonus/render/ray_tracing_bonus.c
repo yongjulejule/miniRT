@@ -6,30 +6,88 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 16:07:24 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/16 18:18:17 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-void	init_obj_img(t_rt *rt)
+static int	intersect_cone(t_rt *rt, double *ray, t_pt_info *pt_info, t_cn *cn)
 {
-	rt->obj_img.img_ptr = mlx_new_image(rt->mlx_ptr, WIN_W, WIN_H);
-	if (!rt->obj_img.img_ptr)
-		is_error("Objects image init failed", NULL, EXIT_FAILURE);
-	rt->obj_img.data = (int *)mlx_get_data_addr(rt->obj_img.img_ptr,
-			&rt->obj_img.bpp, &rt->obj_img.width, &rt->obj_img.endian);
-	if (!rt->obj_img.data)
-		is_error("Getting objects image data failed", NULL, EXIT_FAILURE);
+	int	meet;
+
+	if (dot_product(rt->spec->cam.o_vect, cn->o_vect) > 0)
+	{
+		meet = intersect_cn_circle(ray, pt_info, cn);
+		if (!meet)
+			meet = intersect_cn(ray, pt_info, cn);
+	}
+	else
+	{
+		meet = intersect_cn(ray, pt_info, cn);
+		if (!meet)
+			meet = intersect_cn_circle(ray, pt_info, cn);
+	}
+	return (meet);
+}
+
+static int	ray_obj_intersect(t_rt *rt, double *ray,
+				t_pt_info *pt_info, t_obj_lst *cur)
+{
+	int	meet;
+
+	meet = 0;
+	if (cur->type == SPHERE)
+		meet = intersect_sph(ray, pt_info, cur->obj.sph);
+	else if (cur->type == PLANE)
+		meet = intersect_pl(ray, pt_info, cur->obj.pl);
+	else if (cur->type == CYLINDER)
+	{
+		meet = intersect_cy(ray, pt_info, cur->obj.cy);
+		if (!meet)
+			meet = intersect_cy_circle(ray, pt_info, cur->obj.cy);
+	}
+	else if (cur->type == CONE)
+		meet = intersect_cone(rt, ray, pt_info, cur->obj.cn);
+	return (meet);
+}
+
+int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
+{
+	double		ray[3];
+	t_obj_lst	*cur;
+	t_pt_info	pt_info;
+	int			meet;
+
+	pt_info.pt[Z] = 1;
+	fill_vect(ray, vs_x, vs_y, -1 * rt->c_to_s);
+	normalize_vect(ray);
+	cur = rt->spec->obj_lst->next;
+	while (cur)
+	{
+		meet = ray_obj_intersect(rt, ray, &pt_info, cur);
+		if (meet)
+			pt_info.is_txt = cur->is_txt;
+		if (meet && cur->is_txt)
+		{
+			pt_info.ppm.size[X] = cur->ppm.size[X];
+			pt_info.ppm.size[Y] = cur->ppm.size[Y];
+			pt_info.ppm.color_arr = cur->ppm.color_arr;
+		}
+		cur = cur->next;
+	}
+	if (pt_info.pt[Z] < 1)
+		return (get_phong_light(rt, &pt_info));
+	return (TRANSPARENT);
 }
 
 static void	*ray_tracing_multi(void *arg)
 {
 	static int	seek = 0;
-	t_rt		*rt;
 	int			w;
 	int			h;
 	int			max;
+	t_rt		*rt;
 
 	rt = (t_rt *)arg;
 	pthread_mutex_lock(&rt->mutex);

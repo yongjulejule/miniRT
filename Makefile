@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/16 16:09:52 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/16 18:15:13 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,7 +120,6 @@ SRCS_BONUS_RENDER		= $(addprefix $(SRCS_BONUS_RENDER_DIR), \
 				phong_util_bonus.c\
 				ray_tracing_bonus.c\
 				shadow_bonus.c\
-				shoot_ray_bonus.c\
 				vect_ops_bonus.c\
 				vect_util_bonus.c\
 				view_transform_bonus.c\
