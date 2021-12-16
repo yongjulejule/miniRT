@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:39:27 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 18:14:50 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/16 18:57:38 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	apply_checker(t_pt_info *pt_info)
 {
-	double  sines;
-	double  div;
+	double	sines;
+	double	div;
 
 	div = 100;
 	if (pt_info->type == PLANE)
