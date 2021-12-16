@@ -28,8 +28,8 @@ int	circle_cn_shadow(double *ray, t_pt_info *pt_i, t_cn *cn, double r_size)
 	get_pt_on_line(pt_on_cir, pt_i->pt, ray, t);
 	sub_vect(cur_to_cir, pt_on_cir, pt_i->pt);
 	sub_vect(cir_to_cent, pt_on_cir, center);
-	if (t > 0 && vect_size(cur_to_cir) < r_size - 0.5
-		&& vect_size(cir_to_cent) <= cn->radius + 0.1)
+	if (t > 0.5 && vect_size(cur_to_cir) < r_size - 0.5
+		&& vect_size(cir_to_cent) <= cn->radius + 0.5)
 		return (1);
 	return (0);
 }
@@ -46,7 +46,7 @@ int	intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn)
 	if (!intersect_pl(ray, &pt_on_pl, &pl))
 		return (0);
 	sub_vect(pt_to_center, pt_on_pl.pt, pl.center);
-	if (vect_size(pt_to_center) > cn->radius + 0.1)
+	if (vect_size(pt_to_center) > cn->radius + 0.5)
 		return (0);
 	vect_copy(pt_i->pt, pt_on_pl.pt);
 	pt_i->type = CN_CIRCLE;

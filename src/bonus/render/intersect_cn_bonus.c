@@ -56,7 +56,7 @@ static double	get_pt_on_cn(double *r, t_cn *cn, double *origin, double *center)
 			- pow(o[Z], 2) * under);
 	if (pow(coef[1], 2) - 4 * coef[0] * coef[2] < 0)
 		return (0);
-	return ((coef[1] - sqrt(pow(coef[1], 2) - 4 * coef[0] * coef[2]))
+	return ((coef[1] + sqrt(pow(coef[1], 2) - 4 * coef[0] * coef[2]))
 		/ (2 * coef[0]));
 }
 
