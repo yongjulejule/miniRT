@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:15:11 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:17:14 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,11 +136,12 @@ double		get_phong_g(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
 double		get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
 				double reflect);
 double		get_reflect_light(t_pt_info *pt_i, double *o_ray, double *n_vect);
+int			get_shadow(t_l_lst *cur_lp, t_obj_lst *hd, t_pt_info *pt_info);
+void		init_obj_img(t_rt *rt);
 void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
-void		init_obj_img(t_rt *rt);
 
 /* Intersection & Shadow */
 int			circle_cy_shadow(double *ray, t_pt_info *pt_i,
@@ -155,7 +156,6 @@ int			intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn);
 int			intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn);
 double		meet_pl(double *ray, double *o_vect);
 double		meet_sph(double *ray, double *origin, t_sph *sph, double r_size);
-int			get_shadow(t_l_lst *cur_lp, t_obj_lst *hd, t_pt_info *pt_info);
 int			pl_shadow(double *ray, t_pt_info *pt_info,
 				t_pl *pl, double r_size);
 int			side_cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 18:01:07 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:18:17 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 	while (cur)
 	{
 		meet = ray_obj_intersect(rt, ray, &pt_info, cur);
+		if (meet)
+			pt_info.is_txt = cur->is_txt;
 		if (meet && cur->is_txt)
 		{
-			pt_info.is_txt = cur->is_txt;
 			pt_info.ppm.size[X] = cur->ppm.size[X];
 			pt_info.ppm.size[Y] = cur->ppm.size[Y];
 			pt_info.ppm.color_arr = cur->ppm.color_arr;
@@ -83,10 +84,10 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 static void	*ray_tracing_multi(void *arg)
 {
 	static int	seek = 0;
-	t_rt		*rt;
 	int			w;
 	int			h;
 	int			max;
+	t_rt		*rt;
 
 	rt = (t_rt *)arg;
 	pthread_mutex_lock(&rt->mutex);
