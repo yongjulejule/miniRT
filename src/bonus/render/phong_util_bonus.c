@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_util_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/15 16:02:41 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/16 11:32:26 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ double	get_reflect_light(t_pt_info *pt_i, double *o_ray, double *n_vect)
 	double	proj[3];
 	double	view[3];
 
+	if (signbit(dot_product(o_ray, n_vect)))
+		return (0);
 	get_pt_on_line(proj, NULL, n_vect, 2 * dot_product(o_ray, n_vect));
 	sub_vect(reflect, proj, o_ray);
 	normalize_vect(reflect);

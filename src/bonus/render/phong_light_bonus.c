@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/15 16:15:44 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/16 12:02:11 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	get_surface_n_cn(double *n_vect, t_pt_info *pt_i)
 	sub_vect(vert, pt_i->pt, pt_i->obj.cn->center);
 	normalize_vect(vert);
 	sub_vect(vert, vert, pt_i->obj.cn->o_vect);
-	get_pt_on_line(vert, NULL, vert, -1 * pt_i->obj.cn->height);
+	get_pt_on_line(vert, NULL, vert, pt_i->obj.cn->height);
 	get_pt_on_line(hori, NULL, pt_i->obj.cn->o_vect, pt_i->obj.cn->radius);
 	n_vect[X] = vert[X] + hori[X];
 	n_vect[Y] = vert[Y] + hori[Y];
