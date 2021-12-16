@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:55:54 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/16 12:04:00 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:55:59 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	circle_cn_shadow(double *ray, t_pt_info *pt_i, t_cn *cn, double r_size)
 		return (1);
 	return (0);
 }
-
-/* 회전은 잘 되는데 circle이 이상하게 찍혀서 그런거임; */
 
 int	intersect_cn_circle(double *ray, t_pt_info *pt_i, t_cn *cn)
 {

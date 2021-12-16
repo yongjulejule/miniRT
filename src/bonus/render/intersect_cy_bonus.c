@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 15:28:27 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:13:22 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static double	get_pt_on_cy(double *r, t_cy *cy, double *o, double rad)
 	return ((-1 * b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a));
 }
 
-int	cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
+int	side_cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
 {
 	double	t;
 	double	pt_on_cir[3];

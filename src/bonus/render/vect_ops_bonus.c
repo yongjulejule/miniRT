@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:22 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 09:45:50 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:04:50 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	multiply_vect(double *transf, double *dst, int which)
 			+ transf[row * 4 + W] * homo_v[W];
 		row++;
 	}
+	if (which == VECTOR)
+		normalize_vect(dst);
 }
 
 void	cross_product(double *ret, double *vect_1, double *vect_2)
