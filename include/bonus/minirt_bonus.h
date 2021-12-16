@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 12:03:51 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:15:11 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,6 @@ int			circle_cy_shadow(double *ray, t_pt_info *pt_i,
 				t_cy *cy, double r_size);
 int			circle_cn_shadow(double *ray, t_pt_info *pt_i,
 				t_cn *cn, double r_size);
-int			cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size);
-int			cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn, double r_size);
 int			intersect_pl(double *ray, t_pt_info *pt_info, t_pl *pl);
 int			intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph);
 int			intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy);
@@ -160,6 +158,10 @@ double		meet_sph(double *ray, double *origin, t_sph *sph, double r_size);
 int			get_shadow(t_l_lst *cur_lp, t_obj_lst *hd, t_pt_info *pt_info);
 int			pl_shadow(double *ray, t_pt_info *pt_info,
 				t_pl *pl, double r_size);
+int			side_cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy,
+				double r_size);
+int			side_cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn,
+				double r_size);
 
 /* Hook */
 void		hook_minirt(t_rt *rt);

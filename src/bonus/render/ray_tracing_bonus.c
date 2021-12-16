@@ -6,21 +6,29 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 12:01:42 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:01:07 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-void	init_obj_img(t_rt *rt)
+static int	intersect_cone(t_rt *rt, double *ray, t_pt_info *pt_info, t_cn *cn)
 {
-	rt->obj_img.img_ptr = mlx_new_image(rt->mlx_ptr, WIN_W, WIN_H);
-	if (!rt->obj_img.img_ptr)
-		is_error("Objects image init failed", NULL, EXIT_FAILURE);
-	rt->obj_img.data = (int *)mlx_get_data_addr(rt->obj_img.img_ptr,
-			&rt->obj_img.bpp, &rt->obj_img.width, &rt->obj_img.endian);
-	if (!rt->obj_img.data)
-		is_error("Getting objects image data failed", NULL, EXIT_FAILURE);
+	int	meet;
+
+	if (dot_product(rt->spec->cam.o_vect, cn->o_vect) > 0)
+	{
+		meet = intersect_cn_circle(ray, pt_info, cn);
+		if (!meet)
+			meet = intersect_cn(ray, pt_info, cn);
+	}
+	else
+	{
+		meet = intersect_cn(ray, pt_info, cn);
+		if (!meet)
+			meet = intersect_cn_circle(ray, pt_info, cn);
+	}
+	return (meet);
 }
 
 static int	ray_obj_intersect(t_rt *rt, double *ray,
@@ -40,20 +48,7 @@ static int	ray_obj_intersect(t_rt *rt, double *ray,
 			meet = intersect_cy_circle(ray, pt_info, cur->obj.cy);
 	}
 	else if (cur->type == CONE)
-	{
-		if (dot_product(rt->spec->cam.o_vect, cur->obj.cn->o_vect) > 0)
-		{
-			meet = intersect_cn_circle(ray, pt_info, cur->obj.cn);
-			if (!meet)
-				meet = intersect_cn(ray, pt_info, cur->obj.cn);
-		}
-		else
-		{
-			meet = intersect_cn(ray, pt_info, cur->obj.cn);
-			if (!meet)
-				meet = intersect_cn_circle(ray, pt_info, cur->obj.cn);
-		}
-	}
+		meet = intersect_cone(rt, ray, pt_info, cur->obj.cn);
 	return (meet);
 }
 

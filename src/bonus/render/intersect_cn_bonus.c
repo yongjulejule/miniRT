@@ -6,48 +6,60 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 16:19:16 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/14 16:46:42 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:21:20 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static double	get_pt_on_cn(double *r, t_cn *cn, double *origin, double *center)
+static double	get_cn_b(double *r, t_cn *cn, double *o, double under)
+{
+	return (-2 * o[X] * r[X] * pow(cn->o_vect[X], 2) + 2 * o[X] * r[X]
+		* under - 2 * o[X] * r[Y] * cn->o_vect[X] * cn->o_vect[Y]
+		- 2 * o[X] * r[Z] * cn->o_vect[X] * cn->o_vect[Z] - 2 * o[Y] * r[X]
+		* cn->o_vect[X] * cn->o_vect[Y] - 2 * o[Y] * r[Y]
+		* pow(cn->o_vect[Y], 2) + 2 * o[Y] * r[Y] * under
+		- 2 * o[Y] * r[Z] * cn->o_vect[Y] * cn->o_vect[Z]
+		- 2 * o[Z] * r[X] * cn->o_vect[X] * cn->o_vect[Z] - 2 * o[Z] * r[Y]
+		* cn->o_vect[Y] * cn->o_vect[Z] - 2 * o[Z] * r[Z]
+		* pow(cn->o_vect[Z], 2) + 2 * o[Z] * r[Z] * under);
+}
+
+static double	get_cn_c(t_cn *cn, double *o, double under)
+{
+	return (pow(o[X] * cn->o_vect[X], 2) - pow(o[X], 2) * under + 2 * o[X]
+		* o[Y] * cn->o_vect[X] * cn->o_vect[Y] + 2 * o[X] * o[Z]
+		* cn->o_vect[X] * cn->o_vect[Z] + pow(o[Y] * cn->o_vect[Y], 2)
+		- pow(o[Y], 2) * under + 2 * o[Y] * o[Z] * cn->o_vect[Y]
+		* cn->o_vect[Z] + pow(o[Z] * cn->o_vect[Z], 2)
+		- pow(o[Z], 2) * under);
+}
+
+static double	get_pt_on_cn(double *r, t_cn *cn, double *ori, double *center)
 {
 	double	under;
-	double	coef[3];
+	double	a;
+	double	b;
+	double	c;
 	double	o[3];
 
 	under = pow(cos(atan(cn->radius / cn->height)), 2);
-	sub_vect(o, origin, center);
-	coef[0] = (pow(r[X] * cn->o_vect[X], 2) - pow(r[X], 2) * under
+	sub_vect(o, ori, center);
+	a = (pow(r[X] * cn->o_vect[X], 2) - pow(r[X], 2) * under
 			+ 2 * r[X] * r[Y] * cn->o_vect[X] * cn->o_vect[Y]
 			+ 2 * r[X] * r[Z] * cn->o_vect[X] * cn->o_vect[Z]
 			+ pow(r[Y] * cn->o_vect[Y], 2) - pow(r[Y], 2) * under
 			+ 2 * r[Y] * r[Z] * cn->o_vect[Y] * cn->o_vect[Z]
 			+ pow(r[Z] * cn->o_vect[Z], 2) - pow(r[Z], 2) * under);
-	coef[1] = (-2 * o[X] * r[X] * pow(cn->o_vect[X], 2) + 2 * o[X] * r[X]
-			* under - 2 * o[X] * r[Y] * cn->o_vect[X] * cn->o_vect[Y]
-			- 2 * o[X] * r[Z] * cn->o_vect[X] * cn->o_vect[Z] - 2 * o[Y] * r[X]
-			* cn->o_vect[X] * cn->o_vect[Y] - 2 * o[Y] * r[Y]
-			* pow(cn->o_vect[Y], 2) + 2 * o[Y] * r[Y] * under
-			- 2 * o[Y] * r[Z] * cn->o_vect[Y] * cn->o_vect[Z]
-			- 2 * o[Z] * r[X] * cn->o_vect[X] * cn->o_vect[Z] - 2 * o[Z] * r[Y]
-			* cn->o_vect[Y] * cn->o_vect[Z] - 2 * o[Z] * r[Z]
-			* pow(cn->o_vect[Z], 2) + 2 * o[Z] * r[Z] * under);
-	coef[2] = (pow(o[X] * cn->o_vect[X], 2) - pow(o[X], 2) * under + 2 * o[X]
-			* o[Y] * cn->o_vect[X] * cn->o_vect[Y] + 2 * o[X] * o[Z]
-			* cn->o_vect[X] * cn->o_vect[Z] + pow(o[Y] * cn->o_vect[Y], 2)
-			- pow(o[Y], 2) * under + 2 * o[Y] * o[Z] * cn->o_vect[Y]
-			* cn->o_vect[Z] + pow(o[Z] * cn->o_vect[Z], 2)
-			- pow(o[Z], 2) * under);
-	if (pow(coef[1], 2) - 4 * coef[0] * coef[2] < 0)
+	b = get_cn_b(r, cn, o, under);
+	c = get_cn_c(cn, o, under);
+	if (pow(b, 2) - 4 * a * c < 0)
 		return (0);
-	return ((coef[1] + sqrt(pow(coef[1], 2) - 4 * coef[0] * coef[2]))
-		/ (2 * coef[0]));
+	return ((b + sqrt(pow(b, 2) - 4 * a * c))
+		/ (2 * a));
 }
 
-int	cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn, double r_size)
+int	side_cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn, double r_size)
 {
 	double	t;
 	double	pt[3];

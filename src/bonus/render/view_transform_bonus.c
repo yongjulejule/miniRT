@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/14 17:58:00 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:05:59 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	transf_cam_lights(t_spec *spec, double *transf)
 		cur = cur->next;
 	}
 	multiply_vect(transf, spec->cam.o_vect, VECTOR);
-	normalize_vect(spec->cam.o_vect);
 }
 
 static void	transf_objs(t_spec *spec, t_obj_lst *cur, double *transf)
@@ -51,21 +50,17 @@ static void	transf_objs(t_spec *spec, t_obj_lst *cur, double *transf)
 		{
 			multiply_vect(transf, cur->obj.pl->center, POINT);
 			multiply_vect(transf, cur->obj.pl->o_vect, VECTOR);
-			normalize_vect(cur->obj.pl->o_vect);
 		}
 		else if (cur->type == CYLINDER)
 		{
 			multiply_vect(transf, cur->obj.cy->center, POINT);
 			multiply_vect(transf, cur->obj.cy->o_vect, VECTOR);
-			normalize_vect(cur->obj.cy->o_vect);
 			fill_cy_circle(cur->obj.cy, spec->cam.o_vect);
 		}
 		else if (cur->type == CONE)
 		{
 			multiply_vect(transf, cur->obj.cn->center, POINT);
 			multiply_vect(transf, cur->obj.cn->o_vect, VECTOR);
-			normalize_vect(cur->obj.cn->o_vect);
-			// fill_cn_circle(cur->obj.cn, spec->cam.o_vect);
 			vect_copy(cur->obj.cn->circle_o_v, cur->obj.cn->o_vect);
 		}
 		cur = cur->next;
