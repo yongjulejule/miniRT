@@ -3,36 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 18:18:17 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/16 21:47:24 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static int	intersect_cone(t_rt *rt, double *ray, t_pt_info *pt_info, t_cn *cn)
-{
-	int	meet;
-
-	if (dot_product(rt->spec->cam.o_vect, cn->o_vect) > 0)
-	{
-		meet = intersect_cn_circle(ray, pt_info, cn);
-		if (!meet)
-			meet = intersect_cn(ray, pt_info, cn);
-	}
-	else
-	{
-		meet = intersect_cn(ray, pt_info, cn);
-		if (!meet)
-			meet = intersect_cn_circle(ray, pt_info, cn);
-	}
-	return (meet);
-}
-
-static int	ray_obj_intersect(t_rt *rt, double *ray,
-				t_pt_info *pt_info, t_obj_lst *cur)
+static int	ray_obj_intersect(double *ray, t_pt_info *pt_info, t_obj_lst *cur)
 {
 	int	meet;
 
@@ -48,7 +28,11 @@ static int	ray_obj_intersect(t_rt *rt, double *ray,
 			meet = intersect_cy_circle(ray, pt_info, cur->obj.cy);
 	}
 	else if (cur->type == CONE)
-		meet = intersect_cone(rt, ray, pt_info, cur->obj.cn);
+	{
+		meet = intersect_cn(ray, pt_info, cur->obj.cn);
+		if (!meet)
+			meet = intersect_cn_circle(ray, pt_info, cur->obj.cn);
+	}
 	return (meet);
 }
 
@@ -65,7 +49,7 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 	cur = rt->spec->obj_lst->next;
 	while (cur)
 	{
-		meet = ray_obj_intersect(rt, ray, &pt_info, cur);
+		meet = ray_obj_intersect(ray, &pt_info, cur);
 		if (meet)
 			pt_info.is_txt = cur->is_txt;
 		if (meet && cur->is_txt)
