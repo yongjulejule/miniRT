@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:13:22 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/17 09:27:31 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int	side_cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
 		return (0);
 	get_pt_on_line(pt_on_cir, pt_i->pt, ray, t);
 	sub_vect(cir_to_cent, pt_on_cir, cy->center);
-	if (dot_product(cir_to_cent, cy->o_vect) < 0
+	if (signbit(dot_product(cir_to_cent, cy->o_vect))
 		|| pow(vect_size(cir_to_cent), 2) - pow(cy->radius, 2)
-		> pow(cy->height, 2) - 0.5)
+		> pow(cy->height, 2) + 0.1)
 		return (0);
 	sub_vect(cur_to_cir, pt_on_cir, pt_i->pt);
 	if (vect_size(cur_to_cir) < r_size - 0.5)
@@ -113,9 +113,9 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy)
 		return (0);
 	get_pt_on_line(pt, origin, ray, t);
 	sub_vect(diff, pt, cy->center);
-	if (dot_product(diff, cy->o_vect) < 0
+	if (signbit(dot_product(diff, cy->o_vect))
 		|| pow(vect_size(diff), 2) - pow(cy->radius, 2)
-		> pow(cy->height, 2) - 0.5)
+		> pow(cy->height, 2) + 0.1)
 		return (0);
 	vect_copy(pt_info->pt, pt);
 	pt_info->type = CYLINDER;

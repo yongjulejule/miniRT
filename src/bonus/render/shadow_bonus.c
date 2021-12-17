@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:36:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:19:42 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/17 09:45:07 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ static int	check_obj_to_ray(t_obj_lst *cur, t_pt_info *pt_i,
 		else if ((cur->type == CONE || cur->type == CN_CIRCLE)
 			&& cur->obj.cn != pt_i->obj.cn)
 			shaded = cn_shadow(ray, pt_i, cur->obj.cn, r_size);
-		else if (cur->obj.cn == pt_i->obj.cn && cur->type == CN_CIRCLE)
-			shaded = cn_shadow(ray, pt_i, cur->obj.cn, r_size);
-		else if (cur->obj.cn == pt_i->obj.cn && cur->type == CONE)
-			shaded = circle_cn_shadow(ray, pt_i, cur->obj.cn, r_size);
+		if (cur->obj.cn == pt_i->obj.cn && cur->type == CN_CIRCLE)
+			shaded = side_cn_shadow(ray, pt_i, cur->obj.cn, r_size);
 		if (shaded == 1)
 			return (SHADED);
 		cur = cur->next;

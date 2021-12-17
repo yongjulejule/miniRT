@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 16:19:16 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/16 21:38:05 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/17 09:24:38by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	side_cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn, double r_size)
 		return (0);
 	get_pt_on_line(pt, pt_info->pt, ray, t);
 	sub_vect(cur_vect, pt, bottom);
-	if (dot_product(cur_vect, cn->o_vect) > 0
+	if (!signbit(dot_product(cur_vect, cn->o_vect))
 		|| pow(vect_size(cur_vect), 2) - pow(cn->radius, 2)
-		> pow(cn->height, 2))
+		> pow(cn->height, 2) + 0.1)
 		return (0);
 	if (vect_size(cur_vect) < r_size - 0.5)
 		return (1);
@@ -96,9 +96,9 @@ int	intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn)
 		return (0);
 	get_pt_on_line(pt, origin, ray, t);
 	sub_vect(diff, pt, bottom);
-	if (dot_product(diff, cn->o_vect) > 0
+	if (!signbit(dot_product(diff, cn->o_vect))
 		|| pow(vect_size(diff), 2) - pow(cn->radius, 2)
-		> pow(cn->height, 2) + 0.5)
+		> pow(cn->height, 2) + 0.1)
 		return (0);
 	vect_copy(pt_info->pt, pt);
 	pt_info->type = CONE;
