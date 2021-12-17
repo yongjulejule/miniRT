@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 15:40:02 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/17 20:23:18 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static double	get_pt_on_cy(double *r, t_cy *cy, double *o, double rad)
 		- pow(r[Z] * cy->o_vect[Z], 2);
 	b = get_cy_b(r, cy->center, cy->o_vect, o);
 	c = get_cy_c(cy->center, cy->o_vect, o, rad);
-	if (pow(b, 2) - 4 * a * c < 0)
+	if (signbit(pow(b, 2) - 4 * a * c))
 		return (0);
 	return ((-1 * b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a));
 }
@@ -86,16 +86,16 @@ int	cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
 	double	cur_to_cir[3];
 
 	t = get_pt_on_cy(ray, cy, pt_i->pt, cy->radius);
-	if (t < 0.1 || (pt_i->pt[Z] != 1 && pt_i->pt[Z] > ray[Z] * t))
+	if (t < 0.1 || (pt_i->pt[Z] != 1 && !signbit(pt_i->pt[Z] - ray[Z] * t)))
 		return (0);
 	get_pt_on_line(pt_on_cir, pt_i->pt, ray, t);
 	sub_vect(cir_to_cent, pt_on_cir, cy->center);
-	if (dot_product(cir_to_cent, cy->o_vect) < 0
-		|| pow(vect_size(cir_to_cent), 2) - pow(cy->radius, 2)
-		> pow(cy->height, 2) - 0.5)
+	if (signbit(dot_product(cir_to_cent, cy->o_vect))
+		|| !signbit(pow(vect_size(cir_to_cent), 2) - pow(cy->radius, 2)
+			- pow(cy->height, 2)))
 		return (0);
 	sub_vect(cur_to_cir, pt_on_cir, pt_i->pt);
-	if (vect_size(cur_to_cir) < r_size - 0.5)
+	if (signbit(vect_size(cur_to_cir) - r_size))
 		return (1);
 	return (0);
 }
@@ -109,13 +109,14 @@ int	intersect_cy(double *ray, t_pt_info *pt_info, t_cy *cy)
 
 	ft_bzero(origin, sizeof(double) * 3);
 	t = get_pt_on_cy(ray, cy, origin, cy->radius);
-	if (t < 0.1 || (pt_info->pt[Z] != 1 && pt_info->pt[Z] > ray[Z] * t))
+	if (t < 0.1 || (pt_info->pt[Z] != 1
+			&& !signbit(pt_info->pt[Z] - ray[Z] * t)))
 		return (0);
 	get_pt_on_line(pt, origin, ray, t);
 	sub_vect(diff, pt, cy->center);
-	if (dot_product(diff, cy->o_vect) < 0
-		|| pow(vect_size(diff), 2) - pow(cy->radius, 2)
-		> pow(cy->height, 2) - 0.5)
+	if (signbit(dot_product(diff, cy->o_vect))
+		|| !signbit(pow(vect_size(diff), 2) - pow(cy->radius, 2)
+			- pow(cy->height, 2)))
 		return (0);
 	vect_copy(pt_info->pt, pt);
 	pt_info->type = CYLINDER;

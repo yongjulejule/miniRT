@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/16 11:18:27 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:41:04 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,6 @@ static void	check_rgb_range(int *color)
 			color[i] = 0;
 		i++;
 	}
-}
-
-static double	get_reflect_light(t_pt_info *pt_info, double *o_ray,
-				double *n_vect)
-{
-	double	ret;
-	double	reflect[3];
-	double	proj[3];
-	double	view[3];
-
-	if (signbit(dot_product(o_ray, n_vect)))
-		return (0);
-	get_pt_on_line(proj, NULL, n_vect, 2 * dot_product(o_ray, n_vect));
-	sub_vect(reflect, proj, o_ray);
-	normalize_vect(reflect);
-	get_pt_on_line(view, NULL, pt_info->pt, -1);
-	normalize_vect(view);
-	ret = dot_product(reflect, view);
-	if (ret < 0)
-		return (0);
-	return (ret);
 }
 
 static void	get_o_ray_n_vect(t_rt *rt, t_pt_info *pt_info,
@@ -71,7 +50,6 @@ static void	get_o_ray_n_vect(t_rt *rt, t_pt_info *pt_info,
 static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 {
 	double	diffuse;
-	double	reflect;
 	double	n_vect[3];
 	double	o_ray[3];
 
@@ -79,10 +57,9 @@ static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 	if (get_shadow(rt, pt_info) == SHADED)
 		return (SHADED);
 	diffuse = dot_product(o_ray, n_vect);
-	reflect = get_reflect_light(pt_info, o_ray, n_vect);
-	color[R] = get_phong_r(rt, pt_info, diffuse, reflect);
-	color[G] = get_phong_g(rt, pt_info, diffuse, reflect);
-	color[B] = get_phong_b(rt, pt_info, diffuse, reflect);
+	color[R] = get_phong_r(rt, pt_info, diffuse);
+	color[G] = get_phong_g(rt, pt_info, diffuse);
+	color[B] = get_phong_b(rt, pt_info, diffuse);
 	return (NOT_SHADED);
 }
 
