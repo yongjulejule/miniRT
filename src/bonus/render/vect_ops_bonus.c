@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:22 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 18:04:50 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:58:56 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	normalize_vect(double *vect)
 	double	size;
 
 	size = vect_size(vect);
-	if (!size)
+	if (fpclassify(size) == FP_ZERO)
 		is_error("Cannot divide by 0", NULL, EXIT_FAILURE);
 	vect[X] /= size;
 	vect[Y] /= size;
