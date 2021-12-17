@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sph_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:07:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:21:45 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/17 14:57:41 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ double	meet_sph(double *ray, double *origin, t_sph *sph, double r_size)
 	sub_vect(diff, origin, sph->center);
 	d = (pow(dot_product(ray, diff), 2)
 			- (pow(vect_size(diff), 2) - pow(sph->radius, 2)));
-	if (d < 0)
+	if (signbit(d))
 		return (-1);
 	t = -1 * dot_product(diff, ray) - sqrt(d);
 	get_pt_on_line(int_pt, origin, ray, t);
 	sub_vect(diff, int_pt, origin);
-	if (vect_size(diff) - r_size < 0 && t > 0)
+	if (signbit(vect_size(diff) - r_size) && !signbit(t))
 		return (1);
 	return (-1);
 }
@@ -47,9 +47,9 @@ int	intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph)
 	if (d < 0)
 		return (0);
 	t = dot_product(ray, sph->center) - sqrt(d);
-	if (t < 0.1)
+	if (signbit(t))
 		return (0);
-	if (pt_info->pt[Z] != 1 && pt_info->pt[Z] >= ray[Z] * t)
+	if (pt_info->pt[Z] != 1 && !signbit(pt_info->pt[Z] - ray[Z] * t))
 		return (0);
 	get_pt_on_line(pt_info->pt, NULL, ray, t);
 	pt_info->type = SPHERE;
