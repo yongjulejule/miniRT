@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/17 09:05:02 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:37:33 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	transf_objs(t_spec *spec, t_obj_lst *cur, double *transf)
 		{
 			multiply_vect(transf, cur->obj.cn->center, POINT);
 			multiply_vect(transf, cur->obj.cn->o_vect, VECTOR);
-			vect_copy(cur->obj.cn->circle_o_v, cur->obj.cn->o_vect);
+			fill_cn_circle(cur->obj.cn, spec->cam.o_vect);
 		}
 		cur = cur->next;
 	}
