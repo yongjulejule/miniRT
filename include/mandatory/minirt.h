@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 15:49:57 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/17 18:40:57 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,9 @@ void		draw(t_rt *rt, t_rt *c_rt);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
 int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
-int			get_phong_r(t_rt *rt, t_pt_info *pt_info,
-				double diffuse, double reflect);
-int			get_phong_g(t_rt *rt, t_pt_info *pt_info,
-				double diffuse, double reflect);
-int			get_phong_b(t_rt *rt, t_pt_info *pt_info,
-				double diffuse, double reflect);
+int			get_phong_r(t_rt *rt, t_pt_info *pt_info, double diffuse);
+int			get_phong_g(t_rt *rt, t_pt_info *pt_info, double diffuse);
+int			get_phong_b(t_rt *rt, t_pt_info *pt_info, double diffuse);
 void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
 void		ray_tracing(t_rt *rt);
