@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/17 08:59:16 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/18 02:14:08 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@
 # define R 0
 # define G 1
 # define B 2
+
+# define U 0
+# define V 1
 
 # define POINT 0
 # define VECTOR 1
@@ -123,7 +126,6 @@ void		fill_txt(t_txt_lst **hd, char **info);
 
 /* Render */
 void		apply_checker(t_pt_info *pt_info);
-void		apply_texture(t_pt_info *pt_info);
 void		draw(t_rt *rt, t_rt *c_rt);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
@@ -142,6 +144,12 @@ void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
 void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
+
+/* Texture Mapping */
+void		apply_texture(t_pt_info *pt_info);
+void		sph_texture(double *uv, t_pt_info *pt_info);
+void		cy_texture(double *uv, t_pt_info *pt_info);
+void		cn_texture(double *uv, t_pt_info *pt_info);
 
 /* Intersection & Shadow */
 int			circle_cy_shadow(double *ray, t_pt_info *pt_i,

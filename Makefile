@@ -6,7 +6,7 @@
 #    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/16 18:15:13 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/18 02:14:36 by ghan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,6 +116,7 @@ SRCS_BONUS_RENDER		= $(addprefix $(SRCS_BONUS_RENDER_DIR), \
 				intersect_cn_circle_bonus.c\
 				intersect_pl_bonus.c\
 				intersect_sph_bonus.c\
+				obj_texture_bonus.c\
 				phong_light_bonus.c\
 				phong_util_bonus.c\
 				ray_tracing_bonus.c\
