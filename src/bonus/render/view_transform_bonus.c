@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/17 15:37:33 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:56:42 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,15 @@ static void	transf_objs(t_spec *spec, t_obj_lst *cur, double *transf)
 	while (cur)
 	{
 		if (cur->type == SPHERE)
+		{
 			multiply_vect(transf, cur->obj.sph->center, POINT);
+			multiply_vect(transf, cur->obj.sph->o_vect, VECTOR);
+			if (fabs(dot_product(spec->cam.o_vect, cur->obj.sph->o_vect)) < 0.1)
+			{
+				cur->obj.sph->o_vect[X] = 0.5;
+				normalize_vect(cur->obj.sph->o_vect);
+			}
+		}
 		else if (cur->type == PLANE)
 		{
 			multiply_vect(transf, cur->obj.pl->center, POINT);

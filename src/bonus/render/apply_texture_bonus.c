@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_texture_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:39:27 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/18 02:22:42 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/18 14:56:35 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,8 @@ void	apply_checker(t_pt_info *pt_info)
 	double	div;
 
 	div = 100;
-	if (pt_info->type == PLANE)
-		div = 400;
-	else if (pt_info->type == SPHERE)
-		div = pt_info->obj.sph->radius / 4;
-	else if (pt_info->type == CYLINDER)
-		div = pt_info->obj.cy->radius / 4;
-	else if (pt_info->type == CONE)
-		div = pt_info->obj.cn->radius / 4;
 	sines = sin(pt_info->pt[X] / div) * sin(pt_info->pt[Y] / div)
-		* sin(pt_info->pt[Z] / div);
+		/* * sin(pt_info->pt[Z] / div) */;
 	if (!signbit(sines))
 		ft_bzero(pt_info->color, sizeof(int) * 3);
 	else
@@ -38,7 +30,7 @@ void	apply_checker(t_pt_info *pt_info)
 	}
 }
 
-void	apply_texture(t_pt_info *pt_info)
+void	apply_texture(t_pt_info *pt_info, t_cam cam, double c_to_s)
 {
 	double	uv[2];
 	int		idx;
@@ -49,9 +41,14 @@ void	apply_texture(t_pt_info *pt_info)
 		cy_texture(uv, pt_info);
 	else if (pt_info->type == CONE)
 		cn_texture(uv, pt_info);
-	idx = pt_info->ppm.size[X] * 3 * (int)(uv[V] * (pt_info->ppm.size[Y] - 1))
+	else if (pt_info->type == PLANE)
+		pl_texture(uv, pt_info, cam, c_to_s);
+	if (uv[U] >= 0 && uv[U] <= 1 && uv[V] >= 0 && uv[V] <= 1)
+	{
+		idx = pt_info->ppm.size[X] * 3 * (int)(uv[V] * (pt_info->ppm.size[Y] - 1))
 		+ 3 * (int)(uv[U] * (pt_info->ppm.size[X] - 1));
-	pt_info->color[R] = pt_info->ppm.color_arr[idx];
-	pt_info->color[G] = pt_info->ppm.color_arr[idx + 1];
-	pt_info->color[B] = pt_info->ppm.color_arr[idx + 2];
+		pt_info->color[R] = pt_info->ppm.color_arr[idx];
+		pt_info->color[G] = pt_info->ppm.color_arr[idx + 1];
+		pt_info->color[B] = pt_info->ppm.color_arr[idx + 2];
+	}
 }

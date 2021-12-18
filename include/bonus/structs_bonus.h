@@ -6,7 +6,7 @@
 /*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:53:59 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 15:37:00 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/18 16:56:14 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_l_lst
 typedef struct s_sph
 {
 	double	center[3];
+	double	o_vect[3];
 	double	diameter;
 	double	radius;
 	int		color[3];
