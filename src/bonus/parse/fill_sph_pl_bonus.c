@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_sph_pl_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:15:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 01:34:50 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/18 16:56:28 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	fill_sphere(t_obj_lst **hd, char **info, int cv_flag)
 	if (cv_flag || new_sph->diameter < 0)
 		is_error("Invalid configuration (SPH DIAMETER)", NULL, EXIT_FAILURE);
 	fill_sphere_two(new_sph, info);
+	fill_vect(new_sph->o_vect, 0, 1, 0);
 }
 
 static void	fill_plane_two(t_pl *new_pl, char **info, int cv_flag)
