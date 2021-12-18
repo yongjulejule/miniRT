@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clone_obj_lst_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:48:06 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/14 01:31:31 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/18 16:56:53 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	clone_sph(t_obj_lst **c_lst, t_sph *o_sph)
 	n_sph->diameter = o_sph->diameter;
 	n_sph->radius = o_sph->radius;
 	vect_copy(n_sph->center, o_sph->center);
+	vect_copy(n_sph->o_vect, o_sph->o_vect);
 	copy_color(n_sph->color, o_sph->color);
 }
 

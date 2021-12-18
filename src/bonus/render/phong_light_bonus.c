@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/17 15:06:22 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:08:26 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	get_phong_light(t_rt *rt, t_pt_info *pt_info)
 	if (pt_info->is_txt == CHECKERED)
 		apply_checker(pt_info);
 	else if (pt_info->is_txt == CUSTOM_TXT)
-		apply_texture(pt_info);
+		apply_texture(pt_info, rt->spec->cam, rt->c_to_s);
 	multi_phong_rgb(rt, pt_info, d_color);
 	color[R] = d_color[R] * 255;
 	color[G] = d_color[G] * 255;
