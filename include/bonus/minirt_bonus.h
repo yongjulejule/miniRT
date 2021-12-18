@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/18 13:12:04 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/18 17:50:12 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void		draw(t_rt *rt, t_rt *c_rt);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
 void		get_coord_system(t_spec *spec, double *transf);
+double		get_diffuse_light(double *o_vect, double *o_ray);
 int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
 double		get_phong_r(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
 				double reflect);
