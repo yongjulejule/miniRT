@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_texture_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:39:27 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/18 02:22:42 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/18 11:39:49 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	apply_texture(t_pt_info *pt_info)
 		cn_texture(uv, pt_info);
 	idx = pt_info->ppm.size[X] * 3 * (int)(uv[V] * (pt_info->ppm.size[Y] - 1))
 		+ 3 * (int)(uv[U] * (pt_info->ppm.size[X] - 1));
-	pt_info->color[R] = pt_info->ppm.color_arr[idx];
-	pt_info->color[G] = pt_info->ppm.color_arr[idx + 1];
-	pt_info->color[B] = pt_info->ppm.color_arr[idx + 2];
+	if (idx >= 0)
+	{
+		pt_info->color[R] = pt_info->ppm.color_arr[idx];
+		pt_info->color[G] = pt_info->ppm.color_arr[idx + 1];
+		pt_info->color[B] = pt_info->ppm.color_arr[idx + 2];
+	}
 }
