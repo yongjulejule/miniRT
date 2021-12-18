@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/17 15:06:22 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:46:05 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,13 @@ static void	multi_phong_rgb(t_rt *rt, t_pt_info *pt_info, double *d_color)
 	while (cur)
 	{
 		sub_vect(o_ray, cur->lp, pt_info->pt);
-		normalize_vect(o_ray);
 		get_surface_n_vect(n_vect, pt_info);
 		if (get_shadow(cur, rt->spec->obj_lst, pt_info) == SHADED)
 		{
 			cur = cur->next;
 			continue ;
 		}
-		diffuse = dot_product(o_ray, n_vect);
+		diffuse = get_diffuse_light(n_vect, o_ray);
 		reflect = get_reflect_light(pt_info, o_ray, n_vect);
 		d_color[R] += get_phong_r(cur, pt_info, diffuse, reflect);
 		d_color[G] += get_phong_g(cur, pt_info, diffuse, reflect);

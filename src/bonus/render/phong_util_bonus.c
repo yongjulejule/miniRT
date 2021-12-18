@@ -6,25 +6,39 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/17 09:16:21 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:5764:16ngjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
+double	get_diffuse_light(double *o_vect, double *o_ray)
+{
+	double	diffuse;
+	double	bright;
+
+	bright = pow(vect_size(o_ray), 2);
+	if (bright < 1)
+		bright = 1;
+	diffuse = dot_product(o_ray, o_vect) / bright;
+	return (diffuse);
+}
+
 double	get_reflect_light(t_pt_info *pt_i, double *o_ray, double *n_vect)
 {
+	double	bright;
 	double	ret;
 	double	reflect[3];
 	double	proj[3];
 	double	view[3];
 
+	bright = pow(vect_size(o_ray), 2);
+	if (bright < 1)
+		bright = 1;
 	get_pt_on_line(proj, NULL, n_vect, 2 * dot_product(o_ray, n_vect));
 	sub_vect(reflect, proj, o_ray);
-	normalize_vect(reflect);
 	get_pt_on_line(view, NULL, pt_i->pt, -1);
-	normalize_vect(view);
-	ret = dot_product(reflect, view);
+	ret = dot_product(reflect, view) / bright;
 	if (signbit(ret))
 		return (0);
 	return (ret);
