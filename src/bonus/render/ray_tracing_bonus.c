@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:37:33 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/17 08:42:17 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 11:30:01 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static int	ray_obj_intersect(double *ray, t_pt_info *pt_info, t_obj_lst *cur)
 int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 {
 	double		ray[3];
+	int			meet;
 	t_obj_lst	*cur;
 	t_pt_info	pt_info;
-	int			meet;
 
 	pt_info.pt[Z] = 1;
 	fill_vect(ray, vs_x, vs_y, -1 * rt->c_to_s);
@@ -52,7 +52,7 @@ int	shoot_ray(t_rt *rt, double vs_x, double vs_y)
 		meet = ray_obj_intersect(ray, &pt_info, cur);
 		if (meet)
 			pt_info.is_txt = cur->is_txt;
-		if (meet && cur->is_txt)
+		if (meet && pt_info.is_txt == CUSTOM_TXT)
 		{
 			pt_info.ppm.size[X] = cur->ppm.size[X];
 			pt_info.ppm.size[Y] = cur->ppm.size[Y];
