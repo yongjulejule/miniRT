@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   txt_to_objs_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:01:52 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/15 12:15:26 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:11:54 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	txt_to_objs(t_spec *spec, t_obj_lst *cur_obj, int n_obj)
 			fill_obj_txt_info(cur_obj, nth_txt);
 		}
 		else
-			cur_obj->type = NO_TXT;
+			cur_obj->is_txt = NO_TXT;
 		cur_obj = cur_obj->next;
 		i++;
 	}
