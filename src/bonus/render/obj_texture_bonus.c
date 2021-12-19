@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_texture_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 02:07:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/18 17:40:25 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:28:05 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,9 @@ void	pl_texture(double *uv, t_pt_info *pt_info, t_cam cam, double c_to_s)
 {
 	double	ray_depth;
 	double	scale_ratio;
-	double	c_to_center;
 
-	c_to_center = dot_product(pt_info->obj.pl->center, cam.o_vect);
 	ray_depth = dot_product(pt_info->pt, cam.o_vect);
-	scale_ratio = ray_depth / c_to_center * ray_depth / c_to_s;
+	scale_ratio = ray_depth / c_to_s;
 	uv[U] = pt_info->pt[X] / (WIN_W * scale_ratio) + 0.5;
 	uv[V] = pt_info->pt[Y] / (WIN_H * scale_ratio) + 0.5;
 }

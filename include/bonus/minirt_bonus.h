@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/18 17:50:12 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 11:33:11 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void		ray_tracing(t_rt *rt);
 void		view_transform(t_rt *rt);
 
 /* Texture Mapping */
-void		apply_texture(t_pt_info *pt_info, t_cam cam, double c_to_s);
+void		apply_texture(t_pt_info *pt_i, t_cam cam, double c_to_s);
 void		cn_texture(double *uv, t_pt_info *pt_info);
 void		cy_texture(double *uv, t_pt_info *pt_info);
 void		pl_texture(double *uv, t_pt_info *pt_info, t_cam cam,
