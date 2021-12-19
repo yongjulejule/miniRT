@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/19 15:50:25 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:14:24 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	view_transform(t_rt *rt)
 	cur = rt->spec->obj_lst->next;
 	while (cur)
 	{
-		transf_objs(rt->spec, rt->spec->obj_lst->next, transf);
+		transf_objs(rt->spec, cur, transf);
 		cur = cur->next;
 	}
 }
