@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/18 16:56:42 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/19 10:58:57 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+void	rotate_vect(double *dst, double *src, double *angle)
+{
+	double	backup[3];
+
+	vect_copy(backup, src);
+	dst[X] = backup[X] * (cos(angle[Z]) * cos(angle[Y]))
+		+ backup[Y] * (cos(angle[Z]) * sin(angle[Y]) * sin(angle[X])
+			- sin(angle[Z]) * cos(angle[X]))
+		+ backup[Z] * (cos(angle[Z]) * sin(angle[Y]) * cos(angle[X])
+			+ sin(angle[Z]) * sin(angle[X]));
+	dst[Y] = backup[X] * (sin(angle[Z]) * cos(angle[Y]))
+		+ backup[Y] * (sin(angle[Z]) * sin(angle[Y]) * sin(angle[X])
+			+ cos(angle[Z]) * cos(angle[X]))
+		+ backup[Z] * (sin(angle[Z]) * sin(angle[Y]) * cos(angle[X])
+			- cos(angle[Z]) * sin(angle[X]));
+	dst[Z] = -1 * backup[X] * sin(angle[Y])
+		+ backup[Y] * cos(angle[Y]) * sin(angle[X])
+		+ backup[Z] * cos(angle[Y]) * cos(angle[X]);
+}
 
 static void	get_transf_matrix(double *vp, double *transf)
 {
@@ -48,11 +68,7 @@ static void	transf_objs(t_spec *spec, t_obj_lst *cur, double *transf)
 		{
 			multiply_vect(transf, cur->obj.sph->center, POINT);
 			multiply_vect(transf, cur->obj.sph->o_vect, VECTOR);
-			if (fabs(dot_product(spec->cam.o_vect, cur->obj.sph->o_vect)) < 0.1)
-			{
-				cur->obj.sph->o_vect[X] = 0.5;
-				normalize_vect(cur->obj.sph->o_vect);
-			}
+			printf("sph o_vect is %.2f, %.2f ,%.2f\n", cur->obj.sph->o_vect[X],cur->obj.sph->o_vect[Y],cur->obj.sph->o_vect[Z]);
 		}
 		else if (cur->type == PLANE)
 		{

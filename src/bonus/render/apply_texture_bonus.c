@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_texture_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:39:27 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/18 14:56:35 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/18 19:53:38 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	apply_texture(t_pt_info *pt_info, t_cam cam, double c_to_s)
 		pl_texture(uv, pt_info, cam, c_to_s);
 	if (uv[U] >= 0 && uv[U] <= 1 && uv[V] >= 0 && uv[V] <= 1)
 	{
-		idx = pt_info->ppm.size[X] * 3 * (int)(uv[V] * (pt_info->ppm.size[Y] - 1))
-		+ 3 * (int)(uv[U] * (pt_info->ppm.size[X] - 1));
+		idx = pt_info->ppm.size[X] * 3 * (int)(uv[V]
+				* (pt_info->ppm.size[Y] - 1))
+			+ 3 * (int)(uv[U] * (pt_info->ppm.size[X] - 1));
 		pt_info->color[R] = pt_info->ppm.color_arr[idx];
 		pt_info->color[G] = pt_info->ppm.color_arr[idx + 1];
 		pt_info->color[B] = pt_info->ppm.color_arr[idx + 2];
