@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:07:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/17 20:26:39 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 21:06:53 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ double	meet_sph(double *ray, double *origin, t_sph *sph, double r_size)
 	t = -1 * dot_product(diff, ray) - sqrt(d);
 	get_pt_on_line(int_pt, origin, ray, t);
 	sub_vect(diff, int_pt, origin);
-	if (signbit(vect_size(diff) - r_size) && t > 0.1)
+	if (signbit(vect_size(diff) - r_size + 0.1) && t > 0.1)
 		return (1);
 	return (-1);
 }

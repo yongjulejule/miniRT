@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:19 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/17 20:23:18 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 21:04:04 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	cy_shadow(double *ray, t_pt_info *pt_i, t_cy *cy, double r_size)
 			- pow(cy->height, 2)))
 		return (0);
 	sub_vect(cur_to_cir, pt_on_cir, pt_i->pt);
-	if (signbit(vect_size(cur_to_cir) - r_size))
+	if (signbit(vect_size(cur_to_cir) - r_size + 0.1))
 		return (1);
 	return (0);
 }
