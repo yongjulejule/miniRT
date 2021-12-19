@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 02:07:55 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/19 11:49:06 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:33:17 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	sph_texture(double *uv, t_pt_info *pt_info)
 {
 	double	n_vect[3];
-	double	n_vect_t[3];
+	double	cur_vect[3];
 	double	angle[3];
 
-	get_pt_on_line(angle, NULL, pt_info->obj.sph->o_vect, 1);
+	get_pt_on_line(angle, NULL, pt_info->obj.sph->o_vect, -1);
 	sub_vect(n_vect, pt_info->pt, pt_info->obj.sph->center);
 	normalize_vect(n_vect);
-	rotate_vect(n_vect_t, n_vect, angle);
-	normalize_vect(n_vect_t);
-	uv[U] = 0.5 + (atan2(n_vect_t[X], n_vect_t[Y]) / (2 * M_PI));
-	uv[V] = acos(n_vect_t[Z]) / M_PI;
+	rotate_vect(cur_vect, n_vect, angle);
+	normalize_vect(cur_vect);
+	uv[U] = 0.5 + (atan2(cur_vect[Y], cur_vect[X]) / (2 * M_PI));
+	uv[V] = acos(cur_vect[Z]) / M_PI;
 }
 
 void	cy_texture(double *uv, t_pt_info *pt_info)
