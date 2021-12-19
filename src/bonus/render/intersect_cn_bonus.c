@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 16:19:16 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/17 20:59:31 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 21:04:48 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	side_cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn, double r_size)
 		|| !signbit(pow(vect_size(cur_vect), 2) - pow(cn->radius, 2)
 			- pow(cn->height, 2)))
 		return (0);
-	if (!signbit(vect_size(cur_vect) - r_size))
+	if (!signbit(vect_size(cur_vect) - r_size + 0.1))
 		return (1);
 	return (0);
 }

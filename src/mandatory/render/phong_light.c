@@ -6,11 +6,22 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/17 18:41:04 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:55:53 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static double	get_diffuse_light(double *o_vect, double *o_ray)
+{
+	double	diffuse;
+	double	bright;
+
+	bright = vect_size(o_ray);
+	normalize_vect(o_ray);
+	diffuse = dot_product(o_ray, o_vect) / (1 + 0.0001 * bright);
+	return (diffuse);
+}
 
 static void	check_rgb_range(int *color)
 {
@@ -31,7 +42,6 @@ static void	get_o_ray_n_vect(t_rt *rt, t_pt_info *pt_info,
 				double *o_ray, double *n_vect)
 {
 	sub_vect(o_ray, rt->spec->light.lp, pt_info->pt);
-	normalize_vect(o_ray);
 	if (pt_info->type == SPHERE)
 		sub_vect(n_vect, pt_info->pt, pt_info->obj.sph->center);
 	else if (pt_info->type == PLANE)
@@ -56,7 +66,7 @@ static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 	get_o_ray_n_vect(rt, pt_info, o_ray, n_vect);
 	if (get_shadow(rt, pt_info) == SHADED)
 		return (SHADED);
-	diffuse = dot_product(o_ray, n_vect);
+	diffuse = get_diffuse_light(n_vect, o_ray);
 	color[R] = get_phong_r(rt, pt_info, diffuse);
 	color[G] = get_phong_g(rt, pt_info, diffuse);
 	color[B] = get_phong_b(rt, pt_info, diffuse);
