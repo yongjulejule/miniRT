@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/19 15:41:28 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:50:25 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	rotate_vect(double *dst, double *src, double *angle)
 
 	vect_copy(backup, src);
 	dst[X] = backup[X] * (cos(angle[Z]) * cos(angle[Y]))
-		- backup[Y] * (cos(angle[Z]) * sin(angle[Y]) * sin(angle[X])
+		+ backup[Y] * (cos(angle[Z]) * sin(angle[Y]) * sin(angle[X])
 			- sin(angle[Z]) * cos(angle[X]))
 		+ backup[Z] * (cos(angle[Z]) * sin(angle[Y]) * cos(angle[X])
 			+ sin(angle[Z]) * sin(angle[X]));
-	dst[Y] = -1 * backup[X] * (sin(angle[Z]) * cos(angle[Y]))
+	dst[Y] = backup[X] * (sin(angle[Z]) * cos(angle[Y]))
 		+ backup[Y] * (sin(angle[Z]) * sin(angle[Y]) * sin(angle[X])
 			+ cos(angle[Z]) * cos(angle[X]))
-		- backup[Z] * (sin(angle[Z]) * sin(angle[Y]) * cos(angle[X])
+		+ backup[Z] * (sin(angle[Z]) * sin(angle[Y]) * cos(angle[X])
 			- cos(angle[Z]) * sin(angle[X]));
 	dst[Z] = -1 * backup[X] * sin(angle[Y])
-		- backup[Y] * cos(angle[Y]) * sin(angle[X])
+		+ backup[Y] * cos(angle[Y]) * sin(angle[X])
 		+ backup[Z] * cos(angle[Y]) * cos(angle[X]);
 }
 
