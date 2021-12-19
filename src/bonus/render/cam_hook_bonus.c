@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cam_hook_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 10:04:48 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/11 11:32:30 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/19 15:25:13 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,18 @@ static void	move_based_angle(t_rt *rt)
 
 int	move_cam_pos(int keycode, t_rt *rt)
 {
-	static double	sign = 1;
-
-	if (sin(rt->spec->cam.sph_coord[THETA]) < sin(M_PI / 30))
-	{
-		rt->spec->cam.sph_coord[PHI] += M_PI;
-		sign = -1 * sign;
-	}
 	if (keycode == KEY_A)
 		rt->spec->cam.sph_coord[RAD] += 1;
 	else if (keycode == KEY_S)
-		rt->spec->cam.sph_coord[THETA] += sign * M_PI / 30;
+		rt->spec->cam.sph_coord[THETA] += M_PI / 90;
 	else if (keycode == KEY_D)
-		rt->spec->cam.sph_coord[PHI] += M_PI / 30;
+		rt->spec->cam.sph_coord[PHI] += M_PI / 90;
 	else if (keycode == KEY_Z)
 		rt->spec->cam.sph_coord[RAD] -= 1;
 	else if (keycode == KEY_X)
-		rt->spec->cam.sph_coord[THETA] -= sign * M_PI / 30;
+		rt->spec->cam.sph_coord[THETA] -= M_PI / 90;
 	else if (keycode == KEY_C)
-		rt->spec->cam.sph_coord[PHI] -= M_PI / 30;
+		rt->spec->cam.sph_coord[PHI] -= M_PI / 90;
 	else
 		return (0);
 	move_based_angle(rt);

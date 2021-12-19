@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clone_rt_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:52:13 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/18 16:56:53 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:58:08 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	clone_rt(t_rt o_rt, t_rt *c_rt, t_spec *o_spec, t_spec *c_spec)
 	c_spec->cam.fov = o_spec->cam.fov;
 	vect_copy(c_spec->cam.vp, o_spec->cam.vp);
 	vect_copy(c_spec->cam.o_vect, o_spec->cam.o_vect);
+	vect_copy(c_spec->cam.sph_coord, o_spec->cam.sph_coord);
 	clone_l_lst(o_spec->l_lst, &c_l_lst);
 	c_spec->l_lst = c_l_lst;
 	clone_obj_lst(o_spec->obj_lst, &c_obj_lst);

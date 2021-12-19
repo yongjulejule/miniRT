@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/19 11:33:11 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:49:04 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void		init_obj_img(t_rt *rt);
 void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);
 void		ray_tracing(t_rt *rt);
+void		rotate_vect(double *dst, double *src, double *angle);
 void		view_transform(t_rt *rt);
 
 /* Texture Mapping */

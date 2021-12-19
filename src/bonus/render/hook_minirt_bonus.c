@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_minirt_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:47:35 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/11 11:32:29 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/19 14:52:29 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	close_window(void *param)
 static void	get_sph_coord(t_spec *spec)
 {
 	spec->cam.sph_coord[RAD] = vect_size(spec->cam.vp);
-	if (!spec->cam.sph_coord[RAD])
+	if (fpclassify(spec->cam.sph_coord[RAD]) == FP_ZERO)
 		spec->cam.sph_coord[THETA] = 0;
 	else
 		spec->cam.sph_coord[THETA] = acos(spec->cam.vp[Z]
