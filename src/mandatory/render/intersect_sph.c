@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:07:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/19 21:06:53 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:50:08 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	intersect_sph(double *ray, t_pt_info *pt_info, t_sph *sph)
 	if (d < 0)
 		return ;
 	t = dot_product(ray, sph->center) - sqrt(d);
-	if (t < 0.1)
+	if (t < 0)
 		return ;
 	if (pt_info->pt[Z] != 1 && !signbit(pt_info->pt[Z] - ray[Z] * t))
 		return ;

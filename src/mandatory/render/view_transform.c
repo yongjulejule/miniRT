@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_transform.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:08:46 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/11 16:06:04 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/20 20:52:57 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@ static void	get_vert_coord(t_spec *spec, double *transf)
 
 	fill_vect(x_axis, 1, 0, 0);
 	if (spec->cam.o_vect[Y] < 0)
+	{
 		fill_vect(y_axis, 0, 0, 1);
+		fill_vect(z_axis, 0, 1, 0);
+	}
 	else
+	{
 		fill_vect(y_axis, 0, 0, -1);
-	fill_vect(z_axis, 0, 1, 0);
+		fill_vect(z_axis, 0, -1, 0);
+	}
 	update_vect(transf, x_axis, X, 4);
 	update_vect(transf, y_axis, Y, 4);
 	update_vect(transf, z_axis, Z, 4);
 }
-
-/* FIXME : swap coordinate when cam o_vect is oriented to y-axis */
 
 static void	get_coord_system(t_spec *spec, double *transf)
 {
