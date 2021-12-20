@@ -6,11 +6,26 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:27:04 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:56:15 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:31:40 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+void	check_rgb_range(int *color)
+{
+	int	i;
+
+	i = 0 ;
+	while (i < 3)
+	{
+		if (color[i] > 255)
+			color[i] = 255;
+		else if (color[i] < 0)
+			color[i] = 0;
+		i++;
+	}
+}
 
 void	init_obj_img(t_rt *rt)
 {

@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/17 18:40:57 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:11:23 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void		fill_sphere(t_obj_lst **hd, char **info, int cv_flag);
 void		draw(t_rt *rt, t_rt *c_rt);
 int			cur_pixel(t_rt *rt, int w, int h);
 int			get_color(int *color, double ratio);
+double		get_diffuse_light(double *o_vect, double *o_ray);
 int			get_phong_light(t_rt *rt, t_pt_info *pt_info);
 int			get_phong_r(t_rt *rt, t_pt_info *pt_info, double diffuse);
 int			get_phong_g(t_rt *rt, t_pt_info *pt_info, double diffuse);

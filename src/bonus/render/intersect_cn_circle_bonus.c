@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:55:54 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/19 21:05:01 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:21:14 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	circle_cn_shadow(double *ray, t_pt_info *pt_i, t_cn *cn, double r_size)
 	get_pt_on_line(pt_on_cir, pt_i->pt, ray, t);
 	sub_vect(cur_to_cir, pt_on_cir, pt_i->pt);
 	sub_vect(cir_to_cent, pt_on_cir, center);
-	if (t > 0.5 && signbit(vect_size(cur_to_cir) - r_size + 0.1)
+	if (t > 0.1 && signbit(vect_size(cur_to_cir) - r_size + 0.1)
 		&& signbit(vect_size(cir_to_cent) - cn->radius))
 		return (1);
 	return (0);

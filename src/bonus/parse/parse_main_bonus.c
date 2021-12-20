@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:12:42 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/18 15:44:56 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/20 16:15:14 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,6 @@ static void	read_config(int fd, t_conf **hd)
 		free(line);
 }
 
-static void	decide_pl_orientation(t_spec *spec)
-{
-	t_obj_lst	*cur;
-
-	cur = spec->obj_lst->next;
-	while (cur)
-	{
-		if (cur->type == PLANE)
-		{
-			if (dot_product(spec->cam.o_vect, cur->obj.pl->o_vect) > 0)
-				fill_vect(cur->obj.pl->o_vect, -1 * cur->obj.pl->o_vect[X],
-					-1 * cur->obj.pl->o_vect[Y], -1 * cur->obj.pl->o_vect[Z]);
-		}
-		cur = cur->next;
-	}
-}
-
 void	parse_config(int argc, char **argv, t_spec *spec)
 {
 	int		fd;
@@ -77,6 +60,5 @@ void	parse_config(int argc, char **argv, t_spec *spec)
 	spec->l_lst = l_lst_new();
 	spec->txt_lst = txt_lst_new(NO_TXT);
 	config_to_spec(head->next, spec, 0);
-	decide_pl_orientation(spec);
 	free_config(head);
 }

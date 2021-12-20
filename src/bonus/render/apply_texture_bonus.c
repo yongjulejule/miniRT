@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:39:27 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/19 11:49:47 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:25:05 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	apply_texture(t_pt_info *pt_i, t_cam cam, double c_to_s)
 		cy_texture(uv, pt_i);
 	else if (pt_i->type == CONE)
 		cn_texture(uv, pt_i);
-	else if (pt_i->type == PLANE)
+	else if (pt_i->type == PLANE
+		|| pt_i->type == CN_CIRCLE || pt_i->type == CY_CIRCLE)
 		pl_texture(uv, pt_i, cam, c_to_s);
 	if (uv[U] >= 0 && uv[U] <= 1 && uv[V] >= 0 && uv[V] <= 1)
 	{
