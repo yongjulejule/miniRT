@@ -6,22 +6,11 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/19 20:55:53 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:13:00 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static double	get_diffuse_light(double *o_vect, double *o_ray)
-{
-	double	diffuse;
-	double	bright;
-
-	bright = vect_size(o_ray);
-	normalize_vect(o_ray);
-	diffuse = dot_product(o_ray, o_vect) / (1 + 0.0001 * bright);
-	return (diffuse);
-}
 
 static void	check_rgb_range(int *color)
 {
@@ -57,6 +46,21 @@ static void	get_o_ray_n_vect(t_rt *rt, t_pt_info *pt_info,
 	normalize_vect(n_vect);
 }
 
+static int	adjust_pl_o_vect(t_pt_info *pt_info, double *o_ray, double *n_vect)
+{
+	double	new_o[3];
+
+	if (pt_info->type == PLANE)
+	{
+		vect_copy(new_o, n_vect);
+		if (dot_product(n_vect, o_ray) < 0)
+			get_pt_on_line(new_o, NULL, n_vect, -1);
+		if (dot_product(new_o, pt_info->pt) > 0)
+			return (1);
+	}
+	return (0);
+}
+
 static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 {
 	double	diffuse;
@@ -64,7 +68,8 @@ static int	phong_rgb(t_rt *rt, t_pt_info *pt_info, int *color)
 	double	o_ray[3];
 
 	get_o_ray_n_vect(rt, pt_info, o_ray, n_vect);
-	if (get_shadow(rt, pt_info) == SHADED)
+	if (get_shadow(rt, pt_info) == SHADED
+		|| adjust_pl_o_vect(pt_info, o_ray, n_vect))
 		return (SHADED);
 	diffuse = get_diffuse_light(n_vect, o_ray);
 	color[R] = get_phong_r(rt, pt_info, diffuse);

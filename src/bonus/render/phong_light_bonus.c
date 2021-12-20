@@ -6,26 +6,11 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/19 20:52:22 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:31:03 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
-
-static void	check_rgb_range(int *color)
-{
-	int	i;
-
-	i = 0 ;
-	while (i < 3)
-	{
-		if (color[i] > 255)
-			color[i] = 255;
-		else if (color[i] < 0)
-			color[i] = 0;
-		i++;
-	}
-}
 
 static void	get_surface_n_cn(double *n_vect, t_pt_info *pt_i)
 {
@@ -63,6 +48,21 @@ static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
 	normalize_vect(n_vect);
 }
 
+static int	adjust_pl_o_vect(t_pt_info *pt_info, double *o_ray, double *n_vect)
+{
+	double	new_o[3];
+
+	if (pt_info->type == PLANE)
+	{
+		vect_copy(new_o, n_vect);
+		if (dot_product(n_vect, o_ray) < 0)
+			get_pt_on_line(new_o, NULL, n_vect, -1);
+		if (dot_product(new_o, pt_info->pt) > 0)
+			return (1);
+	}
+	return (0);
+}
+
 static void	multi_phong_rgb(t_rt *rt, t_pt_info *pt_info, double *d_color)
 {
 	double	diffuse;
@@ -76,7 +76,8 @@ static void	multi_phong_rgb(t_rt *rt, t_pt_info *pt_info, double *d_color)
 	{
 		sub_vect(o_ray, cur->lp, pt_info->pt);
 		get_surface_n_vect(n_vect, pt_info);
-		if (get_shadow(cur, rt->spec->obj_lst, pt_info) == SHADED)
+		if (get_shadow(cur, rt->spec->obj_lst, pt_info) == SHADED
+			|| adjust_pl_o_vect(pt_info, o_ray, n_vect))
 		{
 			cur = cur->next;
 			continue ;

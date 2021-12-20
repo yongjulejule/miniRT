@@ -6,11 +6,22 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:59:31 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/19 20:30:21 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:11:26 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+double	get_diffuse_light(double *o_vect, double *o_ray)
+{
+	double	diffuse;
+	double	bright;
+
+	bright = vect_size(o_ray);
+	normalize_vect(o_ray);
+	diffuse = dot_product(o_ray, o_vect) / (1 + 0.0001 * bright);
+	return (diffuse);
+}
 
 int	get_phong_r(t_rt *rt, t_pt_info *pt_info, double diffuse)
 {
