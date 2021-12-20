@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:02:18 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/19 11:56:52 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:53:08 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@ static void	get_vert_coord(t_spec *spec, double *transf)
 
 	fill_vect(x_axis, 1, 0, 0);
 	if (spec->cam.o_vect[Y] < 0)
+	{
 		fill_vect(y_axis, 0, 0, 1);
+		fill_vect(z_axis, 0, 1, 0);
+	}
 	else
+	{
 		fill_vect(y_axis, 0, 0, -1);
+		fill_vect(z_axis, 0, -1, 0);
+	}
 	fill_vect(z_axis, 0, 1, 0);
 	update_vect(transf, x_axis, X, 4);
 	update_vect(transf, y_axis, Y, 4);
