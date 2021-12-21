@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_setting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghan <ghan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 13:23:37 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/13 15:56:35 by ghan             ###   ########.fr       */
+/*   Updated: 2021/12/21 15:13:11 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static void	fill_light_two(t_spec *spec, char **info)
 {
 	char	**color_arr;
 	int		i;
+	int		input;
 
 	color_arr = check_commas_split(info[2]);
 	if (ft_strsetlen(color_arr) != 3)
@@ -93,9 +94,9 @@ static void	fill_light_two(t_spec *spec, char **info)
 	i = -1;
 	while (color_arr[++i])
 	{
-		spec->light.color[i] = ft_pos_atoi(color_arr[i]);
-		if ((spec->light.color[i] == 0 && color_arr[i][0] != '0')
-			|| spec->light.color[i] > 255 || spec->light.color[i] < 0)
+		spec->light.color[i] = 255;
+		input = ft_pos_atoi(color_arr[i]);
+		if ((input == 0 && color_arr[i][0] != '0') || input > 255 || input < 0)
 			is_error("Invalid configuration (L COLOR)", NULL, EXIT_FAILURE);
 	}
 	free_double_ptr((void **)color_arr);
