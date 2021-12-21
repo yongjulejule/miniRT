@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/21 14:35:37 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:53:18 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	hidden_by_self(t_pt_info *pt_i, double *o_ray,
 {
 	double	new_o[3];
 	double	top_to_lp[3];
+	t_cn	*cn;
 
 	if (pt_i->type == PLANE)
 	{
@@ -64,14 +65,13 @@ static int	hidden_by_self(t_pt_info *pt_i, double *o_ray,
 	}
 	else if (pt_i->type == CONE)
 	{
-		get_pt_on_line(new_o, pt_i->obj.cn->center,
-			pt_i->obj.cn->o_vect, pt_i->obj.cn->height);
+		cn = pt_i->obj.cn;
+		get_pt_on_line(new_o, cn->center, cn->o_vect, cn->height);
 		sub_vect(top_to_lp, lp, new_o);
-		if (atan(pt_i->obj.cn->radius / pt_i->obj.cn->height)
-			> acos(dot_product(top_to_lp, pt_i->obj.cn->o_vect)
-				/ vect_size(top_to_lp)))
+		if (!signbit(atan(cn->radius / cn->height) - acos(dot_product(top_to_lp
+						, cn->o_vect)) / vect_size(top_to_lp)))
 			return (0);
-		if (dot_product(top_to_lp, pt_i->obj.cn->o_vect) > pt_i->obj.cn->height)
+		if (!signbit(dot_product(top_to_lp, cn->o_vect) - cn->height))
 			return (0);
 		return (1);
 	}
