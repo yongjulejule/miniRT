@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 16:19:16 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/21 12:45:40 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/21 12:49:43 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	side_cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn, double r_size)
 	sub_vect(cur_vect, pt, bottom);
 	if (!signbit(dot_product(cur_vect, cn->o_vect))
 		|| !signbit(pow(vect_size(cur_vect), 2) - pow(cn->radius, 2)
-				- pow(cn->height, 2)))
+			- pow(cn->height, 2)))
 		return (0);
 	sub_vect(pt_to_obj, pt, pt_info->pt);
 	if (signbit(vect_size(pt_to_obj) - r_size + 0.1))
@@ -102,7 +102,7 @@ int	intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn)
 	sub_vect(diff, pt, bottom);
 	if (!signbit(dot_product(diff, cn->o_vect))
 		|| !signbit(pow(vect_size(diff), 2) - pow(cn->radius, 2)
-				- pow(cn->height, 2)))
+			- pow(cn->height, 2)))
 		return (0);
 	vect_copy(pt_info->pt, pt);
 	pt_info->type = CONE;
