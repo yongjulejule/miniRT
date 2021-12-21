@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 16:19:16 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/20 13:20:44 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:35:31 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static double	get_pt_on_cn(double *r, t_cn *cn, double *ori, double *center)
 			+ pow(r[Z] * cn->o_vect[Z], 2) - pow(r[Z], 2) * under);
 	b = get_cn_b(r, cn, o, under);
 	c = get_cn_c(cn, o, under);
-	if (signbit(pow(b, 2) - 4 * a * c))
+	if (signbit((pow(b, 2) - 4 * a * c)))
 		return (0);
 	return ((b + sqrt(pow(b, 2) - 4 * a * c))
 		/ (2 * a));
@@ -64,20 +64,22 @@ int	side_cn_shadow(double *ray, t_pt_info *pt_info, t_cn *cn, double r_size)
 	double	t;
 	double	pt[3];
 	double	cur_vect[3];
+	double	pt_to_obj[3];
 	double	bottom[3];
 
 	get_pt_on_line(bottom, cn->center, cn->o_vect, cn->height);
 	t = get_pt_on_cn(ray, cn, pt_info->pt, bottom);
-	if (t < 0.1 || (pt_info->pt[Z] != 1
+	if (t <= 0.1 || (pt_info->pt[Z] != 1
 			&& !signbit(pt_info->pt[Z] - ray[Z] * t)))
 		return (0);
 	get_pt_on_line(pt, pt_info->pt, ray, t);
 	sub_vect(cur_vect, pt, bottom);
 	if (!signbit(dot_product(cur_vect, cn->o_vect))
 		|| !signbit(pow(vect_size(cur_vect), 2) - pow(cn->radius, 2)
-			- pow(cn->height, 2)))
+			- pow(cn->height, 2) + 0.5))
 		return (0);
-	if (signbit(vect_size(cur_vect) - r_size + 0.1))
+	sub_vect(pt_to_obj, pt, pt_info->pt);
+	if (signbit(vect_size(pt_to_obj) - r_size + 0.1))
 		return (1);
 	return (0);
 }
@@ -93,7 +95,7 @@ int	intersect_cn(double *ray, t_pt_info *pt_info, t_cn *cn)
 	ft_bzero(origin, sizeof(double) * 3);
 	get_pt_on_line(bottom, cn->center, cn->o_vect, cn->height);
 	t = get_pt_on_cn(ray, cn, origin, bottom);
-	if (t < 0.1 || (pt_info->pt[Z] != 1
+	if (t <= 0 || (pt_info->pt[Z] != 1
 			&& !signbit(pt_info->pt[Z] - ray[Z] * t)))
 		return (0);
 	get_pt_on_line(pt, origin, ray, t);
