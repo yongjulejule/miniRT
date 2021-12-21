@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_coord_sys_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:02:18 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/20 20:53:08 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/22 03:16:11 by ghan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	get_vert_coord(t_spec *spec, double *transf)
 		fill_vect(y_axis, 0, 0, -1);
 		fill_vect(z_axis, 0, -1, 0);
 	}
-	fill_vect(z_axis, 0, 1, 0);
 	update_vect(transf, x_axis, X, 4);
 	update_vect(transf, y_axis, Y, 4);
 	update_vect(transf, z_axis, Z, 4);
