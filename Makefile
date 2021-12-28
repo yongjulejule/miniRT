@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ghan <ghan@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 14:49:19 by ghan              #+#    #+#              #
-#    Updated: 2021/12/18 02:14:36 by ghan             ###   ########.fr        #
+#    Updated: 2021/12/28 12:39:44 by yongjule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,7 @@ SRCS_BONUS_RENDER		= $(addprefix $(SRCS_BONUS_RENDER_DIR), \
 				phong_util_bonus.c\
 				ray_tracing_bonus.c\
 				shadow_bonus.c\
+				shadow_util_bonus.c\
 				vect_ops_bonus.c\
 				vect_util_bonus.c\
 				view_transform_bonus.c\
