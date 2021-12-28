@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:49:32 by ghan              #+#    #+#             */
-/*   Updated: 2021/12/20 16:31:25 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/28 12:44:44 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ double		get_phong_b(t_l_lst *cur, t_pt_info *pt_i, double diffuse,
 				double reflect);
 double		get_reflect_light(t_pt_info *pt_i, double *o_ray, double *n_vect);
 int			get_shadow(t_l_lst *cur_lp, t_obj_lst *hd, t_pt_info *pt_info);
+int			hidden_by_cn(t_pt_info *pt_i, double *lp);
+int			hidden_by_pl(t_pt_info *pt_i, double *o_ray, double *n_vect);
 void		init_obj_img(t_rt *rt);
 void		init_rt_struct(t_rt *o_rt, t_rt *c_rt,
 				t_spec *o_spec, t_spec *c_spec);

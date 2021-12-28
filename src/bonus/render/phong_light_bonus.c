@@ -6,7 +6,7 @@
 /*   By: yongjule <yongjule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:14:15 by yongjule          #+#    #+#             */
-/*   Updated: 2021/12/21 14:53:18 by yongjule         ###   ########.fr       */
+/*   Updated: 2021/12/28 12:43:51 by yongjule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,36 +48,6 @@ static void	get_surface_n_vect(double *n_vect, t_pt_info *pt_i)
 	normalize_vect(n_vect);
 }
 
-static int	hidden_by_self(t_pt_info *pt_i, double *o_ray,
-	double *n_vect, double *lp)
-{
-	double	new_o[3];
-	double	top_to_lp[3];
-	t_cn	*cn;
-
-	if (pt_i->type == PLANE)
-	{
-		vect_copy(new_o, n_vect);
-		if (dot_product(n_vect, o_ray) < 0)
-			get_pt_on_line(new_o, NULL, n_vect, -1);
-		if (dot_product(new_o, pt_i->pt) > 0)
-			return (1);
-	}
-	else if (pt_i->type == CONE)
-	{
-		cn = pt_i->obj.cn;
-		get_pt_on_line(new_o, cn->center, cn->o_vect, cn->height);
-		sub_vect(top_to_lp, lp, new_o);
-		if (!signbit(atan(cn->radius / cn->height) - acos(dot_product(top_to_lp
-						, cn->o_vect)) / vect_size(top_to_lp)))
-			return (0);
-		if (!signbit(dot_product(top_to_lp, cn->o_vect) - cn->height))
-			return (0);
-		return (1);
-	}
-	return (0);
-}
-
 static void	multi_phong_rgb(t_rt *rt, t_pt_info *pt_info, double *d_color)
 {
 	double	diffuse;
@@ -92,7 +62,8 @@ static void	multi_phong_rgb(t_rt *rt, t_pt_info *pt_info, double *d_color)
 		sub_vect(o_ray, cur->lp, pt_info->pt);
 		get_surface_n_vect(n_vect, pt_info);
 		if (get_shadow(cur, rt->spec->obj_lst, pt_info) == SHADED
-			|| hidden_by_self(pt_info, o_ray, n_vect, cur->lp))
+			|| hidden_by_pl(pt_info, o_ray, n_vect)
+			|| hidden_by_cn(pt_info, cur->lp))
 		{
 			cur = cur->next;
 			continue ;
